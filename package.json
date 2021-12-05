@@ -1,5 +1,5 @@
 {
-  "name": "init",
+  "name": "jungdam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -78,5 +78,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.4.1",
     "redux-devtools-extension": "^2.13.9"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }

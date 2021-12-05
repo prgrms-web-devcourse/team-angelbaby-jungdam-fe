@@ -1,2 +1,1 @@
-# team-angelbaby-jungdam-fe
-fe 극락이들
+## [2조] 극락이네 - FE

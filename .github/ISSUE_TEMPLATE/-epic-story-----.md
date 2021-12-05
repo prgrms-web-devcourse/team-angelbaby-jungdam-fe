@@ -3,7 +3,7 @@ name: "[EPIC/STORY] 템플릿"
 about: Epic, Story 단위 이슈 템플릿입니다.
 title: "[EPIC] or [STORY] 내용"
 labels: ''
-assignees: minsgy
+assignees: ''
 
 ---
 

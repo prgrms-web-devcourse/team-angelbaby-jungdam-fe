@@ -1,11 +1,11 @@
-export default {
-  black: '#383b3f', // primary
+const color = {
+  black: '#352D1F', // primary
+  black_70: '#352D1FB2', // dim
+  black_90: '#352D1FE5', // modal
+  grey: '#C4C4C4',
+  grey_50: '#E4E4E4',
+  brown: '#645847',
   white: '#ffffff', // textColor
-  salmon: '#ff6666', // linear-gradient
-  orange: '#ffA85F', // linear-gradient
-  cheese: '#ffc629', // linear-gradient
-  black_40: '#00000040', // card-background
-  black_94: '#383b3ff0', // modal
-  black_linear: 'linear-gradient(to bottom, #383b3f, #383b3fb3, #383b3f00)',
-  icon_linear: 'linear-gradient(135deg, #ff6666 6%, #ffa85f 43%, #ffc629 100%)',
 };
+
+export default color;

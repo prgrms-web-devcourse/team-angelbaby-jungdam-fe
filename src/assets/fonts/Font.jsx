@@ -24,12 +24,6 @@ const font = {
     line-height: 20px;
     font-weight: 300;
   `,
-
-  Text2_11px: css`
-    font-size: 10px;
-    line-height: 15px;
-    font-weight: 400;
-  `,
 };
 
 export default font;

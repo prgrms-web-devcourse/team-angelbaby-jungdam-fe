@@ -1,5 +1,10 @@
 import axios from 'axios';
-const SERVER_URL = '/api';
+import dotenv from 'dotenv';
+
+// env 파일 읽어오기 + axios 베이스 URL 설정
+// CRA에서 환경 변수 사용하기 위해서는 REACT_APP_이 접두어로 꼭 붙어야함.
+dotenv.config();
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const Api = ({
   url,
@@ -22,7 +27,7 @@ const Api = ({
 
   return axios({
     method: type,
-    url: `${SERVER_URL}${url}`,
+    url: `${url}`,
     headers,
     data: params,
   });

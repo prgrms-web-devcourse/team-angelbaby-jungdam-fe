@@ -1,4 +1,4 @@
-export default {
+const color = {
   black: '#383b3f', // primary
   white: '#ffffff', // textColor
   salmon: '#ff6666', // linear-gradient
@@ -9,3 +9,5 @@ export default {
   black_linear: 'linear-gradient(to bottom, #383b3f, #383b3fb3, #383b3f00)',
   icon_linear: 'linear-gradient(135deg, #ff6666 6%, #ffa85f 43%, #ffc629 100%)',
 };
+
+export default color;

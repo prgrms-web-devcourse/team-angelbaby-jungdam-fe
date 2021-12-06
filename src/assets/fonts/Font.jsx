@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-export default {
+const font = {
   Text1_18px: css`
     font-size: 18px;
     line-height: 26px;
@@ -31,3 +31,5 @@ export default {
     font-weight: 400;
   `,
 };
+
+export default font;

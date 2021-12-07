@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import colors from '@assets/colors/Color';
+import PropTypes from 'prop-types';
 const Icon = styled.i`
   display: inline-block;
   vertical-align: middle;
@@ -42,3 +43,9 @@ const Spinner = ({ size = 16, color = colors.brown, isLoading = true }) => {
 };
 
 export default Spinner;
+
+Spinner.propTypes = {
+  size: PropTypes.number,
+  color: PropTypes.string,
+  isLoading: PropTypes.bool,
+};

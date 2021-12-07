@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import color from '@assets/colors/Color';
+import { Image } from '@components/base';
 
 const Sizes = {
   large: '80px',
@@ -26,7 +27,7 @@ const AvatarWrapper = styled.div`
 const Avatar = ({ size, src, ...props }) => {
   return (
     <AvatarWrapper {...props} size={size}>
-      <img src={src} alt="userProfile" />
+      <Image src={src} alt="userProfile" mode="cover" />
     </AvatarWrapper>
   );
 };

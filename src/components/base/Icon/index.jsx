@@ -8,6 +8,7 @@ const IconComponent = ({ name, color, height, ...props }) => {
       color={color}
       height={height}
       style={{ ...props.style }}
+      {...props}
     />
   );
 };

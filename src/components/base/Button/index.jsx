@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import font from '@assets/fonts/Font';
-import color from '@assets/colors/Color';
+import font from '@assets/fonts';
+import color from '@assets/colors';
 
 const Root = styled.button`
   display: flex;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import colors from '@assets/colors/Color';
+import colors from '@assets/colors';
 import PropTypes from 'prop-types';
 const Icon = styled.i`
   display: inline-block;

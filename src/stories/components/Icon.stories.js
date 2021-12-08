@@ -1,5 +1,5 @@
 import { Icon } from '@components/base';
-import color from '@assets/colors/Color';
+import color from '@assets/colors';
 
 export default {
   title: 'Components/Icon',

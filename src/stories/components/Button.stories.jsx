@@ -1,4 +1,4 @@
-import color from '@assets/colors/Color';
+import color from '@assets/colors';
 import styled from '@emotion/styled';
 import { Button } from '@components/base';
 import { Icon } from '@components/base';

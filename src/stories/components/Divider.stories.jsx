@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import font from '@assets/fonts/Font';
+import font from '@assets/fonts';
 import { Divider } from '@components/base';
 
 const Title = styled.h1`

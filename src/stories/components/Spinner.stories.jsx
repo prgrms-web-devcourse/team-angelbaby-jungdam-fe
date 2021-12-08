@@ -9,8 +9,8 @@ export default {
 export const Default = (args) => {
   return (
     <>
-      <Spinner size="32" {...args} />
-      <Spinner size="24" {...args} />
+      <Spinner size={32} {...args} />
+      <Spinner size={24} {...args} />
       <Spinner {...args} />
     </>
   );

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import color from '@assets/colors/Color';
+import color from '@assets/colors';
 import useClickAway from '@hooks/useClickAway';
 
 const BackgroundDim = styled.div`

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import color from '@assets/colors/Color';
+import color from '@assets/colors';
 import { Image } from '@components/base';
 
 const Sizes = {

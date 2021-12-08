@@ -5,7 +5,7 @@ const MainWrapper = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  padding: 0 32px;
+  padding: 32px;
   overflow-y: auto;
 `;
 

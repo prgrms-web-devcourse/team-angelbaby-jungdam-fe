@@ -25,7 +25,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.0",
-    "swiper": "^6.8.4",
+    "swiper": "6.8.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -81,7 +81,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.4.1",
     "redux-devtools-extension": "^2.13.9",
-    "storybook-mobile": "^1.0.0"
+    "storybook-mobile": "^1.0.0",
+    "storybook-preset-craco": "^0.0.6"
   },
   "resolutions": {
     "babel-loader": "8.1.0"

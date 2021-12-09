@@ -49,3 +49,19 @@ Button.propTypes = {
   mode: PropTypes.string,
   gap: PropTypes.string,
 };
+
+const BottomFloatContainer = styled.div`
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  transform: translatex(0);
+`;
+
+export const BottomFloatButton = ({ children, ...props }) => (
+  <BottomFloatContainer>
+    <Root type="button" className="primary" {...props}>
+      {children}
+    </Root>
+  </BottomFloatContainer>
+);

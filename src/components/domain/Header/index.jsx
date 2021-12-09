@@ -17,7 +17,6 @@ const HeaderContainer = styled.header`
   align-items: center;
   margin: 0;
   padding: 0 32px 0 32px;
-  border-bottom: 1px solid;
 `;
 
 const HeaderContent = styled.div`
@@ -103,6 +102,7 @@ export const MainHeader = ({ groupTitle, familyMotto, role }) => {
 export const ServiceInfoHeader = () => {
   return (
     <Header
+      style={{ boxShadow: `0px 1px 4px rgba(100, 88, 71, 0.25)` }}
       leftComponent={<Image src={Logo} alt="logo" block width="38px" />}
       rightComponent={<Avatar />}
     />
@@ -129,6 +129,9 @@ export const DetailPageHeader = ({ pageTitle }) => {
 
 export const OnlyInfoHeader = ({ pageTitle }) => {
   return (
-    <Header leftComponent={<HeadingContent>{pageTitle}</HeadingContent>} />
+    <Header
+      style={{ boxShadow: `0px 1px 4px rgba(100, 88, 71, 0.25)` }}
+      leftComponent={<HeadingContent>{pageTitle}</HeadingContent>}
+    />
   );
 };

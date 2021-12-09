@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import lottie from 'lottie-web';
+import PropTypes from 'prop-types';
 
 const AnimationBox = styled.div`
   width: ${({ width }) => width};
@@ -28,3 +29,9 @@ const Lottie = ({
 };
 
 export default Lottie;
+
+Lottie.propTypes = {
+  animationData: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
+};

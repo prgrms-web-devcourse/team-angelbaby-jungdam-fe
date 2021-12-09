@@ -3,7 +3,9 @@ import { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import color from '@assets/colors';
+import font from '@assets/fonts';
 import useClickAway from '@hooks/useClickAway';
+import { Button } from '@components/base';
 
 const BackgroundDim = styled.div`
   position: fixed;
@@ -26,23 +28,17 @@ const ModalContainer = styled.div`
   box-sizing: border-box;
   padding: 40px 32px;
   text-align: center;
+  ${font.content_16};
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 38px;
-  gap: 16px;
+  gap: 32px;
 `;
 
-const Button = styled.button`
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-`;
-
-const Modal = ({ children, width, height, visible, onClose, ...props }) => {
+const Modal = ({ children, width, visible, onClose, ...props }) => {
   const ref = useClickAway(() => {
     onClose();
   });
@@ -50,9 +46,9 @@ const Modal = ({ children, width, height, visible, onClose, ...props }) => {
   const containerStyle = useMemo(() => {
     return {
       width,
-      height,
     };
-  }, [width, height]);
+  }, [width]);
+
   const el = useMemo(() => document.createElement('div'), []);
 
   useEffect(() => {
@@ -61,6 +57,21 @@ const Modal = ({ children, width, height, visible, onClose, ...props }) => {
       document.body.removeChild(el);
     };
   }, [el]);
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.cssText = `
+      position: fixed;
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+      return () => {
+        const scrollY = document.body.style.top;
+        document.body.style.cssText = '';
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      };
+    }
+  }, [visible]);
 
   return ReactDOM.createPortal(
     <BackgroundDim style={{ display: visible ? 'block' : 'none' }}>
@@ -83,7 +94,6 @@ const Modal = ({ children, width, height, visible, onClose, ...props }) => {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   visible: PropTypes.bool,
   onClose: PropTypes.func,
   style: PropTypes.object,
@@ -93,6 +103,7 @@ Modal.defaultProps = {
   width: '60%',
   visible: false,
   onClose: () => {},
+  style: {},
 };
 
 export default Modal;

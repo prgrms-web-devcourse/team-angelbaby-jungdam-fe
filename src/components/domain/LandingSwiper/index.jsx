@@ -2,11 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Lottie } from '@components/base';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import font from '@assets/fonts';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import SwiperCore, { Pagination } from 'swiper';
 import { ReactComponent as Logo } from '@assets/Image/Logo.svg';
+import font from '@assets/fonts';
 
 // Swiper Core
 SwiperCore.use([Pagination]);
@@ -29,14 +29,6 @@ const slides = [
   },
 ];
 
-const swiperStyle = {
-  width: '100%',
-  height: '70vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
-
 const SliderBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,9 +44,9 @@ const LogoBox = styled.div`
 `;
 
 const Title = styled.h1`
-  ${font.heading_20}
   flex: 1;
   margin-top: 15px;
+  ${font.heading_20};
 `;
 
 const Content = styled.p`
@@ -76,6 +68,14 @@ const renderSlide = (slides) =>
   ));
 
 const LandingSwiper = () => {
+  const swiperStyle = {
+    width: '100%',
+    height: '70vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
   return (
     <Swiper
       style={swiperStyle}

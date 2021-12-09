@@ -128,5 +128,7 @@ export const DetailPageHeader = ({ pageTitle }) => {
 };
 
 export const OnlyInfoHeader = ({ pageTitle }) => {
-  return <Header leftComponent={<TextContent>{pageTitle}</TextContent>} />;
+  return (
+    <Header leftComponent={<HeadingContent>{pageTitle}</HeadingContent>} />
+  );
 };

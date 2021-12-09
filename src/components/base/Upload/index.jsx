@@ -1,41 +1,49 @@
-import React from 'react';
-import { Icon } from '@components/base';
-import color from '@assets/colors';
-import { useRef } from 'react';
-import { css } from '@emotion/react';
+import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
+
+const Container = styled.div`
+  display: inline-block;
+`;
 
 const Input = styled.input`
   display: none;
 `;
 
-const IconStyle = css`
-  cursor: pointer;
+const Button = styled.button`
+  all: unset;
 `;
 
-const Upload = () => {
+const Upload = ({ children, onChange, ...props }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [files, setFiles] = useState(null);
   const imageUploadInput = useRef(null);
+
+  const handleImageUploadChange = (e) => {
+    const files = e.target.files;
+    const changedFiles = files;
+
+    setFiles(changedFiles);
+
+    onChange && onChange(changedFiles);
+  };
 
   const handleImageUploadClick = () => {
     imageUploadInput.current.click();
   };
 
   return (
-    <>
+    <Container>
       <Input
         type="file"
         accept="image/jpg, image/jpeg, image/png"
         multiple
         ref={imageUploadInput}
+        onChange={handleImageUploadChange}
       />
-      <Icon
-        name="fluent:camera-add-24-regular"
-        color={color.brown}
-        height={48}
-        onClick={handleImageUploadClick}
-        css={IconStyle}
-      />
-    </>
+      <Button type="button" onClick={handleImageUploadClick} {...props}>
+        {children}
+      </Button>
+    </Container>
   );
 };
 

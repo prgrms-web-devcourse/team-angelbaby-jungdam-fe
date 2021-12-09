@@ -1,3 +1,4 @@
+import React from 'react';
 import { Icon } from '@components/base';
 import color from '@assets/colors';
 

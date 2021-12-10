@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import React from 'react';
 import { Header } from '@components/domain';
-import { Button, Icon } from '@components/base';
+import { Button, Icon, ProgressBar } from '@components/base';
 import font from '@assets/fonts';
 import color from '@assets/colors';
+import DefaultContainer from '@styles/DefaultContainer';
+
+const DefaultMarginTop = css`
+  margin-top: 40px;
+`;
 
 const DiaryCreatePage = () => {
   const leftHeaderContent = () => {
@@ -26,12 +32,14 @@ const DiaryCreatePage = () => {
   };
 
   return (
-    <>
+    <DefaultContainer>
       <Header
         leftComponent={leftHeaderContent()}
         centerComponent={centerHeaderContent()}
       />
-    </>
+
+      <ProgressBar css={DefaultMarginTop} totalStep={3} currentStep={1} />
+    </DefaultContainer>
   );
 };
 

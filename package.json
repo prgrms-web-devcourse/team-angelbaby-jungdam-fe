@@ -88,5 +88,6 @@
   },
   "resolutions": {
     "babel-loader": "8.1.0"
-  }
+  },
+  "proxy": "https://test-api.jungdam.tk"
 }

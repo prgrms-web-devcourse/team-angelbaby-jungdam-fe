@@ -4,6 +4,7 @@ import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Icon } from '@components/base';
 import { OnlyInfoHeader } from '@components/domain';
+import { useNavigate } from 'react-router-dom';
 
 const MemberListPageContainer = styled(DefaultContainer)`
   width: 100%;
@@ -36,10 +37,16 @@ const MemberListTitle = styled.div`
 `;
 
 const MemberListPage = () => {
+  const navigate = useNavigate();
+
+  const handleToInvite = (e) => {
+    e.preventDefault();
+    navigate('/invite'); // url 확정시 수정
+  };
   return (
     <MemberListPageContainer>
       <OnlyInfoHeader pageTitle="멤버 리스트" />
-      <ToInvitePage>
+      <ToInvitePage onClick={handleToInvite}>
         <InviteWrapper>
           <Icon name="octicon:person-add-24" height="24" />
           멤버 초대하기

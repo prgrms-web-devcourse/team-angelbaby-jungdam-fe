@@ -1,13 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Outlet, Navigate } from 'react-router-dom';
 
 const PreventedRoute = ({ ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      // render={(props) => (accessToken ? <Redirect to="/" /> : <Component {...props} />)}
-    />
-  );
+  const { token } = useSelector((state) => state.member);
+  return !token ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PreventedRoute;

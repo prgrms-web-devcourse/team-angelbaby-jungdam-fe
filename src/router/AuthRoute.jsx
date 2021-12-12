@@ -1,24 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet } from 'react-router-dom';
 
-const AuthRoute = ({ ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      // render={(props) =>
-      //   accessToken ? (
-      //     <Component {...props} />
-      //   ) : (
-      //     <Redirect
-      //       to={{
-      //         pathname: '/login',
-      //         state: { text: 'Token 만료' },
-      //       }}
-      //     />
-      //   )
-      // }
-    />
-  );
+const AuthRoute = () => {
+  const { token } = useSelector((state) => state.member);
+  return token ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default AuthRoute;

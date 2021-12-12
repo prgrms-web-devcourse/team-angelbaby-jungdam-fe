@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { user } from './user';
+import { member } from './member';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 import logger from 'redux-logger';
@@ -10,12 +10,12 @@ const persistConfig = {
   key: 'root',
   storage: session,
   //  user reducer만 localstorage에 저장.
-  whitelist: ['user'],
+  whitelist: ['member'],
   // blacklist - 스토리지에 저장하지 않을 리스트
 };
 
 const combinedReducer = combineReducers({
-  user: user.reducer,
+  member: member.reducer,
 });
 const rootReducer = persistReducer(persistConfig, combinedReducer);
 

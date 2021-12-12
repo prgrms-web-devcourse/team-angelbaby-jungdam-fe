@@ -30,6 +30,13 @@ const centerHeaderContent = () => {
   return <Span>다이어리 만들기</Span>;
 };
 
+const ButtonStyle = {
+  width: '100%',
+  boxSizing: 'border-box',
+  position: 'absolute',
+  bottom: '0',
+};
+
 const DiaryCreatePage = () => {
   return (
     <DefaultContainer>
@@ -41,6 +48,14 @@ const DiaryCreatePage = () => {
       <ProgressBar css={DefaultMarginTop} totalStep={3} currentStep={1} />
 
       <DiaryCreateStepOne />
+
+      <Button
+        mode="primary"
+        style={{ ...ButtonStyle }}
+        onClick={() => console.log('clickTest')}
+      >
+        다음
+      </Button>
     </DefaultContainer>
   );
 };

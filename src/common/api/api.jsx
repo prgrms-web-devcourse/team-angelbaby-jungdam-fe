@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// env 파일 읽어오기 + axios 베이스 URL 설정
+// axios 베이스 URL 설정 예정
 // CRA에서 환경 변수 사용하기 위해서는 REACT_APP_이 접두어로 꼭 붙어야함.
-
-// dotenv.config();
 // axios.defaults.baseURL = API_POINT;
 
 const Api = ({
@@ -26,7 +24,7 @@ const Api = ({
   if (token !== null) {
     headers.Authorization = `Bearer ${token}`;
   }
-  console.log(url, token, headers);
+
   return axios({
     method: type,
     url: `${url}`,

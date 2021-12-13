@@ -2,7 +2,11 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header, DiaryCreateStepOne } from '@components/domain';
+import {
+  Header,
+  DiaryCreateStepOne,
+  DiaryCreateStepTwo,
+} from '@components/domain';
 import { Button, Icon, ProgressBar } from '@components/base';
 import font from '@assets/fonts';
 import color from '@assets/colors';
@@ -58,6 +62,16 @@ const DiaryCreatePage = () => {
     return <Span>다이어리 만들기</Span>;
   };
 
+  const renderDiaryCreateForm = () => {
+    if (step === 1) {
+      return <DiaryCreateStepOne />;
+    } else if (step === 2) {
+      return <DiaryCreateStepTwo />;
+    } else {
+      return;
+    }
+  };
+
   return (
     <DefaultContainer>
       <Header
@@ -67,7 +81,7 @@ const DiaryCreatePage = () => {
 
       <ProgressBar css={DefaultMarginTop} totalStep={3} currentStep={step} />
 
-      <DiaryCreateStepOne />
+      {renderDiaryCreateForm()}
 
       <Button
         mode="primary"

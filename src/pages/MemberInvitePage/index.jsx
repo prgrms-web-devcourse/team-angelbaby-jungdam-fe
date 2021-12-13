@@ -69,6 +69,7 @@ const ButtonWrapper = styled.div`
 
 const MemberInvitePage = () => {
   const [searchInfo, setSearchInfo] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [ModalVisible, setModalVisible] = useState(false);
   const [isToggle, setIsToggle] = useState(false);
   const { values, isLoading, handleChange, handleSubmit } = useForm({
@@ -96,6 +97,7 @@ const MemberInvitePage = () => {
 
   const onToggle = async (e) => {
     setIsToggle((state) => !state);
+    setSelectedUsers(searchInfo);
   };
 
   const OpenModal = () => {
@@ -128,13 +130,13 @@ const MemberInvitePage = () => {
           초대하기
         </Button>
       </ButtonWrapper>
-      {searchInfo.length === 0 ? (
+      {selectedUsers.length === 0 ? (
         <Modal visible={ModalVisible} onClose={CloseModal} selectable={false}>
           초대할 인원이 없습니다.
         </Modal>
       ) : (
         <Modal visible={ModalVisible} onClose={CloseModal}>
-          총 {searchInfo.length}명의 인원을 초대하시겠습니까?
+          총 {selectedUsers.length}명의 인원을 초대하시겠습니까?
         </Modal>
       )}
     </MemberInvitePageWrapper>

@@ -10,3 +10,4 @@ export { default as LandingSwiper } from './LandingSwiper';
 export { default as DiaryCreateStepOne } from './DiaryCreateStepOne';
 export { default as DiaryCreateStepTwo } from './DiaryCreateStepTwo';
 export { default as DiaryCreateStepThree } from './DiaryCreateStepThree';
+export { default as UserCard } from './UserCard';

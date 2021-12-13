@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import DefaultContainer from '@styles/DefaultContainer';
 import { LandingSwiper } from '@components/domain';
-import { BottomFloatButton } from '@components/base/Button';
+import { BottomFloatButton } from '@components/base';
 
 const LandingPageContainer = styled(DefaultContainer)`
   justify-content: center;

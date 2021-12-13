@@ -40,6 +40,11 @@ const DiaryCreatePage = () => {
     }
   };
 
+  const handleSubmitButtonClick = () => {
+    // api 코드 추가 예정
+    navigate('../diary');
+  };
+
   const leftHeaderContent = () => {
     return (
       <>
@@ -69,7 +74,6 @@ const DiaryCreatePage = () => {
     } else if (step === 2) {
       return <DiaryCreateStepTwo />;
     } else if (step === 3) {
-      console.log(step);
       return <DiaryCreateStepThree />;
     }
   };
@@ -88,9 +92,9 @@ const DiaryCreatePage = () => {
       <Button
         mode="primary"
         style={{ ...ButtonStyle }}
-        onClick={handleNextButtonClick}
+        onClick={step === 3 ? handleSubmitButtonClick : handleNextButtonClick}
       >
-        다음
+        {step === 3 ? '확인' : '다음'}
       </Button>
     </DefaultContainer>
   );

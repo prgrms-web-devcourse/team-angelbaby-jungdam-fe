@@ -9,21 +9,21 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 
 const slides = [
-  // {
-  //   title: '사랑스러운 민석이 가족🎁',
-  //   motto: '가훈입니다아아아아아아아아',
-  //   thumbnail: 'https://picsum.photos/200/300',
-  // },
-  // {
-  //   title: '사랑스러운 민석이 가족🎁',
-  //   motto: '가훈입니다아아아아아아아아',
-  //   thumbnail: 'https://picsum.photos/200/300',
-  // },
-  // {
-  //   title: '사랑스러운 민석이 가족🎁',
-  //   motto: '가훈입니다아아아아아아아아',
-  //   thumbnail: 'https://picsum.photos/200/300',
-  // },
+  {
+    title: '사랑스러운 민석이 가족🎁',
+    motto: '가훈입니다아아아아아아아아',
+    thumbnail: 'https://picsum.photos/200/300',
+  },
+  {
+    title: '사랑스러운 민석이 가족🎁',
+    motto: '가훈입니다아아아아아아아아',
+    thumbnail: 'https://picsum.photos/200/300',
+  },
+  {
+    title: '사랑스러운 민석이 가족🎁',
+    motto: '가훈입니다아아아아아아아아',
+    thumbnail: 'https://picsum.photos/200/300',
+  },
 ];
 
 const SliderBox = styled.div`
@@ -54,7 +54,7 @@ const NoneAlbumGuide = styled.p`
 const AlbumSwiper = () => {
   const swiperStyle = {
     margin: '0 -32px',
-    height: '40vh',
+    height: '38vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

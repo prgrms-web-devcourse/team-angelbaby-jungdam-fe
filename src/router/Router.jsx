@@ -2,7 +2,14 @@ import React, { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DefaultTemplate from '@styles/DefaultTemplate';
 import ScrollToTop from '@utils/ScrollToTop';
 import { AuthRoute, PreventedRoute } from '@router';
-import { LandingPage, LoginPage, MainPage, OAuthRedirect, MainPage, DiaryPage, DiaryCreatePage } from '@pages';
+import {
+  LandingPage,
+  LoginPage,
+  MainPage,
+  OAuthRedirect,
+  DiaryPage,
+  DiaryCreatePage,
+} from '@pages';
 
 const Router = () => {
   return (

@@ -6,6 +6,7 @@ import {
   Header,
   DiaryCreateStepOne,
   DiaryCreateStepTwo,
+  DiaryCreateStepThree,
 } from '@components/domain';
 import { Button, Icon, ProgressBar } from '@components/base';
 import font from '@assets/fonts';
@@ -67,8 +68,9 @@ const DiaryCreatePage = () => {
       return <DiaryCreateStepOne />;
     } else if (step === 2) {
       return <DiaryCreateStepTwo />;
-    } else {
-      return;
+    } else if (step === 3) {
+      console.log(step);
+      return <DiaryCreateStepThree />;
     }
   };
 

@@ -12,8 +12,9 @@ const HeaderContainer = styled.header`
   position: fixed;
   z-index: 5;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
   justify-content: center;
   align-items: center;
   margin: 0;

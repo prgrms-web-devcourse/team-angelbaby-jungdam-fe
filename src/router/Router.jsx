@@ -2,7 +2,7 @@ import React, { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DefaultTemplate from '@styles/DefaultTemplate';
 import ScrollToTop from '@utils/ScrollToTop';
 import { AuthRoute, PreventedRoute } from '@router';
-import { LandingPage, LoginPage, MainPage, OAuthRedirect } from '@pages';
+import { LandingPage, LoginPage, MainPage, OAuthRedirect, MainPage, DiaryPage, DiaryCreatePage } from '@pages';
 
 const Router = () => {
   return (
@@ -20,6 +20,8 @@ const Router = () => {
           <Route element={<AuthRoute />}>
             <Route path="/" element={<MainPage />} />
             <Route path="/album" element={<MainPage />} />
+            <Route path="/diary" element={<DiaryPage />} />
+            <Route path="/diary/new" element={<DiaryCreatePage />} />
           </Route>
           {/* 임시 404 페이지 */}
           <Route path="*" element={<div>404 Page</div>} />

@@ -1,8 +1,7 @@
 import React, { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DefaultTemplate from '@styles/DefaultTemplate';
 import ScrollToTop from '@utils/ScrollToTop';
-import { MainPage } from '@pages';
-import { DiaryCreatePage } from '@pages';
+import { MainPage, DiaryPage, DiaryCreatePage } from '@pages';
 
 const Router = () => {
   return (
@@ -11,6 +10,7 @@ const Router = () => {
       <DefaultTemplate>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/diary" element={<DiaryPage />} />
           <Route path="/diary/new" element={<DiaryCreatePage />} />
         </Routes>
       </DefaultTemplate>

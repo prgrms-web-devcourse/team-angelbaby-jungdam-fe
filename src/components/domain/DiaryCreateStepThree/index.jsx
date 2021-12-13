@@ -77,7 +77,7 @@ const DiaryCreateStepThree = ({ onChange }) => {
     <Container>
       <Title>추억이 담긴 사진을 넣어보세요.</Title>
       <Title className="subtitle">
-        여러장의 사진을 동시에 지정할 수 도 있어요 !
+        여러장의 사진을 동시에 저장할 수 있어요 !
       </Title>
       <Upload onChange={handleUploadImagesChange}>
         <Icon

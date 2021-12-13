@@ -16,7 +16,6 @@ const OAuthRedirect = () => {
     if (token) {
       try {
         dispatch(setToken(token));
-        sessionStorage.setItem('token', token);
         dispatch(fetchMemberLogin());
         navigate('/');
       } catch (error) {

@@ -39,6 +39,7 @@ export const member = createSlice({
   initialState: initialValue,
   reducers: {
     setToken: (state, action) => {
+      sessionStorage.setItem('token', action.payload);
       state.token = action.payload;
     },
   },

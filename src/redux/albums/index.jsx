@@ -1,29 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const name = 'user';
+const name = 'album';
 
 // 비동기 함수를 활용가능.
 const initialValue = {
-  user: {
-    id: '',
-    admin: false,
-    groupCode: '',
-    name: '',
-    email: '',
-  },
-  token: '',
+  Albums: [],
+  InviteList: [],
   isLoading: false,
 };
 
-// const fetchUserLogin = createAsyncThunk(
-//   `${name}/fetchUserLogin`,
-//   async (user) => {
-//     const { data } = await axios.post('/user/login', user);
-//     console.log(data);
-//   },
-// );
+// JWT Token 값만 넣으면 됌.
+export const fetchAlbums = createAsyncThunk(`${name}/fetchAlbums`, async () => {
+  // const { data } = await 앨범 리스트 불러오는 데이터
+});
 
-export const user = createSlice({
+export const albums = createSlice({
   name,
   initialState: initialValue,
   reducers: {
@@ -54,5 +45,9 @@ export const user = createSlice({
     //   },
     // },
   },
-  extraReducers: {},
+  extraReducers: {
+    // [fetchAlbums.fulfilled]: (state, action) => {
+    //   state.Albums = action.payload;
+    // },
+  },
 });

@@ -5,19 +5,18 @@ import color from '@assets/colors';
 import { useCallback, useRef } from 'react';
 
 const TextareaContainer = styled.textarea`
-  padding: 6px 12px;
   border: none;
   resize: none;
   box-sizing: border-box;
   outline: none;
-  overflow: hidden;
+  overflow: none;
   background-attachment: local;
   background-image: linear-gradient(
       to right,
-      ${color.white} 10px,
-      transparent 10px
+      ${color.white} 0px,
+      transparent 0px
     ),
-    linear-gradient(to left, ${color.white} 10px, transparent 10px),
+    linear-gradient(to left, ${color.white} 0px, transparent 0px),
     repeating-linear-gradient(
       ${color.white},
       ${color.white} 30px,

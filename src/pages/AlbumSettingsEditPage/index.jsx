@@ -10,6 +10,7 @@ const ALBUM_EDIT_LIST = [
   {
     name: 'ALBUM_TITLE',
     text: '앨범 명을 입력해주세요.',
+    placeholder: '예) 사랑하는 우리 가족 🥰',
     type: 'input',
   },
   {
@@ -20,6 +21,7 @@ const ALBUM_EDIT_LIST = [
   {
     name: 'ALBUM_FAMILY_MOTTO',
     text: '가훈을 입력해주세요.',
+    placeholder: '예) 둥근 마음 열린 생각 바른 행동',
     type: 'input',
   },
 ];
@@ -52,7 +54,7 @@ const UploadWrapper = styled.div`
 
 const AlbumSettingsEditPage = () => {
   const EditLists = (list) =>
-    list.map(({ name, text, type }) => (
+    list.map(({ name, text, placeholder, type }) => (
       <ContentWrapper>
         <ContentTitle>{text}</ContentTitle>
         {type === 'upload' ? (
@@ -62,7 +64,7 @@ const AlbumSettingsEditPage = () => {
             </Upload>
           </UploadWrapper>
         ) : (
-          <Input name={name} placeholder={name} />
+          <Input name={name} placeholder={placeholder} />
         )}
       </ContentWrapper>
     ));

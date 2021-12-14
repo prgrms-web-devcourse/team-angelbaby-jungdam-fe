@@ -8,3 +8,4 @@ export { default as AlbumSettingsPage } from './AlbumSettingsPage';
 export { default as OAuthRedirect } from './OAuthRedirect';
 export { default as AlbumCreatePage } from './AlbumCreatePage';
 export { default as StoryBookPage } from './StoryBookPage';
+export { default as StoryBookDetailPage } from './StoryBookDetailPage';

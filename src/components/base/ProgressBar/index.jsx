@@ -36,8 +36,10 @@ const renderHighLight = (totalStep, currentStep) => {
   return result;
 };
 
-const ProgressBar = ({ totalStep, currentStep }) => {
-  return <Container>{renderHighLight(totalStep, currentStep)}</Container>;
+const ProgressBar = ({ totalStep, currentStep, ...props }) => {
+  return (
+    <Container {...props}>{renderHighLight(totalStep, currentStep)}</Container>
+  );
 };
 
 ProgressBar.propTypes = {

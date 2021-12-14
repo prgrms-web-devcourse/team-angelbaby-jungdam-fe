@@ -7,6 +7,8 @@ export {
   OnlyInfoHeader,
 } from './Header';
 export { default as LandingSwiper } from './LandingSwiper';
+export { default as AlbumInviteList } from './AlbumInviteList';
+export { default as AlbumSwiper } from './AlbumSwiper';
 export { default as DiaryCreateStepOne } from './DiaryCreateStepOne';
 export { default as DiaryCreateStepTwo } from './DiaryCreateStepTwo';
 export { default as DiaryCreateStepThree } from './DiaryCreateStepThree';

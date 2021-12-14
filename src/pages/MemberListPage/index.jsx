@@ -40,7 +40,7 @@ const MemberListPage = () => {
   const navigate = useNavigate();
 
   const handleToInvite = (e) => {
-    navigate('/invite');
+    navigate('invite');
   };
   return (
     <MemberListPageContainer>

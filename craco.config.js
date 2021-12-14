@@ -13,6 +13,7 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@api': path.resolve(__dirname, 'src/common/api'),
       '@utils': path.resolve(__dirname, 'src/common/utils'),
+      '@redux': path.resolve(__dirname, 'src/redux'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@router': path.resolve(__dirname, 'src/router'),
     },

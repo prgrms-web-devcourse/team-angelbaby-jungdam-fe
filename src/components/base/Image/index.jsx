@@ -37,11 +37,10 @@ const ImageBox = styled.div`
 `;
 
 const DimContainer = styled.div`
-  width: ${(props) => props.width || '100%'};
-  height: ${(props) => props.height || '100px'};
+  width: 100%;
   background-color: ${color.black_70};
   color: ${color.white};
-  padding: 14px;
+  padding: ${(props) => props.dimPadding || '14px'};
   text-shadow: 1px 2px 3px ${color.black};
   ${font.heading_20};
   border-radius: 0 0 6px 6px;
@@ -52,6 +51,7 @@ export const DimImage = ({
   alt,
   width,
   height,
+  dimPadding,
   mode,
   src,
   ...props
@@ -65,7 +65,7 @@ export const DimImage = ({
       mode={mode}
       {...props}
     >
-      <DimContainer>{children}</DimContainer>
+      <DimContainer dimPadding={dimPadding}>{children}</DimContainer>
     </ImageBox>
   );
 };

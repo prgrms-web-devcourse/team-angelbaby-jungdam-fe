@@ -7,3 +7,4 @@ export { default as DiaryCreatePage } from './DiaryCreatePage';
 export { default as AlbumSettingsPage } from './AlbumSettingsPage';
 export { default as OAuthRedirect } from './OAuthRedirect';
 export { default as AlbumCreatePage } from './AlbumCreatePage';
+export { default as StoryBookPage } from './StoryBookPage';

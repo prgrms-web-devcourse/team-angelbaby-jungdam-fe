@@ -130,20 +130,21 @@ ServiceInfoHeader.defaultProps = {
   src: '',
 };
 
-export const DetailPageHeader = ({ pageTitle }) => {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
 
+export const DetailPageHeader = ({ pageTitle, handleGoBack, handleClose }) => {
   return (
     <Header
       leftComponent={
-        <Button onClick={goBack}>
+        <Button onClick={handleGoBack}>
           <Icon name="ep:back" color={color.brown} />
         </Button>
       }
       centerComponent={<HeadingContent>{pageTitle}</HeadingContent>}
+      rightComponent={
+        <Button onClick={handleClose}>
+          <Icon name="bx:bx-x" color={color.brown} height={20} />
+        </Button>
+      }
     />
   );
 };

@@ -40,8 +40,7 @@ const MemberListPage = () => {
   const navigate = useNavigate();
 
   const handleToInvite = (e) => {
-    e.preventDefault();
-    navigate('/invite'); // url 확정시 수정
+    navigate('/invite');
   };
   return (
     <MemberListPageContainer>

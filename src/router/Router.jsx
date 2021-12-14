@@ -9,6 +9,7 @@ import {
   AlbumCreatePage,
   OAuthRedirect,
   StoryBookPage,
+  StoryBookDetailPage,
 } from '@pages';
 
 const Router = () => {
@@ -41,7 +42,10 @@ const Router = () => {
               {/* <Route path="settings" element={<AlbumSettingsPage />}> */}
               {/* <Route path="edit" element={<AlbumSettingsEditPage />} /> */}
               {/* </Route> */}
-              <Route path="storybook" element={<StoryBookPage />} />
+              <Route path="storybook">
+                <Route path="" element={<StoryBookPage />} />
+                <Route path=":storybookId" element={<StoryBookDetailPage />} />
+              </Route>
               {/* <Route path="moment" element={<SpecialMomentPage />} /> */}
             </Route>
           </Route>

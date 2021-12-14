@@ -103,6 +103,7 @@ const ResetStyle = css`
   section {
     display: block;
   }
+  ,
   body {
     line-height: 1;
   }
@@ -140,6 +141,11 @@ const ResetStyle = css`
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
       Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
       'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
   }
 `;
 

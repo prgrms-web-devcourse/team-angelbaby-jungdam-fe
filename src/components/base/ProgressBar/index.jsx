@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const HighLight = styled.div`
   width: ${({ width }) => width};
+  height: 5px;
   border-radius: 4px;
   background: ${({ active }) => (active ? color.brown : color.grey)};
 `;
@@ -29,6 +30,7 @@ const renderHighLight = (totalStep, currentStep) => {
         key={i}
         width={calculateWidth}
         active={i < currentStep && true}
+        className="bar"
       />,
     );
   }
@@ -36,8 +38,10 @@ const renderHighLight = (totalStep, currentStep) => {
   return result;
 };
 
-const ProgressBar = ({ totalStep, currentStep }) => {
-  return <Container>{renderHighLight(totalStep, currentStep)}</Container>;
+const ProgressBar = ({ totalStep, currentStep, ...props }) => {
+  return (
+    <Container {...props}>{renderHighLight(totalStep, currentStep)}</Container>
+  );
 };
 
 ProgressBar.propTypes = {

@@ -12,8 +12,9 @@ const HeaderContainer = styled.header`
   position: fixed;
   z-index: 5;
   top: 0;
+  left: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -129,20 +130,21 @@ ServiceInfoHeader.defaultProps = {
   src: '',
 };
 
-export const DetailPageHeader = ({ pageTitle }) => {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
 
+export const DetailPageHeader = ({ pageTitle, handleGoBack, handleClose }) => {
   return (
     <Header
       leftComponent={
-        <Button onClick={goBack}>
+        <Button onClick={handleGoBack}>
           <Icon name="ep:back" color={color.brown} />
         </Button>
       }
       centerComponent={<HeadingContent>{pageTitle}</HeadingContent>}
+      rightComponent={
+        <Button onClick={handleClose}>
+          <Icon name="bx:bx-x" color={color.brown} height={20} />
+        </Button>
+      }
     />
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
+import { useAuth } from '@hooks';
 
-const PreventedRoute = ({ ...rest }) => {
-  const { token } = useSelector((state) => state.member);
+const PreventedRoute = () => {
+  const token = useAuth();
   return !token ? <Outlet /> : <Navigate to="/" />;
 };
 

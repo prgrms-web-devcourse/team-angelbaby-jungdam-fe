@@ -9,6 +9,7 @@ import {
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  SpecialMomentPage,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -44,7 +45,7 @@ const Router = () => {
             {/* <Route path="edit" element={<AlbumSettingsEditPage />} /> */}
             {/* </Route> */}
             {/* <Route path="storybook" element={<StorybookPage />} /> */}
-            {/* <Route path="moment" element={<SpecialMomentPage />} /> */}
+            <Route path="moment" element={<SpecialMomentPage />} />
             {/* </Route> */}
           </Route>
           {/* 임시 404 페이지 */}

@@ -11,6 +11,7 @@ import {
   StoryBookPage,
   StoryBookDetailPage,
 } from '@pages';
+import TestPage from '../pages/TestPage';
 
 const Router = () => {
   return (
@@ -18,6 +19,8 @@ const Router = () => {
       <ScrollToTop />
       <DefaultTemplate>
         <Routes>
+          {/* TestRoute - 각 Choi/Hoon/Bingle*/}
+          <Route path="/test/:name" element={<TestPage />} />
           {/* PreventedRoute - Token이 존재 할 시 자동 메인(앨범 선택)으로 이동 */}
           <Route element={<PreventedRoute />}>
             <Route path="/login" element={<LoginPage />} />

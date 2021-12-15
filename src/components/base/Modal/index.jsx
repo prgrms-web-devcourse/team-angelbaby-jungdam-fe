@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
@@ -38,7 +39,7 @@ const ButtonWrapper = styled.div`
   gap: 32px;
 `;
 
-const Modal = ({ children, width, visible, onClose, ...props }) => {
+const Modal = ({ children, width, visible, onClose, selectable, ...props }) => {
   const ref = useClickAway(() => {
     onClose();
   });
@@ -82,8 +83,14 @@ const Modal = ({ children, width, visible, onClose, ...props }) => {
       >
         {children}
         <ButtonWrapper>
-          <Button onClick={onClose}>예</Button>
-          <Button onClick={onClose}>아니오</Button>
+          {selectable ? (
+            <>
+              <Button onClick={onClose}>예</Button>
+              <Button onClick={onClose}>아니오</Button>
+            </>
+          ) : (
+            <Button onClick={onClose}>확인</Button>
+          )}
         </ButtonWrapper>
       </ModalContainer>
     </BackgroundDim>,
@@ -96,6 +103,7 @@ Modal.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   visible: PropTypes.bool,
   onClose: PropTypes.func,
+  selectable: PropTypes.bool,
   style: PropTypes.object,
 };
 
@@ -103,6 +111,7 @@ Modal.defaultProps = {
   width: '60%',
   visible: false,
   onClose: () => {},
+  selectable: true,
   style: {},
 };
 

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Header,
@@ -27,6 +27,24 @@ const ButtonStyle = {
 const DiaryCreatePage = () => {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
+
+  const buttonRef = useRef();
+
+  useLayoutEffect(() => {
+    const detectMobileKeyboard = () => {
+      const activeElement = document.activeElement;
+
+      activeElement.focus();
+      activeElement.scrollIntoView({ block: 'end' });
+
+      buttonRef.current.style.display =
+        buttonRef.current.style.display === 'none' ? 'block' : 'none';
+    };
+
+    window.addEventListener('resize', detectMobileKeyboard);
+
+    return () => window.removeEventListener('resize', detectMobileKeyboard);
+  }, []);
 
   const handleNextButtonClick = () => {
     setStep(() => step + 1);
@@ -85,13 +103,19 @@ const DiaryCreatePage = () => {
         centerComponent={centerHeaderContent()}
       />
 
-      <ProgressBar css={DefaultMarginTop} totalStep={3} currentStep={step} />
+      <ProgressBar
+        className="progress"
+        css={DefaultMarginTop}
+        totalStep={3}
+        currentStep={step}
+      />
 
       {renderDiaryCreateForm()}
 
       <Button
         mode="primary"
         style={{ ...ButtonStyle }}
+        ref={buttonRef}
         onClick={step === 3 ? handleSubmitButtonClick : handleNextButtonClick}
       >
         {step === 3 ? '확인' : '다음'}

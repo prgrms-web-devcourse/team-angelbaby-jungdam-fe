@@ -32,6 +32,7 @@ const DiaryCreateStepTwo = () => {
         onChange={onChange}
         placeholder="제목을 입력해주세요."
         css={InputStyle}
+        autoComplete="off"
       />
 
       <Title>일기장을 적어볼까요 ?</Title>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import DefaultContainer from '@styles/DefaultContainer';
-import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Icon, Divider } from '@components/base';
 import { OnlyInfoHeader, UserCard } from '@components/domain';
@@ -60,8 +59,8 @@ const MemberListPage = () => {
   };
 
   const memberList = (list) =>
-    list.map(({ nickname, avatar, role }) => (
-      <UserCard nickname={nickname} avatar={avatar} role={role} />
+    list.map(({ nickname, avatar, role }, index) => (
+      <UserCard nickname={nickname} avatar={avatar} role={role} key={index} />
     ));
 
   return (
@@ -69,10 +68,10 @@ const MemberListPage = () => {
       <OnlyInfoHeader pageTitle="멤버 리스트" />
       <ToInvitePage onClick={handleToInvite}>
         <InviteWrapper>
-          <Icon name="octicon:person-add-24" height="24" />
+          <Icon name="octicon:person-add-24" />
           멤버 초대하기
         </InviteWrapper>
-        <Icon name="octicon:chevron-right-24" height="24" />
+        <Icon name="octicon:chevron-right-24" />
       </ToInvitePage>
       <Divider size={4} />
       <MemberListWrapper>

@@ -134,7 +134,7 @@ const StoryBookPage = () => {
             <Avatar src={avatar} />
             <StorybookSubHeader>{memberName}의 스토리북</StorybookSubHeader>
           </StorybookSubHeaderLeft>
-          <Link to="">
+          <Link to={`${index + 1}`}>
             <Button mode="border" style={buttonStyle}>
               모두 보기
             </Button>

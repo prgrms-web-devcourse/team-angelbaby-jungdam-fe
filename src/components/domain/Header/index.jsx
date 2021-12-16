@@ -130,7 +130,6 @@ ServiceInfoHeader.defaultProps = {
   src: '',
 };
 
-
 export const DetailPageHeader = ({ pageTitle, handleGoBack, handleClose }) => {
   return (
     <Header
@@ -141,9 +140,13 @@ export const DetailPageHeader = ({ pageTitle, handleGoBack, handleClose }) => {
       }
       centerComponent={<HeadingContent>{pageTitle}</HeadingContent>}
       rightComponent={
-        <Button onClick={handleClose}>
-          <Icon name="bx:bx-x" color={color.brown} height={20} />
-        </Button>
+        handleClose ? (
+          <Button onClick={handleClose}>
+            <Icon name="bx:bx-x" color={color.brown} height={20} />
+          </Button>
+        ) : (
+          <HeadingContent />
+        )
       }
     />
   );

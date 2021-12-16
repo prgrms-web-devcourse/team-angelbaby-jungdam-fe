@@ -52,7 +52,7 @@ const ButtonStyle = {
   borderRadius: '5px',
 };
 
-const DiaryCommentInput = ({ profile }) => {
+const DiaryCommentInputForm = ({ profile }) => {
   return (
     <Container>
       <Avatar alt="profile" src={profile} />
@@ -64,4 +64,4 @@ const DiaryCommentInput = ({ profile }) => {
   );
 };
 
-export default DiaryCommentInput;
+export default DiaryCommentInputForm;

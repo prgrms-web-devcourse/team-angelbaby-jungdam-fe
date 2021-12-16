@@ -18,4 +18,4 @@ export { default as DiaryImages } from './DiaryImages';
 export { default as DiaryComment } from './DiaryComment';
 export { default as DiaryHeaderInfo } from './DiaryHeaderInfo';
 export { default as DiaryContent } from './DiaryContent';
-export { default as DiaryCommentInput } from './DiaryCommentInput';
+export { default as DiaryCommentInputForm } from './DiaryCommentInputForm';

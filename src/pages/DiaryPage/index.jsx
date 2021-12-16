@@ -6,7 +6,7 @@ import {
   DiaryImages,
   DiaryContent,
   DiaryComment,
-  DiaryCommentInput,
+  DiaryCommentInputForm,
 } from '@components/domain';
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
@@ -116,7 +116,7 @@ const DiaryPage = () => {
         <DiaryImages images={images} />
         <DiaryContent content={content} />
         <DiaryComment comments={comments} />
-        <DiaryCommentInput profile={profile} />
+        <DiaryCommentInputForm profile={profile} />
       </DefaultContainer>
     </>
   );

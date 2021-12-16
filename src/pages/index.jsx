@@ -2,6 +2,7 @@ export { default as MainPage } from './MainPage';
 export { default as LoginPage } from './LoginPage';
 export { default as LandingPage } from './LandingPage';
 export { default as MemberListPage } from './MemberListPage';
+export { default as ProfilePage } from './ProfilePage';
 export { default as AlbumListPage } from './AlbumListPage';
 export { default as DiaryPage } from './DiaryPage';
 export { default as DiaryCreatePage } from './DiaryCreatePage';

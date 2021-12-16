@@ -11,7 +11,13 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
-import { useState, useCallback, useEffect } from 'react';
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 
 const DUMMY_USERINFO = {
   profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
@@ -88,6 +94,8 @@ const DiaryPage = () => {
   const [comments, setComments] = useState([]);
   const [profile, setProfile] = useState(null);
 
+  const containerRef = useRef(null);
+
   useEffect(() => {
     // 초기 호출 Api 적용예정..
     setTitle(() => DUMMY_DATA.title);
@@ -96,6 +104,16 @@ const DiaryPage = () => {
     setContent(() => DUMMY_DATA.content);
     setComments(() => DUMMY_DATA.comments);
     setProfile(() => DUMMY_USERINFO.profile);
+  }, []);
+
+  useLayoutEffect(() => {
+    const detectMobileKeyboard = () => {
+      containerRef.current.scrollIntoView({ block: 'end' });
+    };
+
+    window.addEventListener('resize', detectMobileKeyboard);
+
+    return () => window.removeEventListener('resize', detectMobileKeyboard);
   }, []);
 
   const leftHeaderContent = useCallback(() => {
@@ -115,7 +133,7 @@ const DiaryPage = () => {
         <DiaryHeaderInfo title={title} createdAt={createdAt} />
         <DiaryImages images={images} />
         <DiaryContent content={content} />
-        <DiaryComment comments={comments} />
+        <DiaryComment comments={comments} ref={containerRef} />
         <DiaryCommentInputForm profile={profile} />
       </DefaultContainer>
     </>

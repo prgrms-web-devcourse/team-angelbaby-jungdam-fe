@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import font from '@assets/fonts';
+import { forwardRef } from 'react';
 
 const Conatainer = styled.div`
   margin-top: 20px;
@@ -32,10 +33,9 @@ const Comment = styled.span`
   ${() => font.content_12}
 `;
 
-const DiaryComment = ({ comments }) => {
-  console.log(comments);
+const DiaryComment = forwardRef(({ comments }, ref) => {
   return (
-    <Conatainer>
+    <Conatainer ref={ref}>
       {comments.map(({ id, profile, username, comment }) => (
         <Article key={id}>
           <Avatar alt="images" src={profile} />
@@ -47,6 +47,6 @@ const DiaryComment = ({ comments }) => {
       ))}
     </Conatainer>
   );
-};
+});
 
 export default DiaryComment;

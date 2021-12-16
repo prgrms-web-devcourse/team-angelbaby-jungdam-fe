@@ -39,8 +39,8 @@ const Router = () => {
               <Route path="new" element={<AlbumCreatePage />} />
               {/* <Route path="profile" element={<ProfilePage />} /> */}
             </Route>
-            <Route path="/album/:albumId/*">
-              <Route path="diary/*">
+            <Route path="/album/:albumId">
+              <Route path="diary">
                 <Route path=":diaryId" element={<DiaryPage />} />
                 <Route path="new" element={<DiaryCreatePage />} />
               </Route>

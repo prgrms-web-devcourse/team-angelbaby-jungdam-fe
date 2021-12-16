@@ -19,6 +19,7 @@ import {
   useRef,
 } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getDiaryContents } from '@api/getDiaryContents';
 
 const DUMMY_USERINFO = {
@@ -97,7 +98,8 @@ const DiaryPage = () => {
   const [images, setImages] = useState([]);
   const [content, setContent] = useState(null);
   const [comments, setComments] = useState([]);
-  const [profile, setProfile] = useState(null);
+
+  const profile = useSelector((state) => state.member.data.memberAvatar);
 
   const containerRef = useRef(null);
 
@@ -117,7 +119,6 @@ const DiaryPage = () => {
       setImages(() => diaryPhotos);
       setContent(() => content);
       setComments(() => DUMMY_DATA.comments);
-      setProfile(() => DUMMY_USERINFO.profile);
     };
 
     fetchDiaryInfo();
@@ -144,20 +145,18 @@ const DiaryPage = () => {
   }, []);
 
   return (
-    <>
-      <DefaultContainer css={ContainerStyle}>
-        <Header leftComponent={leftHeaderContent()} />
-        <DiaryHeaderInfo
-          title={title}
-          createdAt={createdAt}
-          bookmark={bookmark}
-        />
-        <DiaryImages images={images} />
-        <DiaryContent content={content} />
-        <DiaryComment comments={comments} ref={containerRef} />
-        <DiaryCommentInputForm profile={profile} />
-      </DefaultContainer>
-    </>
+    <DefaultContainer css={ContainerStyle}>
+      <Header leftComponent={leftHeaderContent()} />
+      <DiaryHeaderInfo
+        title={title}
+        createdAt={createdAt}
+        bookmark={bookmark}
+      />
+      <DiaryImages images={images} />
+      <DiaryContent content={content} />
+      <DiaryComment comments={comments} ref={containerRef} />
+      <DiaryCommentInputForm profile={profile} />
+    </DefaultContainer>
   );
 };
 

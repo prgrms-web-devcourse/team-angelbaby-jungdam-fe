@@ -11,15 +11,10 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
-import {
-  useState,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import usePromise from '@hooks/usePromise';
 import { getDiaryContents } from '@api/getDiaryContents';
 
 const DUMMY_USERINFO = {
@@ -91,38 +86,16 @@ const ContainerStyle = css`
 
 const DiaryPage = () => {
   const { albumId, diaryId } = useParams();
-
-  const [title, setTitle] = useState(null);
-  const [bookmark, setBookmark] = useState(null);
-  const [createdAt, setCreatedAt] = useState(null);
-  const [images, setImages] = useState([]);
-  const [content, setContent] = useState(null);
-  const [comments, setComments] = useState([]);
-
-  const profile = useSelector((state) => state.member.data.memberAvatar);
-
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const fetchDiaryInfo = async () => {
-      const data = {
-        albumId,
-        diaryId,
-      };
-
-      const { title, bookmark, recordedAt, diaryPhotos, content } =
-        await getDiaryContents(data);
-
-      setTitle(() => title);
-      setBookmark(() => bookmark);
-      setCreatedAt(() => recordedAt);
-      setImages(() => diaryPhotos);
-      setContent(() => content);
-      setComments(() => DUMMY_DATA.comments);
+  const [loading, fetchDiaryContents] = usePromise(() => {
+    const data = {
+      albumId,
+      diaryId,
     };
 
-    fetchDiaryInfo();
+    return getDiaryContents(data);
   }, [albumId, diaryId]);
+  const profile = useSelector((state) => state.member.data.memberAvatar);
+  const containerRef = useRef(null);
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
@@ -136,23 +109,33 @@ const DiaryPage = () => {
 
   const leftHeaderContent = useCallback(() => {
     return (
-      <>
-        <Button>
-          <Icon name="ep:back" color={color.brown} />
-        </Button>
-      </>
+      <Button>
+        <Icon name="ep:back" color={color.brown} />
+      </Button>
     );
   }, []);
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (!fetchDiaryContents) {
+    return null;
+  }
+
+  const { title, bookmark, recordedAt, diaryPhotos, content } =
+    fetchDiaryContents;
+  const comments = DUMMY_DATA.comments;
 
   return (
     <DefaultContainer css={ContainerStyle}>
       <Header leftComponent={leftHeaderContent()} />
       <DiaryHeaderInfo
         title={title}
-        createdAt={createdAt}
+        createdAt={recordedAt}
         bookmark={bookmark}
       />
-      <DiaryImages images={images} />
+      <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
       <DiaryComment comments={comments} ref={containerRef} />
       <DiaryCommentInputForm profile={profile} />

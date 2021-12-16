@@ -19,6 +19,7 @@ const Spinner = ({ size = 16, color = colors.brown, isLoading = true }) => {
         height="38"
         viewBox="0 0 38 38"
         xmlns="http://www.w3.org/2000/svg"
+        stroke={color}
         style={sizeStyle}
       >
         <g fill="none" fillRule="evenodd">

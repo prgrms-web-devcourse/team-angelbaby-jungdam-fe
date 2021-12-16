@@ -12,11 +12,17 @@ const Container = styled.div`
   ${() => font.content_16}
 `;
 
+const Paragraph = styled.p`
+  margin-bottom: 5px;
+`;
+
 const DiaryContent = ({ content }) => {
   return (
     <Container>
       {content &&
-        content.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+        content
+          .split('\n')
+          .map((line, index) => <Paragraph key={index}>{line}</Paragraph>)}
     </Container>
   );
 };

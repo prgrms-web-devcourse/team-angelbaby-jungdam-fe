@@ -10,6 +10,8 @@ import {
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  AlbumListPage,
+  AlbumCreatePage,
   SpecialMomentPage,
   MemberListPage,
   MemberInvitePage,

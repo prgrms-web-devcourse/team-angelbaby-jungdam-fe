@@ -15,6 +15,7 @@ import {
   MemberInvitePage,
   StoryBookPage,
   StoryBookDetailPage,
+  Error404Page,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -58,7 +59,7 @@ const Router = () => {
             </Route>
           </Route>
           {/* 임시 404 페이지 */}
-          <Route path="*" element={<div>404 Page</div>} />
+          <Route path="*" element={<Error404Page />} />
         </Routes>
       </DefaultTemplate>
     </BrowserRouter>

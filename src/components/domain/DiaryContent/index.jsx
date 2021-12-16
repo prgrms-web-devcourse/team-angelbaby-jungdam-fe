@@ -15,7 +15,8 @@ const Container = styled.div`
 const DiaryContent = ({ content }) => {
   return (
     <Container>
-      {content && content.split('\n').map((line) => <p>{line}</p>)}
+      {content &&
+        content.split('\n').map((line, index) => <p key={index}>{line}</p>)}
     </Container>
   );
 };

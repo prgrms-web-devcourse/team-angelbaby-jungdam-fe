@@ -8,6 +8,10 @@ import {
   AlbumListPage,
   AlbumCreatePage,
   OAuthRedirect,
+  DiaryPage,
+  DiaryCreatePage,
+  MemberListPage,
+  MemberInvitePage,
   StoryBookPage,
   StoryBookDetailPage,
 } from '@pages';
@@ -38,10 +42,10 @@ const Router = () => {
               {/* <Route path="diary"> */}
               {/* <Route path=":diaryId" element={<DiaryPage />} /> */}
               {/* <Route path="new" element={<DiaryCreatePage />} /> */}
-              {/* </Route> */}
-              {/* <Route path="members" element={<MemberListPage />}> */}
-              {/* <Route path="invite" element={<MemberInvitePage />} /> */}
-              {/* </Route> */}
+              <Route path="members/*">
+                <Route path="" element={<MemberListPage />} />
+                <Route path="invite" element={<MemberInvitePage />} />
+              </Route>
               {/* <Route path="settings" element={<AlbumSettingsPage />}> */}
               {/* <Route path="edit" element={<AlbumSettingsEditPage />} /> */}
               {/* </Route> */}

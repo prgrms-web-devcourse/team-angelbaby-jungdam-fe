@@ -1,10 +1,27 @@
 import styled from 'styled-components';
 import DefaultContainer from '@styles/DefaultContainer';
-import color from '@assets/colors';
 import font from '@assets/fonts';
-import { Icon } from '@components/base';
-import { OnlyInfoHeader } from '@components/domain';
+import { Icon, Divider } from '@components/base';
+import { OnlyInfoHeader, UserCard } from '@components/domain';
 import { useNavigate } from 'react-router-dom';
+
+const DUMMY_DATA = [
+  {
+    nickname: 'test1',
+    avatar: 'https://picsum.photos/300/600',
+    role: 'OWNER',
+  },
+  {
+    nickname: 'test2',
+    avatar: 'https://picsum.photos/300/600',
+    role: 'MEMBER',
+  },
+  {
+    nickname: 'test3',
+    avatar: '',
+    role: 'MEMBER',
+  },
+];
 
 const MemberListPageContainer = styled(DefaultContainer)`
   width: 100%;
@@ -17,7 +34,6 @@ const ToInvitePage = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 48px;
-  border-bottom: 1px solid ${color.grey_50};
 `;
 
 const InviteWrapper = styled.div`
@@ -28,7 +44,6 @@ const InviteWrapper = styled.div`
 
 const MemberListWrapper = styled.div`
   margin-top: 78px;
-  border-bottom: 1px solid ${color.grey_50};
 `;
 
 const MemberListTitle = styled.div`
@@ -40,21 +55,29 @@ const MemberListPage = () => {
   const navigate = useNavigate();
 
   const handleToInvite = (e) => {
-    navigate('/invite');
+    navigate('invite');
   };
+
+  const memberList = (list) =>
+    list.map(({ nickname, avatar, role }, index) => (
+      <UserCard nickname={nickname} avatar={avatar} role={role} key={index} />
+    ));
+
   return (
     <MemberListPageContainer>
       <OnlyInfoHeader pageTitle="멤버 리스트" />
       <ToInvitePage onClick={handleToInvite}>
         <InviteWrapper>
-          <Icon name="octicon:person-add-24" height="24" />
+          <Icon name="octicon:person-add-24" />
           멤버 초대하기
         </InviteWrapper>
-        <Icon name="octicon:chevron-right-24" height="24" />
+        <Icon name="octicon:chevron-right-24" />
       </ToInvitePage>
+      <Divider size={4} />
       <MemberListWrapper>
         <MemberListTitle>멤버</MemberListTitle>
-        {/* UserCard 도메인이 들어갈 구역 */}
+        <Divider size={4} />
+        {memberList(DUMMY_DATA)}
       </MemberListWrapper>
     </MemberListPageContainer>
   );

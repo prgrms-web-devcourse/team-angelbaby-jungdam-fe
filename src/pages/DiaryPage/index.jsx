@@ -73,6 +73,11 @@ const DUMMY_DATA = {
 const ContainerStyle = css`
   padding-top: 38px;
   overflow-y: auto;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DiaryPage = () => {

@@ -147,7 +147,11 @@ const DiaryPage = () => {
     <>
       <DefaultContainer css={ContainerStyle}>
         <Header leftComponent={leftHeaderContent()} />
-        <DiaryHeaderInfo title={title} createdAt={createdAt} />
+        <DiaryHeaderInfo
+          title={title}
+          createdAt={createdAt}
+          bookmark={bookmark}
+        />
         <DiaryImages images={images} />
         <DiaryContent content={content} />
         <DiaryComment comments={comments} ref={containerRef} />

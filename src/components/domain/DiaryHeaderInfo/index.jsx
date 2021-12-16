@@ -35,17 +35,25 @@ const DiaryDelete = styled.span`
   ${() => font.content_16}
 `;
 
-const DiaryHeaderInfo = ({ title, createdAt }) => {
+const DiaryHeaderInfo = ({ title, createdAt, bookmark }) => {
   return (
     <>
       <TitleContainer>
         <Title>{title}</Title>
         <Button>
-          <Icon
-            name="ant-design:star-outlined"
-            color={color.brown}
-            height={30}
-          />
+          {!bookmark ? (
+            <Icon
+              name="ant-design:star-outlined"
+              color={color.brown}
+              height={30}
+            />
+          ) : (
+            <Icon
+              name="ant-design:star-filled"
+              color={color.brown}
+              height={30}
+            />
+          )}
         </Button>
       </TitleContainer>
 

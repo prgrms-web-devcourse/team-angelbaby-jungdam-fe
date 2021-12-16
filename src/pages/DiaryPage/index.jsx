@@ -18,6 +18,8 @@ import {
   useLayoutEffect,
   useRef,
 } from 'react';
+import { useParams } from 'react-router-dom';
+import { getDiaryContents } from '@api/getDiaryContents';
 
 const DUMMY_USERINFO = {
   profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
@@ -87,7 +89,10 @@ const ContainerStyle = css`
 `;
 
 const DiaryPage = () => {
+  const { albumId, diaryId } = useParams();
+
   const [title, setTitle] = useState(null);
+  const [bookmark, setBookmark] = useState(null);
   const [createdAt, setCreatedAt] = useState(null);
   const [images, setImages] = useState([]);
   const [content, setContent] = useState(null);
@@ -97,14 +102,26 @@ const DiaryPage = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // 초기 호출 Api 적용예정..
-    setTitle(() => DUMMY_DATA.title);
-    setCreatedAt(() => DUMMY_DATA.createdAt);
-    setImages(() => DUMMY_DATA.images);
-    setContent(() => DUMMY_DATA.content);
-    setComments(() => DUMMY_DATA.comments);
-    setProfile(() => DUMMY_USERINFO.profile);
-  }, []);
+    const fetchDiaryInfo = async () => {
+      const data = {
+        albumId,
+        diaryId,
+      };
+
+      const { title, bookmark, recordedAt, diaryPhotos, content } =
+        await getDiaryContents(data);
+
+      setTitle(() => title);
+      setBookmark(() => bookmark);
+      setCreatedAt(() => recordedAt);
+      setImages(() => diaryPhotos);
+      setContent(() => content);
+      setComments(() => DUMMY_DATA.comments);
+      setProfile(() => DUMMY_USERINFO.profile);
+    };
+
+    fetchDiaryInfo();
+  }, [albumId, diaryId]);
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {

@@ -11,6 +11,7 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
+import { useState, useCallback } from 'react';
 
 const DUMMY_USERINFO = {
   profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
@@ -75,7 +76,7 @@ const ContainerStyle = css`
 `;
 
 const DiaryPage = () => {
-  const leftHeaderContent = () => {
+  const leftHeaderContent = useCallback(() => {
     return (
       <>
         <Button>
@@ -83,7 +84,7 @@ const DiaryPage = () => {
         </Button>
       </>
     );
-  };
+  }, []);
 
   return (
     <>

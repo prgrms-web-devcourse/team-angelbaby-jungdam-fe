@@ -11,7 +11,7 @@ import {
   AlbumSwiper,
 } from '@components/domain';
 
-const AlbumMainPageContainer = styled(DefaultContainer)`
+const AlbumListPageContainer = styled(DefaultContainer)`
   padding-top: 50px;
 `;
 
@@ -26,11 +26,11 @@ const Subtitle = styled.h2`
   ${font.heading_20};
 `;
 
-const AlbumMainPage = () => {
+const AlbumListPage = () => {
   return (
     <>
       <ServiceInfoHeader />
-      <AlbumMainPageContainer>
+      <AlbumListPageContainer>
         <SubHeader>
           <Subtitle>주디님의 초대 목록</Subtitle>
         </SubHeader>
@@ -43,7 +43,7 @@ const AlbumMainPage = () => {
           </Button>
         </SubHeader>
         <AlbumSwiper />
-      </AlbumMainPageContainer>
+      </AlbumListPageContainer>
       <Link to="new">
         <BottomFloatButton>그룹 생성하기</BottomFloatButton>
       </Link>
@@ -51,4 +51,4 @@ const AlbumMainPage = () => {
   );
 };
 
-export default AlbumMainPage;
+export default AlbumListPage;

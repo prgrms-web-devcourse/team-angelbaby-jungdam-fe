@@ -5,11 +5,11 @@ import { AuthRoute, PreventedRoute } from '@router';
 import {
   LandingPage,
   LoginPage,
-  AlbumListPage,
-  AlbumCreatePage,
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  AlbumListPage,
+  AlbumCreatePage,
   SpecialMomentPage,
   MemberListPage,
   MemberInvitePage,

@@ -12,9 +12,24 @@ const Title = styled.span`
   ${font.heading_24};
 `;
 
-const DiaryCreateStepOne = () => {
-  const onChange = (e) => {
-    console.log(e.target.value);
+const DiaryCreateStepOne = ({ onChange, date }) => {
+  const getTodayDate = () => {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd += '0';
+    }
+
+    if (mm < 10) {
+      mm += '0';
+    }
+
+    today = `${yyyy}-${mm}-${dd}`;
+
+    return today;
   };
 
   return (
@@ -22,9 +37,11 @@ const DiaryCreateStepOne = () => {
       <Title>날짜를 선택해주세요.</Title>
       <Input
         type="date"
-        name="Date"
+        name="date"
         onChange={onChange}
         css={font.content_16}
+        max={getTodayDate()}
+        value={date}
       />
     </Container>
   );

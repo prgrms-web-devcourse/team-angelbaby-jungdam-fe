@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -13,19 +13,8 @@ const Button = styled.button`
   all: unset;
 `;
 
-const Upload = ({ children, onChange, ...props }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [files, setFiles] = useState(null);
+const Upload = ({ children, onChange, name, ...props }) => {
   const imageUploadInput = useRef(null);
-
-  const handleImageUploadChange = (e) => {
-    const files = e.target.files;
-    const changedFiles = files;
-
-    setFiles(changedFiles);
-
-    onChange && onChange(changedFiles);
-  };
 
   const handleImageUploadClick = () => {
     imageUploadInput.current.click();
@@ -35,10 +24,11 @@ const Upload = ({ children, onChange, ...props }) => {
     <Container>
       <Input
         type="file"
+        name={name}
         accept="image/jpg, image/jpeg, image/png"
         multiple
         ref={imageUploadInput}
-        onChange={handleImageUploadChange}
+        onChange={onChange}
       />
       <Button type="button" onClick={handleImageUploadClick} {...props}>
         {children}

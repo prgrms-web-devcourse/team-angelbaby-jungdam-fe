@@ -12,6 +12,9 @@ import { Button, Icon, ProgressBar } from '@components/base';
 import font from '@assets/fonts';
 import color from '@assets/colors';
 import DefaultContainer from '@styles/DefaultContainer';
+import useForm from '@hooks/useForm';
+import { postImageUpload } from '@api/postImageUpload';
+import { postDiaryCreate } from '@api/postDiaryCreate';
 
 const DefaultMarginTop = css`
   margin: 80px 0 80px 0;
@@ -27,8 +30,19 @@ const ButtonStyle = {
 const DiaryCreatePage = () => {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
-
   const buttonRef = useRef();
+  const { values, handleChange } = useForm({
+    initialValues: {
+      date: '',
+      title: '',
+      content: '',
+      photos: [],
+    },
+  });
+  const { date, title, content, photos } = values;
+
+  const [inputErrors, setInputErrors] = useState({});
+  const { titleError, contentError } = inputErrors;
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
@@ -47,7 +61,50 @@ const DiaryCreatePage = () => {
   }, []);
 
   const handleNextButtonClick = () => {
+    if (step === 2) {
+      if (title.length === 0) {
+        setInputErrors((values) => ({
+          ...values,
+          titleError: '제목을 작성해주세요.',
+        }));
+
+        return;
+      } else if (title.length > 30) {
+        setInputErrors((values) => ({
+          ...values,
+          titleError: '제목은 30자 이내로 작성해주세요.',
+        }));
+
+        return;
+      } else {
+        setInputErrors((values) => ({
+          ...values,
+          titleError: '',
+        }));
+      }
+
+      if (content.length === 0) {
+        setInputErrors((values) => ({
+          ...values,
+          contentError: '일기를 작성해주세요.',
+        }));
+
+        return;
+      } else {
+        setInputErrors((values) => ({
+          ...values,
+          contentError: '',
+        }));
+      }
+    }
+
     setStep(() => step + 1);
+
+    setInputErrors((values) => ({
+      ...values,
+      titleError: '',
+      contentError: '',
+    }));
   };
 
   const handlePrevButtonClick = () => {
@@ -58,9 +115,35 @@ const DiaryCreatePage = () => {
     }
   };
 
-  const handleSubmitButtonClick = () => {
+  const handleSubmitButtonClick = async () => {
+    try {
+      const urls = [];
+
+      for (let i = 0; i < photos.length; i++) {
+        const formData = new FormData();
+        formData.append('image', photos[i]);
+
+        const { data } = await postImageUpload(formData);
+        urls.push(data.uploadImageUrl);
+      }
+
+      const submitData = {
+        diaryTitle: title,
+        diaryContent: content,
+        diaryPhotos: urls,
+        recordedAt: date,
+      };
+
+      // albumId 조회 코드 구현 필요
+      // 반환된 diaryId에 대한 navigate 코드 구현 필요
+      const { data } = await postDiaryCreate(5, submitData);
+      console.log(data);
+    } catch (e) {
+      console.log('fail');
+      console.log(e.message);
+    }
     // api 코드 추가 예정
-    navigate('../diary');
+    // navigate('../diary');
   };
 
   const leftHeaderContent = () => {
@@ -88,11 +171,20 @@ const DiaryCreatePage = () => {
 
   const renderDiaryCreateForm = () => {
     if (step === 1) {
-      return <DiaryCreateStepOne />;
+      return <DiaryCreateStepOne onChange={handleChange} date={date} />;
     } else if (step === 2) {
-      return <DiaryCreateStepTwo />;
+      return (
+        <DiaryCreateStepTwo
+          onChange={handleChange}
+          title={title}
+          content={content}
+          titleError={titleError}
+          contentError={contentError}
+          setInputErrors={setInputErrors}
+        />
+      );
     } else if (step === 3) {
-      return <DiaryCreateStepThree />;
+      return <DiaryCreateStepThree onChange={handleChange} photos={photos} />;
     }
   };
 

@@ -10,3 +10,6 @@ export { default as MemberInvitePage } from './MemberInvitePage';
 export { default as OAuthRedirect } from './OAuthRedirect';
 export { default as AlbumSettingsEditPage } from './AlbumSettingsEditPage';
 export { default as AlbumCreatePage } from './AlbumCreatePage';
+export { default as SpecialMomentPage } from './SpecialMomentPage';
+export { default as StoryBookPage } from './StoryBookPage';
+export { default as StoryBookDetailPage } from './StoryBookDetailPage';

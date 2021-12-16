@@ -6,10 +6,15 @@ import {
   DiaryImages,
   DiaryContent,
   DiaryComment,
+  DiaryCommentInput,
 } from '@components/domain';
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
+
+const DUMMY_USERINFO = {
+  profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
+};
 
 const DUMMY_DATA = {
   title: '사랑하는 우리 가족',
@@ -81,16 +86,19 @@ const DiaryPage = () => {
   };
 
   return (
-    <DefaultContainer css={ContainerStyle}>
-      <Header leftComponent={leftHeaderContent()} />
-      <DiaryHeaderInfo
-        title={DUMMY_DATA.title}
-        createdAt={DUMMY_DATA.createdAt}
-      />
-      <DiaryImages images={DUMMY_DATA.images} />
-      <DiaryContent content={DUMMY_DATA.content} />
-      <DiaryComment comments={DUMMY_DATA.comments} />
-    </DefaultContainer>
+    <>
+      <DefaultContainer css={ContainerStyle}>
+        <Header leftComponent={leftHeaderContent()} />
+        <DiaryHeaderInfo
+          title={DUMMY_DATA.title}
+          createdAt={DUMMY_DATA.createdAt}
+        />
+        <DiaryImages images={DUMMY_DATA.images} />
+        <DiaryContent content={DUMMY_DATA.content} />
+        <DiaryComment comments={DUMMY_DATA.comments} />
+        <DiaryCommentInput profile={DUMMY_USERINFO.profile} />
+      </DefaultContainer>
+    </>
   );
 };
 

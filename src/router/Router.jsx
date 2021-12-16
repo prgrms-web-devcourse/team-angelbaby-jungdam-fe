@@ -10,6 +10,7 @@ import {
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  SpecialMomentPage,
   MemberListPage,
   MemberInvitePage,
   StoryBookPage,
@@ -53,7 +54,7 @@ const Router = () => {
                 <Route path="" element={<StoryBookPage />} />
                 <Route path=":storybookId" element={<StoryBookDetailPage />} />
               </Route>
-              {/* <Route path="moment" element={<SpecialMomentPage />} /> */}
+              <Route path="moment" element={<SpecialMomentPage />} />
             </Route>
           </Route>
           {/* 임시 404 페이지 */}

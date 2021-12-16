@@ -11,7 +11,7 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 const DUMMY_USERINFO = {
   profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
@@ -81,6 +81,23 @@ const ContainerStyle = css`
 `;
 
 const DiaryPage = () => {
+  const [title, setTitle] = useState(null);
+  const [createdAt, setCreatedAt] = useState(null);
+  const [images, setImages] = useState([]);
+  const [content, setContent] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    // 초기 호출 Api 적용예정..
+    setTitle(() => DUMMY_DATA.title);
+    setCreatedAt(() => DUMMY_DATA.createdAt);
+    setImages(() => DUMMY_DATA.images);
+    setContent(() => DUMMY_DATA.content);
+    setComments(() => DUMMY_DATA.comments);
+    setProfile(() => DUMMY_USERINFO.profile);
+  }, []);
+
   const leftHeaderContent = useCallback(() => {
     return (
       <>
@@ -95,14 +112,11 @@ const DiaryPage = () => {
     <>
       <DefaultContainer css={ContainerStyle}>
         <Header leftComponent={leftHeaderContent()} />
-        <DiaryHeaderInfo
-          title={DUMMY_DATA.title}
-          createdAt={DUMMY_DATA.createdAt}
-        />
-        <DiaryImages images={DUMMY_DATA.images} />
-        <DiaryContent content={DUMMY_DATA.content} />
-        <DiaryComment comments={DUMMY_DATA.comments} />
-        <DiaryCommentInput profile={DUMMY_USERINFO.profile} />
+        <DiaryHeaderInfo title={title} createdAt={createdAt} />
+        <DiaryImages images={images} />
+        <DiaryContent content={content} />
+        <DiaryComment comments={comments} />
+        <DiaryCommentInput profile={profile} />
       </DefaultContainer>
     </>
   );

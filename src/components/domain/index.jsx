@@ -14,3 +14,7 @@ export { default as DiaryCreateStepTwo } from './DiaryCreateStepTwo';
 export { default as DiaryCreateStepThree } from './DiaryCreateStepThree';
 export { default as UserCard } from './UserCard';
 export { default as StoryBookDiaryList } from './StoryBookDiaryList';
+export { default as DiaryImages } from './DiaryImages';
+export { default as DiaryComment } from './DiaryComment';
+export { default as DiaryHeaderInfo } from './DiaryHeaderInfo';
+export { default as DiaryContent } from './DiaryContent';

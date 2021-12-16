@@ -46,9 +46,18 @@ const AlbumInvite = styled.span`
 const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
   const dispatch = useDispatch();
 
-  const handleCancel = ({ invitationId }) => {
+  const handleCancel = async ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 삭제 구현
-    alert(invitationId);
+    try {
+      const {
+        data: { data },
+      } = await putInvitations({ invitationId, status: 'REJECT' });
+      console.log(data);
+      alert('삭제 완료');
+      dispatch(fetchInvitations());
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const handleApprove = async ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 수락 구현
@@ -57,6 +66,7 @@ const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
         data: { data },
       } = await putInvitations({ invitationId, status: 'ACCEPT' });
       console.log(data);
+      alert('수락 완료');
       dispatch(fetchInvitations());
     } catch (error) {
       console.log(error.message);

@@ -5,7 +5,6 @@ import font from '@assets/fonts';
 import { Button } from '@components/base';
 
 const Container = styled.div`
-  /* border: solid 1px black; */
   width: 100%;
   height: 50px;
   padding: 0 32px;

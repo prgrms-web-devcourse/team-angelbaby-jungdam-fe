@@ -2,7 +2,10 @@ import React from 'react';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Button, Icon } from '@components/base';
+import { putInvitations } from '@api/albumApi';
 import styled from '@emotion/styled';
+import { useDispatch } from 'react-redux';
+import { fetchInvitations } from '@redux/album';
 
 const AlbumInviteCardContainer = styled.li`
   display: flex;
@@ -40,28 +43,38 @@ const AlbumInvite = styled.span`
   color: ${color.black_70};
 `;
 
-const AlbumInviteCard = ({ id, albumName, inviteTime }) => {
-  const handleCancel = ({ id }) => {
+const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
+  const dispatch = useDispatch();
+
+  const handleCancel = ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 삭제 구현
-    alert(id);
+    alert(invitationId);
   };
-  const handleApprove = ({ id }) => {
+  const handleApprove = async ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 수락 구현
-    alert(id);
+    try {
+      const {
+        data: { data },
+      } = await putInvitations({ invitationId, status: 'ACCEPT' });
+      console.log(data);
+      dispatch(fetchInvitations());
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <AlbumInviteCardContainer>
       <AlbumLeft>
         <Icon name="flat-color-icons:invite" height={14} />
-        <AlbumTitle>'{albumName}'</AlbumTitle>에서 초대 요청
-        <AlbumInvite>{inviteTime}</AlbumInvite>
+        <AlbumTitle>'{albumTitle}'</AlbumTitle>에서 초대 요청
+        <AlbumInvite>{invitationCreatedAt}</AlbumInvite>
       </AlbumLeft>
       <AlbumRight>
-        <Button onClick={() => handleCancel({ id })}>
+        <Button onClick={() => handleApprove({ invitationId })}>
           <Icon name="emojione:white-heavy-check-mark" height={16} />
         </Button>
-        <Button onClick={() => handleApprove({ id })}>
+        <Button onClick={() => handleCancel({ invitationId })}>
           <Icon name="bx:bxs-x-circle" height={18} />
         </Button>
       </AlbumRight>

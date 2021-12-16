@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DefaultContainer from '@styles/DefaultContainer';
 import font from '@assets/fonts';
 import color from '@assets/colors';
@@ -10,6 +10,8 @@ import {
   AlbumInviteList,
   AlbumSwiper,
 } from '@components/domain';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchInvitations } from '@redux/album';
 
 const AlbumListPageContainer = styled(DefaultContainer)`
   padding-top: 50px;
@@ -27,9 +29,19 @@ const Subtitle = styled.h2`
 `;
 
 const AlbumListPage = () => {
+  const {
+    data: { memberAvatar },
+  } = useSelector((state) => state.member);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchInvitations());
+  }, [dispatch]);
+
   return (
     <>
-      <ServiceInfoHeader />
+      <ServiceInfoHeader src={memberAvatar} />
       <AlbumListPageContainer>
         <SubHeader>
           <Subtitle>주디님의 초대 목록</Subtitle>

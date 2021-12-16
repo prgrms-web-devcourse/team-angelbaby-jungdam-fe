@@ -9,6 +9,8 @@ import {
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  AlbumListPage,
+  AlbumCreatePage,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -28,10 +30,11 @@ const Router = () => {
           </Route>
           {/* AuthRoute - Token이 존재해야 접속 가능함. */}
           <Route element={<AuthRoute />}>
-            {/* <Route path="/album" element={<AlbumListPage />}> */}
-            {/* <Route path="new" element={<AlbumCreatePage />} /> */}
-            {/* <Route path="profile" element={<ProfilePage />} /> */}
-            {/* </Route> */}
+            <Route path="/album">
+              <Route path="" element={<AlbumListPage />} />
+              <Route path="new" element={<AlbumCreatePage />} />
+              {/* <Route path="profile" element={<ProfilePage />} /> */}
+            </Route>
             {/* <Route path="/album/:albumId" element={<AlbumMainPage />}> */}
             {/* <Route path="diary"> */}
             {/* <Route path=":diaryId" element={<DiaryPage />} /> */}

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { member } from './member';
+import { album } from './album';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 import logger from 'redux-logger';
@@ -16,6 +17,7 @@ const persistConfig = {
 
 const combinedReducer = combineReducers({
   member: member.reducer,
+  album: album.reducer,
 });
 const rootReducer = persistReducer(persistConfig, combinedReducer);
 

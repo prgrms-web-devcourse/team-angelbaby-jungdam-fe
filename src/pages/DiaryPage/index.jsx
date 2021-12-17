@@ -11,7 +11,7 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
-import { useCallback, useLayoutEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import usePromise from '@hooks/usePromise';
@@ -31,7 +31,7 @@ const DUMMY_DATA = {
     'https://swiperjs.com/demos/images/nature-4.jpg',
   ],
   content:
-    '사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.',
+    '사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.',
   comments: [
     {
       id: 7,
@@ -71,11 +71,30 @@ const DUMMY_DATA = {
       profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
       comment: '나도 할머니를 보며 느끼는 점\n 함께여서 행복해',
     },
+    {
+      id: 13,
+      username: '엄마',
+      profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
+      comment:
+        '나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.',
+    },
+    {
+      id: 14,
+      username: '엄마',
+      profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
+      comment: '나도 아빠를 보며 느끼는 점\n 함께여서 행복해',
+    },
+    {
+      id: 15,
+      username: '엄마',
+      profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
+      comment: '나도 할머니를 보며 느끼는 점\n 함께여서 행복해',
+    },
   ],
 };
 
 const ContainerStyle = css`
-  padding-top: 38px;
+  margin-top: 38px;
   overflow-y: auto;
   -ms-overflow-style: none;
 
@@ -95,11 +114,14 @@ const DiaryPage = () => {
     return getDiaryContents(data);
   }, [albumId, diaryId]);
   const profile = useSelector((state) => state.member.data.memberAvatar);
-  const containerRef = useRef(null);
+  const scrollRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const detectMobileKeyboard = () => {
-      containerRef.current.scrollIntoView({ block: 'end' });
+      scrollRef.current.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
     };
 
     window.addEventListener('resize', detectMobileKeyboard);
@@ -137,7 +159,7 @@ const DiaryPage = () => {
       />
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
-      <DiaryComment comments={comments} ref={containerRef} />
+      <DiaryComment comments={comments} ref={scrollRef} />
       <DiaryCommentInputForm profile={profile} />
     </DefaultContainer>
   );

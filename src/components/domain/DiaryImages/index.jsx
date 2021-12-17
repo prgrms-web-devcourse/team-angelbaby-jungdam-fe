@@ -13,15 +13,16 @@ import 'swiper/components/pagination/pagination.min.css';
 
 SwiperCore.use([Pagination]);
 
-const StyledSwiper = styled(Swiper)`
-  width: 100%;
-  height: 40vh;
-  min-height: 40vh;
+const Container = styled.div`
+  display: flex;
   margin-top: 10px;
   margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
+`;
+const StyledSwiper = css`
+  height: 40vh;
+  min-height: 260px;
   position: relative;
+  z-index: 0;
 `;
 
 const SwiperSlideStyle = {
@@ -42,19 +43,21 @@ const swiperParams = {
 
 const DiaryImages = ({ images }) => {
   return (
-    <StyledSwiper {...swiperParams}>
-      {images.map((image, index) => (
-        <SwiperSlide key={index} style={SwiperSlideStyle}>
-          <Image
-            css={ImageStyle}
-            src={image}
-            alt="image"
-            width="100%"
-            height="100%"
-          />
-        </SwiperSlide>
-      ))}
-    </StyledSwiper>
+    <Container>
+      <Swiper css={StyledSwiper} {...swiperParams}>
+        {images.map((image, index) => (
+          <SwiperSlide key={index} style={SwiperSlideStyle}>
+            <Image
+              css={ImageStyle}
+              src={image}
+              alt="image"
+              width="100%"
+              height="100%"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Container>
   );
 };
 

@@ -11,7 +11,7 @@ import {
   AlbumSwiper,
 } from '@components/domain';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchInvitations } from '@redux/album';
+import { fetchInvitations, fetchAlbums } from '@redux/album';
 
 const AlbumListPageContainer = styled(DefaultContainer)`
   padding-top: 50px;
@@ -30,12 +30,13 @@ const Subtitle = styled.h2`
 
 const AlbumListPage = () => {
   const {
-    data: { memberAvatar },
+    data: { memberAvatar, memberNickname },
   } = useSelector((state) => state.member);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchAlbums());
     dispatch(fetchInvitations());
   }, [dispatch]);
 
@@ -44,11 +45,11 @@ const AlbumListPage = () => {
       <ServiceInfoHeader src={memberAvatar} />
       <AlbumListPageContainer>
         <SubHeader>
-          <Subtitle>주디님의 초대 목록</Subtitle>
+          <Subtitle>{memberNickname}님의 초대 목록</Subtitle>
         </SubHeader>
         <AlbumInviteList />
         <SubHeader>
-          <Subtitle>주디님의 앨범 목록</Subtitle>
+          <Subtitle>{memberNickname}님의 앨범 목록</Subtitle>
           <Button mode="border">
             <Icon name="ant-design:plus-outlined" height={10} />
             추가하기

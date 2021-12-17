@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getInvitations } from '@api/albumApi';
+import { getInvitations, getAlbums } from '@api/albumApi';
 const name = 'album';
 
 // 비동기 함수를 활용가능.
@@ -9,9 +9,11 @@ const initialValue = {
   isLoading: false,
 };
 
-// JWT Token 값만 넣으면 됌.
 export const fetchAlbums = createAsyncThunk(`${name}/fetchAlbums`, async () => {
-  // const { data } = await 앨범 리스트 불러오는 데이터
+  const {
+    data: { data },
+  } = await getAlbums();
+  return data;
 });
 
 export const fetchInvitations = createAsyncThunk(
@@ -42,6 +44,17 @@ export const album = createSlice({
     },
     [fetchInvitations.rejected]: (state, action) => {
       state.InviteList = [];
+      state.isLoading = false;
+    },
+    [fetchAlbums.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [fetchAlbums.fulfilled]: (state, action) => {
+      state.Albums = action.payload;
+      state.isLoading = false;
+    },
+    [fetchAlbums.rejected]: (state, action) => {
+      state.Albums = [];
       state.isLoading = false;
     },
   },

@@ -54,7 +54,6 @@ const ProfileItem = ({
 
   const onClickEditorButton = async (state) => {
     setIsLoading(true);
-    console.log(state);
     if (!state) {
       try {
         // 멤버 정보 수정 API 호출
@@ -70,7 +69,6 @@ const ProfileItem = ({
             memberNickname: data.nickname,
           }),
         );
-        console.log(`${dataName} : ${inputValue}`);
       } catch (error) {}
     }
     setIsLoading(false);

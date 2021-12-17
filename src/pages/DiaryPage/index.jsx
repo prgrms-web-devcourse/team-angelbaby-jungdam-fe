@@ -16,6 +16,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import usePromise from '@hooks/usePromise';
 import { getDiaryContents } from '@api/getDiaryContents';
+import { getDiaryComments } from '@api/getDiaryComments';
 import styled from '@emotion/styled';
 
 const DUMMY_USERINFO = {
@@ -113,7 +114,9 @@ const Divider = styled.hr`
 
 const DiaryPage = () => {
   const { albumId, diaryId } = useParams();
-  const [loading, fetchDiaryContents] = usePromise(() => {
+  const cursorId = useRef('');
+
+  const [loadingFetchDiaryContents, fetchDiaryContents] = usePromise(() => {
     const data = {
       albumId,
       diaryId,
@@ -121,6 +124,17 @@ const DiaryPage = () => {
 
     return getDiaryContents(data);
   }, [albumId, diaryId]);
+  const [loadingFetchDiaryComments, fetchDiaryComments] = usePromise(() => {
+    const data = {
+      albumId,
+      diaryId,
+      cursorId: cursorId.current,
+      size: 10,
+    };
+
+    return getDiaryComments(data);
+  }, [albumId, diaryId, cursorId]);
+
   const profile = useSelector((state) => state.member.data.memberAvatar);
   const scrollRef = useRef(null);
 
@@ -145,17 +159,18 @@ const DiaryPage = () => {
     );
   }, []);
 
-  if (loading) {
+  if (loadingFetchDiaryContents || loadingFetchDiaryComments) {
     return <div>loading</div>;
   }
 
-  if (!fetchDiaryContents) {
+  if (!fetchDiaryContents || !fetchDiaryComments) {
     return null;
   }
 
   const { title, bookmark, recordedAt, diaryPhotos, content } =
     fetchDiaryContents;
-  const comments = DUMMY_DATA.comments;
+  const { comments, hasNext, lastCommentId } = fetchDiaryComments;
+  cursorId.current = lastCommentId;
 
   return (
     <DefaultContainer css={ContainerStyle}>
@@ -168,7 +183,7 @@ const DiaryPage = () => {
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
       {comments.length !== 0 && <Divider />}
-      <DiaryComment comments={comments} ref={scrollRef} />
+      <DiaryComment comments={comments} ref={scrollRef} hasNext={hasNext} />
       <DiaryCommentInputForm profile={profile} />
     </DefaultContainer>
   );

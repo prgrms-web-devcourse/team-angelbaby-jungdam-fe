@@ -36,12 +36,12 @@ const Comment = styled.span`
 const DiaryComment = forwardRef(({ comments }, ref) => {
   return (
     <Conatainer ref={ref}>
-      {comments.map(({ id, profile, username, comment }) => (
-        <Article key={id}>
-          <Avatar alt="images" src={profile} />
+      {comments.map(({ commentId, avatar, nickname, commentContent }) => (
+        <Article key={commentId}>
+          <Avatar alt="images" src={avatar} />
           <CommentContainer>
-            <UserInfo>{username}</UserInfo>
-            <Comment>{comment}</Comment>
+            <UserInfo>{nickname}</UserInfo>
+            <Comment>{commentContent}</Comment>
           </CommentContainer>
         </Article>
       ))}

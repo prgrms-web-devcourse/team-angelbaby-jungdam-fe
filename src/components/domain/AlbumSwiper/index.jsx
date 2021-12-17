@@ -40,7 +40,7 @@ const AlbumSwiper = () => {
 
   const swiperStyle = {
     margin: '0 -32px',
-    height: '35vh',
+    height: '40vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,7 +77,7 @@ const AlbumSwiper = () => {
         </Swiper>
       ) : (
         <SliderBox>
-          <Image src={Family} width="200px" height="200px" />
+          <Image src={Family} width="150px" height="150px" />
           <NoneAlbumGuide>
             아직 생성 된 가족 앨범이 없습니다.
             <br />

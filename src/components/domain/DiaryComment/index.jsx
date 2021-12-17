@@ -3,7 +3,7 @@ import font from '@assets/fonts';
 import { forwardRef } from 'react';
 
 const Conatainer = styled.div`
-  margin-top: 20px;
+  padding-top: 20px;
 `;
 
 const Article = styled.div`

@@ -16,6 +16,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import usePromise from '@hooks/usePromise';
 import { getDiaryContents } from '@api/getDiaryContents';
+import styled from '@emotion/styled';
 
 const DUMMY_USERINFO = {
   profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
@@ -103,6 +104,13 @@ const ContainerStyle = css`
   }
 `;
 
+const Divider = styled.hr`
+  display: block;
+  width: 100%;
+  border: solid 0.5px ${color.grey};
+  background-color: ${color.grey};
+`;
+
 const DiaryPage = () => {
   const { albumId, diaryId } = useParams();
   const [loading, fetchDiaryContents] = usePromise(() => {
@@ -159,6 +167,7 @@ const DiaryPage = () => {
       />
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
+      {comments.length !== 0 && <Divider />}
       <DiaryComment comments={comments} ref={scrollRef} />
       <DiaryCommentInputForm profile={profile} />
     </DefaultContainer>

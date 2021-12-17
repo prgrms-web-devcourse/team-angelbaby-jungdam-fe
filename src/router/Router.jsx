@@ -5,17 +5,18 @@ import { AuthRoute, PreventedRoute } from '@router';
 import {
   LandingPage,
   LoginPage,
-  AlbumListPage,
-  AlbumCreatePage,
   OAuthRedirect,
   DiaryPage,
   DiaryCreatePage,
+  AlbumListPage,
+  AlbumCreatePage,
   SpecialMomentPage,
   MemberListPage,
   MemberInvitePage,
   StoryBookPage,
   StoryBookDetailPage,
   ProfilePage,
+  Error404Page,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -40,10 +41,11 @@ const Router = () => {
               <Route path="new" element={<AlbumCreatePage />} />
               <Route path="profile" element={<ProfilePage />} />
             </Route>
-            <Route path="/album/:albumId">
-              {/* <Route path="diary"> */}
-              {/* <Route path=":diaryId" element={<DiaryPage />} /> */}
-              {/* <Route path="new" element={<DiaryCreatePage />} /> */}
+            <Route path="/album/:albumId/*">
+              <Route path="diary/*">
+                <Route path=":diaryId" element={<DiaryPage />} />
+                <Route path="new" element={<DiaryCreatePage />} />
+              </Route>
               <Route path="members/*">
                 <Route path="" element={<MemberListPage />} />
                 <Route path="invite" element={<MemberInvitePage />} />
@@ -59,7 +61,7 @@ const Router = () => {
             </Route>
           </Route>
           {/* 임시 404 페이지 */}
-          <Route path="*" element={<div>404 Page</div>} />
+          <Route path="*" element={<Error404Page />} />
         </Routes>
       </DefaultTemplate>
     </BrowserRouter>

@@ -30,8 +30,11 @@ const Subtitle = styled.h2`
 
 const AlbumListPage = () => {
   const {
-    data: { memberAvatar, memberNickname },
-  } = useSelector((state) => state.member);
+    member: {
+      data: { memberAvatar, memberNickname },
+    },
+    album: { Albums },
+  } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -50,16 +53,24 @@ const AlbumListPage = () => {
         <AlbumInviteList />
         <SubHeader>
           <Subtitle>{memberNickname}님의 앨범 목록</Subtitle>
-          <Button mode="border">
-            <Icon name="ant-design:plus-outlined" height={10} />
-            추가하기
-          </Button>
+          <Link to="/album/new">
+            {Albums && Albums.length === 0 ? (
+              <Button />
+            ) : (
+              <Button mode="border">
+                <Icon name="ant-design:plus-outlined" height={10} />
+                추가하기
+              </Button>
+            )}
+          </Link>
         </SubHeader>
         <AlbumSwiper />
       </AlbumListPageContainer>
-      <Link to="new">
-        <BottomFloatButton>그룹 생성하기</BottomFloatButton>
-      </Link>
+      {Albums && Albums.length === 0 && (
+        <Link to="new">
+          <BottomFloatButton>그룹 생성하기</BottomFloatButton>
+        </Link>
+      )}
     </>
   );
 };

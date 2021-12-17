@@ -52,11 +52,16 @@ const ButtonStyle = {
   borderRadius: '5px',
 };
 
-const DiaryCommentInputForm = ({ profile }) => {
+const DiaryCommentInputForm = ({ profile, onChange, value }) => {
   return (
     <Container>
       <Avatar alt="profile" src={profile} />
-      <Textarea placeholder="댓글 작성..." />
+      <Textarea
+        name="createComment"
+        placeholder="댓글 작성..."
+        onChange={onChange}
+        value={value}
+      />
       <Button mode="primary" style={ButtonStyle}>
         작성
       </Button>

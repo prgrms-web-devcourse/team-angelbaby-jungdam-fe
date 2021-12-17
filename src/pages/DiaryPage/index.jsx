@@ -18,6 +18,7 @@ import usePromise from '@hooks/usePromise';
 import { getDiaryContents } from '@api/getDiaryContents';
 import { getDiaryComments } from '@api/getDiaryComments';
 import styled from '@emotion/styled';
+import useForm from '@hooks/useForm';
 
 const ContainerStyle = css`
   margin-top: 38px;
@@ -61,6 +62,14 @@ const DiaryPage = () => {
 
   const profile = useSelector((state) => state.member.data.memberAvatar);
   const scrollRef = useRef(null);
+
+  const { values, handleChange } = useForm({
+    initialValues: {
+      createComment: '',
+    },
+  });
+
+  const { createComment } = values;
 
   useEffect(() => {
     const detectMobileKeyboard = () => {
@@ -108,7 +117,11 @@ const DiaryPage = () => {
       <DiaryContent content={content} />
       {comments.length !== 0 && <Divider />}
       <DiaryComment comments={comments} ref={scrollRef} hasNext={hasNext} />
-      <DiaryCommentInputForm profile={profile} />
+      <DiaryCommentInputForm
+        profile={profile}
+        onChange={handleChange}
+        value={createComment}
+      />
     </DefaultContainer>
   );
 };

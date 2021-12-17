@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { putMember } from '@api/memberApi';
-import { Button, Input } from '@components/base';
+import { Button, Input, Spinner } from '@components/base';
 import { useDispatch } from 'react-redux';
 import { member } from '@redux/member';
 import styled from '@emotion/styled';
@@ -69,7 +69,9 @@ const ProfileItem = ({
             memberNickname: data.nickname,
           }),
         );
-      } catch (error) {}
+      } catch (error) {
+        alert(error.message);
+      }
     }
     setIsLoading(false);
     setEdited(state);
@@ -96,7 +98,7 @@ const ProfileItem = ({
           <ProfileListItemEditorButton
             onClick={() => onClickEditorButton(false)}
           >
-            완료
+            {isLoading ? <Spinner /> : '완료'}
           </ProfileListItemEditorButton>
         ) : (
           <ProfileListItemEditorButton

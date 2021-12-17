@@ -26,11 +26,16 @@ const CommentContainer = styled.div`
 
 const UserInfo = styled.span`
   display: inline-block;
+  margin-bottom: 2px;
   ${() => font.content_16};
 `;
 
 const Comment = styled.span`
   ${() => font.content_12}
+`;
+
+const Paragraph = styled.p`
+  margin-bottom: 0.025px;
 `;
 
 const DiaryComment = forwardRef(({ comments }, ref) => {
@@ -41,7 +46,11 @@ const DiaryComment = forwardRef(({ comments }, ref) => {
           <Avatar alt="images" src={avatar} />
           <CommentContainer>
             <UserInfo>{nickname}</UserInfo>
-            <Comment>{commentContent}</Comment>
+            <Comment>
+              {commentContent.split('\n').map((line, index) => (
+                <Paragraph key={index}>{line}</Paragraph>
+              ))}
+            </Comment>
           </CommentContainer>
         </Article>
       ))}

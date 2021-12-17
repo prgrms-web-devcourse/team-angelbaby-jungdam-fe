@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Button } from '@components/base';
+import { forwardRef } from 'react';
 
 const Container = styled.div`
   width: 100%;
@@ -48,25 +49,33 @@ const Textarea = styled.textarea`
 const ButtonStyle = {
   marginLeft: '10px',
   width: '25%',
-  height: '50%',
+  height: '70%',
   borderRadius: '5px',
 };
 
-const DiaryCommentInputForm = ({ profile, onChange, value }) => {
-  return (
-    <Container>
-      <Avatar alt="profile" src={profile} />
-      <Textarea
-        name="createComment"
-        placeholder="댓글 작성..."
-        onChange={onChange}
-        value={value}
-      />
-      <Button mode="primary" style={ButtonStyle}>
-        작성
-      </Button>
-    </Container>
-  );
-};
+const DiaryCommentInputForm = forwardRef(
+  ({ profile, onChange, value, onClick }, ref) => {
+    return (
+      <Container>
+        <Avatar alt="profile" src={profile} />
+        <Textarea
+          ref={ref}
+          name="createComment"
+          placeholder="댓글 작성..."
+          onChange={onChange}
+          value={value}
+        />
+        <Button
+          type="button"
+          mode="primary"
+          style={ButtonStyle}
+          onClick={onClick}
+        >
+          작성
+        </Button>
+      </Container>
+    );
+  },
+);
 
 export default DiaryCommentInputForm;

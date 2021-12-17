@@ -11,7 +11,13 @@ import {
 import { Button, Icon } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
-import { useState, useCallback, useLayoutEffect, useRef } from 'react';
+import {
+  useState,
+  useCallback,
+  useLayoutEffect,
+  useEffect,
+  useRef,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDiaryContents } from '@api/getDiaryContents';
@@ -39,14 +45,17 @@ const Divider = styled.hr`
 
 const DiaryPage = () => {
   const { albumId, diaryId } = useParams();
+
+  const [scrollType, setScrollType] = useState(null);
+
   const cursorId = useRef('');
+  const createCommentInput = useRef(null);
 
   const { values, handleChange } = useForm({
     initialValues: {
       createComment: '',
     },
   });
-
   const { createComment } = values;
 
   const [state, setState] = useState({
@@ -57,10 +66,21 @@ const DiaryPage = () => {
     content: '',
     comments: [],
     hasNext: '',
-    lastCommentId: '',
   });
 
   useLayoutEffect(() => {
+    const detectMobileKeyboard = () => {
+      if (scrollType === 'Create') {
+        scrollIntoCommentTop();
+      }
+    };
+
+    window.addEventListener('resize', detectMobileKeyboard);
+
+    return () => window.removeEventListener('resize', detectMobileKeyboard);
+  }, [scrollType]);
+
+  useEffect(() => {
     const fetchContents = async () => {
       const data = await getDiaryContents({ albumId, diaryId });
 
@@ -79,7 +99,7 @@ const DiaryPage = () => {
         albumId,
         diaryId,
         cursorId: cursorId.current,
-        size: 5,
+        size: 10,
       };
 
       const data = await getDiaryComments(body);
@@ -109,34 +129,37 @@ const DiaryPage = () => {
   const profile = useSelector((state) => state.member.data.memberAvatar);
   const scrollRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const detectMobileKeyboard = () => {
-      scrollRef.current.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth',
-      });
-    };
-
-    window.addEventListener('resize', detectMobileKeyboard);
-
-    return () => window.removeEventListener('resize', detectMobileKeyboard);
-  }, []);
-
   const handleCommentCreateClick = useCallback(async () => {
     try {
       const data = {
         albumId,
         diaryId,
         comment: {
-          commentContent: values.createComment,
+          commentContent: createComment,
         },
       };
 
-      await postDiaryComment(data);
+      const newComment = await postDiaryComment(data);
+
+      setState((state) => ({
+        ...state,
+        comments: [newComment].concat(state.comments),
+      }));
+
+      setScrollType(() => 'Create');
+      scrollIntoCommentTop();
+
+      createCommentInput.current.value = '';
     } catch (e) {
       console.log(e);
     }
-  }, [albumId, diaryId, values.createComment]);
+  }, [albumId, diaryId, createComment]);
+
+  const scrollIntoCommentTop = () => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
 
   const leftHeaderContent = useCallback(() => {
     return (
@@ -159,6 +182,7 @@ const DiaryPage = () => {
       {comments.length !== 0 && <Divider />}
       <DiaryComment comments={comments} ref={scrollRef} hasNext={hasNext} />
       <DiaryCommentInputForm
+        ref={createCommentInput}
         profile={profile}
         value={createComment}
         onChange={handleChange}

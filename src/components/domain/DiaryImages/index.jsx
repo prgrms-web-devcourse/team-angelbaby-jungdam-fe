@@ -18,7 +18,8 @@ const Container = styled.div`
   margin-top: 10px;
   margin-bottom: 15px;
 `;
-const StyledSwiper = css`
+
+const StyledSwiper = styled(Swiper)`
   height: 40vh;
   min-height: 260px;
   position: relative;
@@ -44,19 +45,21 @@ const swiperParams = {
 const DiaryImages = ({ images }) => {
   return (
     <Container>
-      <Swiper css={StyledSwiper} {...swiperParams}>
-        {images.map((image, index) => (
-          <SwiperSlide key={index} style={SwiperSlideStyle}>
-            <Image
-              css={ImageStyle}
-              src={image}
-              alt="image"
-              width="100%"
-              height="100%"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {images.length !== 0 && (
+        <StyledSwiper {...swiperParams}>
+          {images.map((image, index) => (
+            <SwiperSlide key={index} style={SwiperSlideStyle}>
+              <Image
+                css={ImageStyle}
+                src={image}
+                alt="image"
+                width="100%"
+                height="100%"
+              />
+            </SwiperSlide>
+          ))}
+        </StyledSwiper>
+      )}
     </Container>
   );
 };

@@ -54,9 +54,7 @@ const AlbumListPage = () => {
         <SubHeader>
           <Subtitle>{memberNickname}님의 앨범 목록</Subtitle>
           <Link to="/album/new">
-            {Albums && Albums.length === 0 ? (
-              <Button />
-            ) : (
+            {Albums && Albums.length > 0 && (
               <Button mode="border">
                 <Icon name="ant-design:plus-outlined" height={10} />
                 추가하기

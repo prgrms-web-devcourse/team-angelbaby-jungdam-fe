@@ -16,7 +16,6 @@ const Container = styled.div`
   margin: 0;
   padding: 0px 32px 0 32px;
   background-color: ${color.white};
-  border: solid 1px black;
   box-sizing: border-box;
 `;
 

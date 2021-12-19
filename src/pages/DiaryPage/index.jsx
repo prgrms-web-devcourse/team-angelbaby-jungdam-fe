@@ -26,6 +26,7 @@ import styled from '@emotion/styled';
 import useForm from '@hooks/useForm';
 import { postDiaryComment } from '@api/postDiaryComment';
 import { deleteDiaryComment } from '@api/deleteDiaryComment';
+import { putBookmark } from '@api/putBookmark';
 
 const ContainerStyle = css`
   margin-top: 38px;
@@ -176,6 +177,21 @@ const DiaryPage = () => {
     [albumId, diaryId],
   );
 
+  const handleBookmarkClick = useCallback(
+    async (e) => {
+      try {
+        await putBookmark({ albumId, diaryId });
+        setState((state) => ({
+          ...state,
+          bookmark: !state.bookmark,
+        }));
+      } catch (e) {
+        console.log(e.response.data.message);
+      }
+    },
+    [albumId, diaryId],
+  );
+
   const scrollIntoCommentTop = () => {
     scrollRef.current.scrollIntoView({
       behavior: 'smooth',
@@ -197,6 +213,7 @@ const DiaryPage = () => {
         title={title}
         createdAt={recordedAt}
         bookmark={bookmark}
+        onBookmarkClick={handleBookmarkClick}
       />
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />

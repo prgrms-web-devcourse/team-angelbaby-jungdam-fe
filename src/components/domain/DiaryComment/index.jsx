@@ -37,7 +37,7 @@ const UserInfo = styled.span`
 
 const Comment = styled.span`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: space-between;
   ${() => font.content_12};
 `;

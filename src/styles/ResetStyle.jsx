@@ -1,5 +1,5 @@
 import { css } from '@emotion/core';
-import color from '@assets/colors';
+
 const ResetStyle = css`
   html,
   body,

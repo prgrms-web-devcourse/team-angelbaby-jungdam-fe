@@ -25,6 +25,7 @@ import { getDiaryComments } from '@api/getDiaryComments';
 import styled from '@emotion/styled';
 import useForm from '@hooks/useForm';
 import { postDiaryComment } from '@api/postDiaryComment';
+import { deleteDiaryComment } from '@api/deleteDiaryComment';
 
 const ContainerStyle = css`
   margin-top: 38px;
@@ -155,6 +156,26 @@ const DiaryPage = () => {
     }
   }, [albumId, diaryId, createComment]);
 
+  const handleCommentDeleteClick = useCallback(
+    async (e) => {
+      try {
+        const commentId = e.target.closest('button').value;
+
+        await deleteDiaryComment({ albumId, diaryId, commentId });
+
+        setState((state) => ({
+          ...state,
+          comments: state.comments.filter(
+            (comment) => comment.commentId !== Number(commentId),
+          ),
+        }));
+      } catch (e) {
+        console.log(e.response.data.message);
+      }
+    },
+    [albumId, diaryId],
+  );
+
   const scrollIntoCommentTop = () => {
     scrollRef.current.scrollIntoView({
       behavior: 'smooth',
@@ -180,7 +201,12 @@ const DiaryPage = () => {
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
       {comments.length !== 0 && <Divider />}
-      <DiaryComment comments={comments} ref={scrollRef} hasNext={hasNext} />
+      <DiaryComment
+        comments={comments}
+        ref={scrollRef}
+        hasNext={hasNext}
+        onDelete={handleCommentDeleteClick}
+      />
       <DiaryCommentInputForm
         ref={createCommentInput}
         profile={profile}

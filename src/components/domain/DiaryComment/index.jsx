@@ -49,13 +49,14 @@ const Paragraph = styled.p`
 const Delete = styled.button`
   position: absolute;
   right: 0;
-  border: solid 1px black;
+  margin: 0;
+  padding: 0;
   outline: none;
   border: none;
   background: none;
 `;
 
-const DiaryComment = forwardRef(({ comments }, ref) => {
+const DiaryComment = forwardRef(({ comments, onDelete }, ref) => {
   const userInfo = useSelector((state) => state.member.data.memberEmail);
 
   return (
@@ -73,7 +74,7 @@ const DiaryComment = forwardRef(({ comments }, ref) => {
               </Comment>
             </CommentContainer>
             {userInfo === email && (
-              <Delete>
+              <Delete type="button" onClick={onDelete} value={commentId}>
                 <Icon name="fluent:delete-16-filled" color={color.grey} />
               </Delete>
             )}

@@ -13,7 +13,7 @@ const BackgroundDim = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: ${color.black_90};
+  background-color: ${color.black_70};
   z-index: 1000;
 `;
 
@@ -66,6 +66,22 @@ const Modal = ({
     };
   }, [el]);
 
+  const renderElement = (selectable) => {
+    switch (selectable) {
+      case 'primary':
+        return (
+          <>
+            <Button onClick={onSubmit}>예</Button>
+            <Button onClick={onClose}>아니오</Button>
+          </>
+        );
+      case 'confirm':
+        return <Button onClick={onClose}>확인</Button>;
+      default:
+        return;
+    }
+  };
+
   useEffect(() => {
     if (visible) {
       document.body.style.cssText = `
@@ -89,16 +105,9 @@ const Modal = ({
         style={{ ...props.style, ...containerStyle }}
       >
         {children}
-        <ButtonWrapper>
-          {selectable ? (
-            <>
-              <Button onClick={onSubmit}>예</Button>
-              <Button onClick={onClose}>아니오</Button>
-            </>
-          ) : (
-            <Button onClick={onClose}>확인</Button>
-          )}
-        </ButtonWrapper>
+        {selectable && (
+          <ButtonWrapper>{renderElement(selectable)}</ButtonWrapper>
+        )}
       </ModalContainer>
     </BackgroundDim>,
     el,
@@ -111,7 +120,6 @@ Modal.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
   onSubmit: PropTypes.func,
-  selectable: PropTypes.bool,
   style: PropTypes.object,
 };
 
@@ -120,7 +128,6 @@ Modal.defaultProps = {
   visible: false,
   onClose: () => {},
   onSubmit: () => {},
-  selectable: true,
   style: {},
 };
 

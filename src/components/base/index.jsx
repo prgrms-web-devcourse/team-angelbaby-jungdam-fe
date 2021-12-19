@@ -11,3 +11,4 @@ export { default as Lottie } from './Lottie';
 export { default as Upload } from './Upload';
 export { default as Textarea } from './Textarea';
 export { default as ProgressBar } from './ProgressBar';
+export { default as LoadingModal } from './LoadingModal';

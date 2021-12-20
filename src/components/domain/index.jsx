@@ -22,3 +22,4 @@ export { default as DiaryHeaderInfo } from './DiaryHeaderInfo';
 export { default as DiaryContent } from './DiaryContent';
 export { default as DiaryCommentInputForm } from './DiaryCommentInputForm';
 export { default as AlbumMainHeader } from './AlbumMainHeader';
+export { default as AlbumMainTimeline } from './AlbumMainTimeline';

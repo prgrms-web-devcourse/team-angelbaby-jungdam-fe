@@ -1,5 +1,9 @@
 import React from 'react';
-import { Navigation, AlbumMainHeader } from '@components/domain';
+import {
+  Navigation,
+  AlbumMainHeader,
+  AlbumMainTimeline,
+} from '@components/domain';
 
 const AlbumMainPage = () => {
   return (
@@ -9,16 +13,63 @@ const AlbumMainPage = () => {
         familyMotto="코딩을 열씨미 하자"
         role="OWNER"
       />
-      <div
-        style={{
-          paddingTop: 38,
-        }}
-      >
-        메인화면입니다.
-      </div>
+      <AlbumMainTimeline diaries={DUMMY_DATA.diaries} />
       <Navigation />
     </>
   );
+};
+
+const DUMMY_DATA = {
+  diaries: [
+    {
+      diary: {
+        diaryId: '5',
+        title: '사랑하는 우리 가족',
+        recordedAt: '2012-02-13',
+        diaryPhotos: [
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+        ],
+      },
+      participant: {
+        avatar: '../../assets/defaultUser.png',
+        nickname: '정담명훈',
+      },
+    },
+    {
+      diary: {
+        diaryId: '6',
+        title: '사랑하는 우리 가족2',
+        recordedAt: '2012-02-13',
+        diaryPhotos: [
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+        ],
+      },
+      participant: {
+        avatar: '../../assets/defaultUser.png',
+        nickname: '정담명훈',
+      },
+    },
+    {
+      diary: {
+        diaryId: '7',
+        title: '사랑하는 우리 가족3',
+        recordedAt: '2012-02-13',
+        diaryPhotos: [
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+          '../../assets/defaultUser.png',
+        ],
+      },
+      participant: {
+        avatar: '../../assets/defaultUser.png',
+        nickname: '정담명훈',
+      },
+    },
+  ],
 };
 
 export default AlbumMainPage;

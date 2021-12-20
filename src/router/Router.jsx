@@ -44,8 +44,8 @@ const Router = () => {
               <Route path="profile" element={<ProfilePage />} />
             </Route>
             <Route element={<AlbumValidationRoute />}>
-              <Route path="/album/:albumId/*">
-                <Route path="diary/*">
+              <Route path="/album/:albumId">
+                <Route path="diary">
                   <Route path=":diaryId" element={<DiaryPage />} />
                   <Route path="new" element={<DiaryCreatePage />} />
                 </Route>

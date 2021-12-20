@@ -14,70 +14,23 @@ import color from '@assets/colors';
 import {
   useState,
   useCallback,
-  useEffect,
   useLayoutEffect,
+  useEffect,
   useRef,
 } from 'react';
-
-const DUMMY_USERINFO = {
-  profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
-};
-
-const DUMMY_DATA = {
-  title: '사랑하는 우리 가족',
-  createdAt: '2021년 12월 16일',
-  images: [
-    'https://user-images.githubusercontent.com/57757719/146334495-e37643ae-93fa-42bc-ab23-11411a778f51.jpg',
-    'https://swiperjs.com/demos/images/nature-2.jpg',
-    'https://swiperjs.com/demos/images/nature-3.jpg',
-    'https://swiperjs.com/demos/images/nature-4.jpg',
-  ],
-  content:
-    '사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.\n사랑하는 우리 가족을 보면서 내가 항상 느끼는 점\n나는 너무 행복하다.\n 앞으로도 계속 행복한 나날을 보내고싶다.',
-  comments: [
-    {
-      id: 7,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
-      comment:
-        '나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.',
-    },
-    {
-      id: 8,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-8.jpg',
-      comment: '나도 아빠를 보며 느끼는 점\n 함께여서 행복해',
-    },
-    {
-      id: 9,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
-      comment: '나도 할머니를 보며 느끼는 점\n 함께여서 행복해',
-    },
-    {
-      id: 10,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-7.jpg',
-      comment:
-        '나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.나도 엄마를 보며 느끼는 점\n 엄마가 함께여서 행복해 우리 항상 행복하자.',
-    },
-    {
-      id: 11,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
-      comment: '나도 아빠를 보며 느끼는 점\n 함께여서 행복해',
-    },
-    {
-      id: 12,
-      username: '엄마',
-      profile: 'https://swiperjs.com/demos/images/nature-3.jpg',
-      comment: '나도 할머니를 보며 느끼는 점\n 함께여서 행복해',
-    },
-  ],
-};
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getDiaryContents } from '@api/getDiaryContents';
+import { getDiaryComments } from '@api/getDiaryComments';
+import styled from '@emotion/styled';
+import useForm from '@hooks/useForm';
+import { postDiaryComment } from '@api/postDiaryComment';
+import { deleteDiaryComment } from '@api/deleteDiaryComment';
+import { putBookmark } from '@api/putBookmark';
+import replaceTildeWithDate from '@utils/replaceTildeWithDate';
 
 const ContainerStyle = css`
-  padding-top: 38px;
+  margin-top: 38px;
   overflow-y: auto;
   -ms-overflow-style: none;
 
@@ -86,57 +39,197 @@ const ContainerStyle = css`
   }
 `;
 
+const Divider = styled.hr`
+  display: block;
+  width: 100%;
+  border: solid 0.5px ${color.grey};
+  background-color: ${color.grey};
+`;
+
 const DiaryPage = () => {
-  const [title, setTitle] = useState(null);
-  const [createdAt, setCreatedAt] = useState(null);
-  const [images, setImages] = useState([]);
-  const [content, setContent] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [profile, setProfile] = useState(null);
+  const { albumId, diaryId } = useParams();
 
-  const containerRef = useRef(null);
+  const [scrollType, setScrollType] = useState(null);
 
-  useEffect(() => {
-    // 초기 호출 Api 적용예정..
-    setTitle(() => DUMMY_DATA.title);
-    setCreatedAt(() => DUMMY_DATA.createdAt);
-    setImages(() => DUMMY_DATA.images);
-    setContent(() => DUMMY_DATA.content);
-    setComments(() => DUMMY_DATA.comments);
-    setProfile(() => DUMMY_USERINFO.profile);
-  }, []);
+  const cursorId = useRef('');
+  const createCommentInput = useRef(null);
+
+  const { values, handleChange } = useForm({
+    initialValues: {
+      createComment: '',
+    },
+  });
+  const { createComment } = values;
+
+  const [state, setState] = useState({
+    title: '',
+    bookmark: '',
+    recordedAt: '',
+    diaryPhotos: [],
+    content: '',
+    comments: [],
+    hasNext: '',
+  });
 
   useLayoutEffect(() => {
     const detectMobileKeyboard = () => {
-      containerRef.current.scrollIntoView({ block: 'end' });
+      if (scrollType === 'Create') {
+        scrollIntoCommentTop();
+      }
     };
 
     window.addEventListener('resize', detectMobileKeyboard);
 
     return () => window.removeEventListener('resize', detectMobileKeyboard);
-  }, []);
+  }, [scrollType]);
+
+  useEffect(() => {
+    const fetchContents = async () => {
+      const data = await getDiaryContents({ albumId, diaryId });
+
+      setState((state) => ({
+        ...state,
+        title: data.title,
+        bookmark: data.bookmark,
+        recordedAt: replaceTildeWithDate(data.recordedAt),
+        diaryPhotos: [...data.diaryPhotos],
+        content: data.content,
+      }));
+    };
+
+    const fetchComments = async () => {
+      const body = {
+        albumId,
+        diaryId,
+        cursorId: cursorId.current,
+        size: 10,
+      };
+
+      const data = await getDiaryComments(body);
+
+      setState((state) => ({
+        ...state,
+        comments: [...data.comments],
+        hasNext: data.hasNext,
+      }));
+
+      cursorId.current = data.lastCommentId;
+    };
+
+    fetchContents();
+    fetchComments();
+  }, [albumId, diaryId]);
+
+  const {
+    title,
+    bookmark,
+    recordedAt,
+    diaryPhotos,
+    content,
+    comments,
+    hasNext,
+  } = state;
+  const profile = useSelector((state) => state.member.data.memberAvatar);
+  const scrollRef = useRef(null);
+
+  const handleCommentCreateClick = useCallback(async () => {
+    try {
+      const data = {
+        albumId,
+        diaryId,
+        comment: {
+          commentContent: createComment,
+        },
+      };
+
+      const newComment = await postDiaryComment(data);
+
+      setState((state) => ({
+        ...state,
+        comments: [newComment].concat(state.comments),
+      }));
+
+      setScrollType(() => 'Create');
+      scrollIntoCommentTop();
+
+      createCommentInput.current.value = '';
+    } catch (e) {
+      console.log(e);
+    }
+  }, [albumId, diaryId, createComment]);
+
+  const handleCommentDeleteClick = useCallback(
+    async (e) => {
+      try {
+        const commentId = e.target.closest('button').value;
+
+        await deleteDiaryComment({ albumId, diaryId, commentId });
+
+        setState((state) => ({
+          ...state,
+          comments: state.comments.filter(
+            (comment) => comment.commentId !== Number(commentId),
+          ),
+        }));
+      } catch (e) {
+        console.log(e.response.data.message);
+      }
+    },
+    [albumId, diaryId],
+  );
+
+  const handleBookmarkClick = useCallback(async () => {
+    try {
+      await putBookmark({ albumId, diaryId });
+      setState((state) => ({
+        ...state,
+        bookmark: !state.bookmark,
+      }));
+    } catch (e) {
+      console.log(e.response.data.message);
+    }
+  }, [albumId, diaryId]);
+
+  const scrollIntoCommentTop = () => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
 
   const leftHeaderContent = useCallback(() => {
     return (
-      <>
-        <Button>
-          <Icon name="ep:back" color={color.brown} />
-        </Button>
-      </>
+      <Button>
+        <Icon name="ep:back" color={color.brown} />
+      </Button>
     );
   }, []);
 
   return (
-    <>
-      <DefaultContainer css={ContainerStyle}>
-        <Header leftComponent={leftHeaderContent()} />
-        <DiaryHeaderInfo title={title} createdAt={createdAt} />
-        <DiaryImages images={images} />
-        <DiaryContent content={content} />
-        <DiaryComment comments={comments} ref={containerRef} />
-        <DiaryCommentInputForm profile={profile} />
-      </DefaultContainer>
-    </>
+    <DefaultContainer css={ContainerStyle}>
+      <Header leftComponent={leftHeaderContent()} />
+      <DiaryHeaderInfo
+        title={title}
+        createdAt={recordedAt}
+        bookmark={bookmark}
+        onBookmarkClick={handleBookmarkClick}
+      />
+      <DiaryImages images={diaryPhotos} />
+      <DiaryContent content={content} />
+      {comments.length !== 0 && <Divider />}
+      <DiaryComment
+        comments={comments}
+        ref={scrollRef}
+        hasNext={hasNext}
+        onDelete={handleCommentDeleteClick}
+      />
+      <DiaryCommentInputForm
+        ref={createCommentInput}
+        profile={profile}
+        value={createComment}
+        onChange={handleChange}
+        onClick={handleCommentCreateClick}
+      />
+    </DefaultContainer>
   );
 };
 

@@ -7,6 +7,5 @@ export const getAlbumMainDiaries = async ({ albumId }) => {
     url: `/api/v1/albums/${albumId}/diaries`,
   });
 
-  console.log(data);
   return data;
 };

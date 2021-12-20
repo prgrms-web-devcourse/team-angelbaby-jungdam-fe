@@ -17,6 +17,7 @@ import {
   StoryBookDetailPage,
   ProfilePage,
   Error404Page,
+  AlbumMainPage,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -42,7 +43,7 @@ const Router = () => {
               <Route path="profile" element={<ProfilePage />} />
             </Route>
             <Route element={<AlbumValidationRoute />}>
-              <Route path="/album/:albumId/*">
+              <Route path="/album/:albumId/*" element={<AlbumMainPage />}>
                 <Route path="diary/*">
                   <Route path=":diaryId" element={<DiaryPage />} />
                   <Route path="new" element={<DiaryCreatePage />} />

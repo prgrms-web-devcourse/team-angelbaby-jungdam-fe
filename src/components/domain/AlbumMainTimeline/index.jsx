@@ -4,7 +4,7 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import color from '@assets/colors';
 import font from '@assets/fonts';
-import { DimImage } from '@components/base';
+import { DimImage, Icon } from '@components/base';
 
 const Container = styled.main`
   width: 100%;
@@ -58,6 +58,23 @@ const DiaryTitle = styled.div`
 const DiaryDate = styled.div`
   color: ${color.white};
   ${font.content_16};
+`;
+
+const DefaultAlbum = styled.div`
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px ${color.grey};
+  border-radius: 6px;
+`;
+
+const DefaultSpan = styled.span`
+  margin-top: 10px;
+  color: ${() => color.grey};
+  ${() => font.content_16};
 `;
 
 const swiperParams = {
@@ -118,7 +135,11 @@ const AlbumMainTimeline = ({ diaries }) => {
           </Diary>
         ))
       ) : (
-        <div>default</div>
+        <DefaultAlbum>
+          <Icon name="healthicons:default" height={50} color={color.grey} />
+          <DefaultSpan>작성된 일기가 없습니다 !</DefaultSpan>
+          <DefaultSpan>먼저 일기를 작성해볼까요 ?</DefaultSpan>
+        </DefaultAlbum>
       )}
     </Container>
   );

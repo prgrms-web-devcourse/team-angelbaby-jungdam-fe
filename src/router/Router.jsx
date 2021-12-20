@@ -19,6 +19,7 @@ import {
   AlbumSettingsPage,
   AlbumSettingsEditPage,
   Error404Page,
+  AlbumMainPage,
 } from '@pages';
 import TestPage from '../pages/TestPage';
 
@@ -45,6 +46,7 @@ const Router = () => {
             </Route>
             <Route element={<AlbumValidationRoute />}>
               <Route path="/album/:albumId">
+                <Route path="" element={<AlbumMainPage />} />
                 <Route path="diary">
                   <Route path=":diaryId" element={<DiaryPage />} />
                   <Route path="new" element={<DiaryCreatePage />} />

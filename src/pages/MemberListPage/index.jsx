@@ -1,27 +1,12 @@
 import styled from 'styled-components';
 import DefaultContainer from '@styles/DefaultContainer';
 import font from '@assets/fonts';
-import { Icon, Divider } from '@components/base';
+import { Icon, Divider, Spinner } from '@components/base';
 import { OnlyInfoHeader, UserCard } from '@components/domain';
 import { useNavigate } from 'react-router-dom';
-
-const DUMMY_DATA = [
-  {
-    nickname: 'test1',
-    avatar: 'https://picsum.photos/300/600',
-    role: 'OWNER',
-  },
-  {
-    nickname: 'test2',
-    avatar: 'https://picsum.photos/300/600',
-    role: 'MEMBER',
-  },
-  {
-    nickname: 'test3',
-    avatar: '',
-    role: 'MEMBER',
-  },
-];
+import { useEffect, useState } from 'react';
+import { getMemberList } from '@api/getMemberList';
+import { useParams } from 'react-router';
 
 const MemberListPageContainer = styled(DefaultContainer)`
   width: 100%;
@@ -51,8 +36,17 @@ const MemberListTitle = styled.div`
   ${font.heading_20}
 `;
 
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`;
+
 const MemberListPage = () => {
   const navigate = useNavigate();
+  const { albumId } = useParams();
+  const [albumMemberList, setAlbumMemberList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToInvite = (e) => {
     navigate('invite');
@@ -62,6 +56,22 @@ const MemberListPage = () => {
     list.map(({ nickname, avatar, role }, index) => (
       <UserCard nickname={nickname} avatar={avatar} role={role} key={index} />
     ));
+
+  useEffect(() => {
+    const getUserList = async () => {
+      setIsLoading(true);
+      try {
+        const {
+          data: { data },
+        } = await getMemberList(albumId);
+        setAlbumMemberList(data.participants);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e.response);
+      }
+    };
+    getUserList();
+  }, [albumId]);
 
   return (
     <MemberListPageContainer>
@@ -77,7 +87,13 @@ const MemberListPage = () => {
       <MemberListWrapper>
         <MemberListTitle>멤버</MemberListTitle>
         <Divider size={4} />
-        {memberList(DUMMY_DATA)}
+        {isLoading ? (
+          <SpinnerWrapper>
+            <Spinner size={24} />
+          </SpinnerWrapper>
+        ) : (
+          memberList(albumMemberList)
+        )}
       </MemberListWrapper>
     </MemberListPageContainer>
   );

@@ -6,6 +6,7 @@ import font from '@assets/fonts';
 import Logo from '@assets/Image/Logo.svg';
 import { useNavigate } from 'react-router';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -117,7 +118,11 @@ export const ServiceInfoHeader = ({ src }) => {
     <Header
       style={{ boxShadow: `0px 1px 4px rgba(100, 88, 71, 0.25)` }}
       leftComponent={<Image src={Logo} alt="logo" block width="38px" />}
-      rightComponent={<Avatar src={src} />}
+      rightComponent={
+        <Link to="/album/profile">
+          <Avatar src={src} />
+        </Link>
+      }
     />
   );
 };

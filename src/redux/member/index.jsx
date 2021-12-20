@@ -42,6 +42,9 @@ export const member = createSlice({
       sessionStorage.setItem('token', action.payload);
       state.token = action.payload;
     },
+    setMemberInfo: (state, action) => {
+      state.data = { ...state.data, ...action.payload };
+    },
   },
   extraReducers: {
     [fetchMemberLogin.pending]: (state, action) => {
@@ -53,8 +56,10 @@ export const member = createSlice({
       state.isLoading = false;
     },
     [fetchMemberLogin.rejected]: (state, action) => {
+      state = initialValue;
       state.error = action.error.message;
       state.isLoading = false;
+      sessionStorage.removeItem('key');
     },
     // [fetchAuthToken.pending]: (state, action) => {
     //   state.member = initialValue.member;

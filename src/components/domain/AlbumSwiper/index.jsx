@@ -7,24 +7,8 @@ import Family from '@assets/Image/Family.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
-
-const slides = [
-  {
-    title: '사랑스러운 민석이 가족🎁',
-    motto: '가훈입니다아아아아아아아아',
-    thumbnail: 'https://picsum.photos/200/300',
-  },
-  {
-    title: '사랑스러운 민석이 가족🎁',
-    motto: '가훈입니다아아아아아아아아',
-    thumbnail: 'https://picsum.photos/200/300',
-  },
-  {
-    title: '사랑스러운 민석이 가족🎁',
-    motto: '가훈입니다아아아아아아아아',
-    thumbnail: 'https://picsum.photos/200/300',
-  },
-];
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SliderBox = styled.div`
   display: flex;
@@ -52,9 +36,11 @@ const NoneAlbumGuide = styled.p`
 `;
 
 const AlbumSwiper = () => {
+  const { Albums } = useSelector((state) => state.album);
+
   const swiperStyle = {
     margin: '0 -32px',
-    height: '38vh',
+    height: '40vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -65,31 +51,33 @@ const AlbumSwiper = () => {
   };
 
   const renderSlide = (slides) =>
-    slides.map(({ title, motto, thumbnail }, index) => (
-      <SwiperSlide style={slider} key={index}>
-        <SliderBox>
-          <DimImage src={thumbnail}>
-            <AlbumTitle>{title}</AlbumTitle>
-            <AlbumMotto>{motto}</AlbumMotto>
-          </DimImage>
-        </SliderBox>
+    slides.map(({ id, title, familyMotto, thumbnail }) => (
+      <SwiperSlide style={slider} key={id}>
+        <Link to={`/album/${id}`} key={id}>
+          <SliderBox>
+            <DimImage src={thumbnail}>
+              <AlbumTitle>{title}</AlbumTitle>
+              <AlbumMotto>{familyMotto}</AlbumMotto>
+            </DimImage>
+          </SliderBox>
+        </Link>
       </SwiperSlide>
     ));
 
   return (
     <>
-      {slides.length > 0 ? (
+      {Albums.length > 0 ? (
         <Swiper
           style={swiperStyle}
           spaceBetween={10}
           centeredSlides={true}
           slidesPerView={'auto'}
         >
-          {renderSlide(slides)}
+          {renderSlide(Albums)}
         </Swiper>
       ) : (
         <SliderBox>
-          <Image src={Family} width="200px" height="200px" />
+          <Image src={Family} width="150px" height="150px" />
           <NoneAlbumGuide>
             아직 생성 된 가족 앨범이 없습니다.
             <br />

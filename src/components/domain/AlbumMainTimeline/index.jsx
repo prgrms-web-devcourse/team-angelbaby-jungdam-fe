@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
-import Family from '@assets/Image/Family.svg';
-import DefaultImage from '@assets/Image/defaultUser.png';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { DimImage } from '@components/base';
@@ -16,22 +14,21 @@ const Container = styled.main`
 
 const Diary = styled.div`
   margin: 0;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
   box-shadow: 2px 2px 5px gray;
   border-radius: 6px;
 `;
 
 const DiaryUserInfo = styled.div`
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
 const Avatar = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 `;
 
@@ -51,13 +48,11 @@ const DiaryImageSlider = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  /* border-radius: 6px; */
 `;
 
 const DiaryTitle = styled.div`
   color: ${color.white};
   ${font.heading_20};
-  /* margin-bottom: 6px; */
 `;
 
 const DiaryDate = styled.div`
@@ -83,6 +78,7 @@ const StyledSwiperSlider = {
   height: '100%',
   borderRadius: '6px',
 };
+
 const AlbumMainTimeline = ({ diaries }) => {
   return (
     <Container>
@@ -95,22 +91,29 @@ const AlbumMainTimeline = ({ diaries }) => {
             </DiaryUserInfo>
 
             <DiaryInfo>
-              <StyledSwiper {...swiperParams}>
-                {diary.diaryPhotos.map((photo, index) => (
-                  <SwiperSlide key={index} style={StyledSwiperSlider}>
-                    <DiaryImageSlider>
-                      <DimImage
-                        src={photo}
-                        mode="cover"
-                        style={{ borderRadius: '6px' }}
-                      >
-                        <DiaryTitle>{diary.title}</DiaryTitle>
-                        <DiaryDate>{diary.recordedAt}</DiaryDate>
-                      </DimImage>
-                    </DiaryImageSlider>
-                  </SwiperSlide>
-                ))}
-              </StyledSwiper>
+              {diary.diaryPhotos.length > 0 ? (
+                <StyledSwiper {...swiperParams}>
+                  {diary.diaryPhotos.map((photo, index) => (
+                    <SwiperSlide key={index} style={StyledSwiperSlider}>
+                      <DiaryImageSlider>
+                        <DimImage
+                          src={photo}
+                          mode="cover"
+                          style={{ borderRadius: '6px' }}
+                        >
+                          <DiaryTitle>{diary.title}</DiaryTitle>
+                          <DiaryDate>{diary.recordedAt}</DiaryDate>
+                        </DimImage>
+                      </DiaryImageSlider>
+                    </SwiperSlide>
+                  ))}
+                </StyledSwiper>
+              ) : (
+                <DimImage mode="cover" style={{ borderRadius: '6px' }}>
+                  <DiaryTitle>{diary.title}</DiaryTitle>
+                  <DiaryDate>{diary.recordedAt}</DiaryDate>
+                </DimImage>
+              )}
             </DiaryInfo>
           </Diary>
         ))

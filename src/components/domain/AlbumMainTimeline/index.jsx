@@ -17,8 +17,8 @@ const Container = styled.main`
 const Diary = styled.div`
   margin: 0;
   margin-bottom: 40px;
-  box-shadow: 3px 3px 7px gray;
-  border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
+  border-radius: 6px;
 `;
 
 const DiaryUserInfo = styled.div`
@@ -41,7 +41,7 @@ const Nickname = styled.div`
 `;
 
 const DiaryInfo = styled.div`
-  border-radius: 5px;
+  width: 100%;
 `;
 
 const DiaryImageSlider = styled.div`
@@ -51,12 +51,13 @@ const DiaryImageSlider = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  /* border-radius: 6px; */
 `;
 
 const DiaryTitle = styled.div`
   color: ${color.white};
   ${font.heading_20};
-  margin-bottom: 6px;
+  /* margin-bottom: 6px; */
 `;
 
 const DiaryDate = styled.div`
@@ -80,6 +81,7 @@ const StyledSwiper = styled(Swiper)`
 const StyledSwiperSlider = {
   width: '100%',
   height: '100%',
+  borderRadius: '6px',
 };
 const AlbumMainTimeline = ({ diaries }) => {
   return (
@@ -88,7 +90,7 @@ const AlbumMainTimeline = ({ diaries }) => {
         diaries.map(({ diary, participant }) => (
           <Diary key={diary.diaryId}>
             <DiaryUserInfo>
-              <Avatar src={DefaultImage} />
+              <Avatar src={participant.avatar} />
               <Nickname>{participant.nickname}</Nickname>
             </DiaryUserInfo>
 
@@ -97,7 +99,11 @@ const AlbumMainTimeline = ({ diaries }) => {
                 {diary.diaryPhotos.map((photo, index) => (
                   <SwiperSlide key={index} style={StyledSwiperSlider}>
                     <DiaryImageSlider>
-                      <DimImage src={Family} mode="cover">
+                      <DimImage
+                        src={photo}
+                        mode="cover"
+                        style={{ borderRadius: '6px' }}
+                      >
                         <DiaryTitle>{diary.title}</DiaryTitle>
                         <DiaryDate>{diary.recordedAt}</DiaryDate>
                       </DimImage>

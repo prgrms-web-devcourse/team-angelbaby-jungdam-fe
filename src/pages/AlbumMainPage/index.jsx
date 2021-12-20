@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Navigation,
   AlbumMainHeader,
   AlbumMainTimeline,
 } from '@components/domain';
+import { getAlbumMainDiaries } from '@api/getAlbumMainDiaries';
 
 const AlbumMainPage = () => {
+  const { albumId } = useParams();
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    const fetchDiaries = async () => {
+      try {
+        const data = await getAlbumMainDiaries({ albumId });
+
+        setState(data);
+      } catch (e) {
+        console.log(e.response.data.message);
+      }
+    };
+
+    fetchDiaries();
+  }, [albumId]);
+
+  if (state.length === 0) return null;
+
   return (
     <>
       <AlbumMainHeader
@@ -13,7 +34,7 @@ const AlbumMainPage = () => {
         familyMotto="코딩을 열씨미 하자"
         role="OWNER"
       />
-      <AlbumMainTimeline diaries={DUMMY_DATA.diaries} />
+      <AlbumMainTimeline diaries={state.diaries} />
       <Navigation />
     </>
   );

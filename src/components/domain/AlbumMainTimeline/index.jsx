@@ -5,6 +5,8 @@ import 'swiper/components/pagination/pagination.min.css';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { DimImage, Icon } from '@components/base';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.main`
   width: 100%;
@@ -97,11 +99,27 @@ const StyledSwiperSlider = {
 };
 
 const AlbumMainTimeline = ({ diaries }) => {
+  const navigate = useNavigate();
+
+  const onClick = useCallback(
+    (e) => {
+      const diary = e.target.closest('.diary');
+      const diaryId = diary.getAttribute('value');
+      navigate(`diary/${diaryId}`);
+    },
+    [navigate],
+  );
+
   return (
     <Container>
       {diaries.length > 0 ? (
         diaries.map(({ diary, participant }) => (
-          <Diary key={diary.diaryId}>
+          <Diary
+            className="diary"
+            value={diary.diaryId}
+            key={diary.diaryId}
+            onClick={onClick}
+          >
             <DiaryUserInfo>
               <Avatar src={participant.avatar} />
               <Nickname>{participant.nickname}</Nickname>

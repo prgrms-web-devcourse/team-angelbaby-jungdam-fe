@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
 import font from '@assets/fonts';
+import color from '@assets/colors';
 import { forwardRef } from 'react';
+import { Icon } from '@components/base';
+import { useSelector } from 'react-redux';
 
 const Conatainer = styled.div`
-  margin-top: 20px;
+  padding-top: 20px;
 `;
 
 const Article = styled.div`
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  position: relative;
 `;
 
 const Avatar = styled.img`
@@ -26,25 +31,56 @@ const CommentContainer = styled.div`
 
 const UserInfo = styled.span`
   display: inline-block;
+  margin-bottom: 2px;
   ${() => font.content_16};
 `;
 
 const Comment = styled.span`
-  ${() => font.content_12}
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  ${() => font.content_12};
 `;
 
-const DiaryComment = forwardRef(({ comments }, ref) => {
+const Paragraph = styled.p`
+  margin-bottom: 0.025px;
+`;
+
+const Delete = styled.button`
+  position: absolute;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+`;
+
+const DiaryComment = forwardRef(({ comments, onDelete }, ref) => {
+  const userInfo = useSelector((state) => state.member.data.memberEmail);
+
   return (
     <Conatainer ref={ref}>
-      {comments.map(({ id, profile, username, comment }) => (
-        <Article key={id}>
-          <Avatar alt="images" src={profile} />
-          <CommentContainer>
-            <UserInfo>{username}</UserInfo>
-            <Comment>{comment}</Comment>
-          </CommentContainer>
-        </Article>
-      ))}
+      {comments.map(
+        ({ commentId, avatar, nickname, commentContent, email }) => (
+          <Article key={commentId}>
+            <Avatar alt="images" src={avatar} />
+            <CommentContainer>
+              <UserInfo>{nickname}</UserInfo>
+              <Comment>
+                {commentContent.split('\n').map((line, index) => (
+                  <Paragraph key={index}>{line}</Paragraph>
+                ))}
+              </Comment>
+            </CommentContainer>
+            {userInfo === email && (
+              <Delete type="button" onClick={onDelete} value={commentId}>
+                <Icon name="fluent:delete-16-filled" color={color.grey} />
+              </Delete>
+            )}
+          </Article>
+        ),
+      )}
     </Conatainer>
   );
 });

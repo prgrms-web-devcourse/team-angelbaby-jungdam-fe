@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import font from '@assets/fonts';
-import color from '@assets/colors';
 
 const Container = styled.div`
   width: 100%;
@@ -8,15 +7,20 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: 10px;
   padding-bottom: 20px;
-  border-bottom: 1px solid ${color.grey};
   ${() => font.content_16}
+`;
+
+const Paragraph = styled.p`
+  margin-bottom: 5px;
 `;
 
 const DiaryContent = ({ content }) => {
   return (
     <Container>
       {content &&
-        content.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+        content
+          .split('\n')
+          .map((line, index) => <Paragraph key={index}>{line}</Paragraph>)}
     </Container>
   );
 };

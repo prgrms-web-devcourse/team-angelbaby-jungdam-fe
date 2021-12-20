@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DetailPageHeader } from '@components/domain';
-import { BottomFloatButton, ProgressBar, Spinner } from '@components/base';
+import { BottomFloatButton, ProgressBar, LoadingModal } from '@components/base';
 import { postAlbums } from '@api/albumApi';
 import { postImageUploads } from '@api/commonApi';
 import styled from '@emotion/styled';
@@ -204,7 +204,7 @@ const AlbumCreatePage = () => {
         </AlbumContentContainer>
       </AlbumCreatePageContainer>
       {isLoading ? (
-        <Spinner />
+        <LoadingModal />
       ) : (
         <BottomFloatButton onClick={() => handleCreateAlbum(step)}>
           {step !== 4 ? '다음' : '완료'}

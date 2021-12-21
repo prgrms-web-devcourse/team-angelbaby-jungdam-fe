@@ -14,14 +14,16 @@ const AlbumCreateStep2 = ({ formData, handleChange, errors }) => {
       <Input
         css={borderColor}
         size="base"
-        placeholder="잠은 죽어서 자자"
+        placeholder="항상 행복한 가정이 되자"
         name="albumMotto"
         value={formData.albumMotto}
         onChange={handleChange}
         ref={ref}
         error={errors.albumMotto && true}
       />
-      {errors.albumMotto && <span css={errorMsg}>{errors.albumMotto}</span>}
+      {errors.albumMotto && (
+        <errorMsg css={errorMsg}>{errors.albumMotto}</errorMsg>
+      )}
     </>
   );
 };

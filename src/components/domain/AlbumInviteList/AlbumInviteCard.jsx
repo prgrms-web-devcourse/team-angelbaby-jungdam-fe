@@ -3,6 +3,7 @@ import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Button, Icon } from '@components/base';
 import { putInvitations } from '@api/albumApi';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useDispatch } from 'react-redux';
 import { fetchInvitations } from '@redux/album';
@@ -45,7 +46,7 @@ const AlbumInvite = styled.span`
 
 const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleCancel = async ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 삭제 구현
     try {
@@ -59,9 +60,12 @@ const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
   const handleApprove = async ({ invitationId }) => {
     //   dispatch 초대 invite 리스트 수락 구현
     try {
-      await putInvitations({ invitationId, status: 'ACCEPT' });
+      const {
+        data: { data },
+      } = await putInvitations({ invitationId, status: 'ACCEPT' });
       alert('수락 완료');
       dispatch(fetchInvitations());
+      navigate(`/album/${data.id}`);
     } catch (error) {
       console.log(error.message);
     }

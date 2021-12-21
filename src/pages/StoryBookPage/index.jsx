@@ -94,11 +94,13 @@ const StoryBookPage = () => {
                 {participantNickname}의 스토리북
               </StorybookSubHeader>
             </StorybookSubHeaderLeft>
-            <Link to={`${participantId}`}>
-              <Button mode="border" style={buttonStyle}>
-                모두 보기
-              </Button>
-            </Link>
+            {diaries.length > 0 && (
+              <Link to={`${participantId}`}>
+                <Button mode="border" style={buttonStyle}>
+                  모두 보기
+                </Button>
+              </Link>
+            )}
           </StorybookSubHeaderContainer>
           <StoryBookDiaryList
             diaryList={diaries}

@@ -3,7 +3,7 @@ import { member } from './member';
 import { album } from './album';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
-// import { isProduction } from '@utils/constants';
+import { isProduction } from '@utils/constants';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import session from 'redux-persist/lib/storage/session';
@@ -22,17 +22,17 @@ const combinedReducer = combineReducers({
 });
 const rootReducer = persistReducer(persistConfig, combinedReducer);
 
-// let middleware = [];
+let middleware = [];
 
-// if (!isProduction) {
-//   middleware = [...middleware, thunk, logger];
-// } else {
-//   middleware = [...middleware, thunk];
-// }
+if (!isProduction) {
+  middleware = [...middleware, thunk, logger];
+} else {
+  middleware = [...middleware, thunk];
+}
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: [thunk, logger],
+  middleware: middleware,
 });
 
 export const persistor = persistStore(store);

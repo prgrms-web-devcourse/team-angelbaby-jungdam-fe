@@ -5,12 +5,12 @@ import DefaultContainer from '@styles/DefaultContainer';
 import {
   GOOGLE_AUTH_URL,
   KAKAO_AUTH_URL,
-  NAVER_AUTH_URL,
+  // NAVER_AUTH_URL,
 } from '@utils/constants';
 import { Button, Image } from '@components/base';
 import google from '@assets/Image/google.png';
 import kakao from '@assets/Image/kakao.png';
-import naver from '@assets/Image/naver.png';
+// import naver from '@assets/Image/naver.png';
 import { ReactComponent as Logo } from '@assets/Image/Logo.svg';
 
 /**
@@ -20,13 +20,13 @@ import { ReactComponent as Logo } from '@assets/Image/Logo.svg';
  */
 
 const SOCIAL_LOGIN_BUTTON_LIST = [
-  {
-    name: 'naver',
-    label: 'Naver',
-    icon: naver,
-    link: NAVER_AUTH_URL,
-    bgColor: '#03C75A',
-  },
+  // {
+  //   name: 'naver',
+  //   label: 'Naver',
+  //   icon: naver,
+  //   link: NAVER_AUTH_URL,
+  //   bgColor: '#03C75A',
+  // },
   {
     name: 'kakao',
     label: 'Kakao',

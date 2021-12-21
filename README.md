@@ -15,7 +15,7 @@
 3. `yarn start`
 
 ## 👩‍💻DEMO
-- GIF 
+- `GIF 준비중`
 
 ## 🧑‍💻 팀원 소개
 
@@ -45,7 +45,7 @@
     <img src="https://user-images.githubusercontent.com/60251579/146899319-2c840945-35c5-4b63-95d3-259e81381435.png" width="600"/>
     </span>
 </div>
-`
+
 
 ## 🔨 기술 스택
 
@@ -80,8 +80,8 @@
 
 ## 프로젝트 진행 사항
 
-- [[극락이들] 1주차 프로젝트 공유사항](https://www.notion.so/1-26887b0b74d749b388454b91a7e1c48c)
+- ✔ [[극락이들] 1주차 프로젝트 공유사항](https://www.notion.so/1-26887b0b74d749b388454b91a7e1c48c)
 
-- [[극락이들] 2주차 프로젝트 공유사항](https://www.notion.so/2-83899a046b004f9aaef1c94d43f8fa77)
+- ✔ [[극락이들] 2주차 프로젝트 공유사항](https://www.notion.so/2-83899a046b004f9aaef1c94d43f8fa77)
 
-- [[극락이들] 3주차 프로젝트 공유사항](https://www.notion.so/3-16fb65f0756146b2adad3698d6771550)
+- ✔ [[극락이들] 3주차 프로젝트 공유사항](https://www.notion.so/3-16fb65f0756146b2adad3698d6771550)

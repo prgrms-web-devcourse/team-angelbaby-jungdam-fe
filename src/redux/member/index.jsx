@@ -57,9 +57,8 @@ export const member = createSlice({
     },
     [fetchMemberLogin.rejected]: (state, action) => {
       state = initialValue;
-      state.error = action.error.message;
       state.isLoading = false;
-      sessionStorage.removeItem('key');
+      sessionStorage.removeItem('token');
     },
     // [fetchAuthToken.pending]: (state, action) => {
     //   state.member = initialValue.member;

@@ -4,7 +4,7 @@ import { useAuth } from '@hooks';
 
 const PreventedRoute = () => {
   const token = useAuth();
-  return !token ? <Outlet /> : <Navigate to="/" />;
+  return !token ? <Outlet /> : <Navigate to="/album" />;
 };
 
 export default PreventedRoute;

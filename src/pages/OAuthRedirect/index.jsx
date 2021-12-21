@@ -17,7 +17,7 @@ const OAuthRedirect = () => {
       try {
         dispatch(setToken(token));
         dispatch(fetchMemberLogin());
-        navigate('/');
+        navigate('/album');
       } catch (error) {
         alert(error);
       }

@@ -1,96 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import font from '@assets/fonts';
 import color from '@assets/colors';
 import DefaultContainer from '@styles/DefaultContainer';
+import { getStoryBook } from '@api/storyBookApi';
 import { Link } from 'react-router-dom';
-import { Avatar, Button } from '@components/base';
+import { Avatar, Button, Skeleton } from '@components/base';
 import {
   OnlyInfoHeader,
   Navigation,
   StoryBookDiaryList,
 } from '@components/domain';
-
-const DUMMY_DATA = [
-  {
-    avatar: 'https://picsum.photos/200/200',
-    memberName: '민석',
-    diaryList: [
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-    ],
-  },
-  {
-    avatar: 'https://picsum.photos/200/200',
-    memberName: '구피',
-    diaryList: [
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-    ],
-  },
-  {
-    avatar: 'https://picsum.photos/200/200',
-    memberName: '구피',
-    diaryList: [
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-      {
-        diaryImage: 'https://picsum.photos/200/200',
-        title: '스토리북 제목',
-        dateTime: '2020-01-01',
-      },
-    ],
-  },
-];
 
 const StoryBookPageContainer = styled(DefaultContainer)`
   height: auto;
@@ -126,29 +47,77 @@ const buttonStyle = {
 };
 
 const StoryBookPage = () => {
+  const [storyBookDiaryList, setStoryBookDiaryList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { albumId } = useParams();
+
+  const fetchStoryBookList = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const {
+        data: { data },
+      } = await getStoryBook({ albumId });
+      setStoryBookDiaryList(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setIsLoading(false);
+  }, [albumId]);
+
+  useEffect(() => {
+    fetchStoryBookList();
+  }, [albumId, fetchStoryBookList]);
+
+  const renderSkeleton = () => (
+    <>
+      <StorybookSubHeaderContainer>
+        <StorybookSubHeaderLeft>
+          <Skeleton.Circle size={40} />
+          <StorybookSubHeader>
+            <Skeleton.Box width={100} height={30} />
+          </StorybookSubHeader>
+        </StorybookSubHeaderLeft>
+        <Skeleton.Box width={50} height={30} />
+      </StorybookSubHeaderContainer>
+      <StoryBookDiaryList isLoading={isLoading} />
+    </>
+  );
+
   const renderStoryBookList = (memberList) =>
-    memberList.map(({ avatar, memberName, diaryList }, index) => (
-      <div key={index}>
-        <StorybookSubHeaderContainer>
-          <StorybookSubHeaderLeft>
-            <Avatar src={avatar} />
-            <StorybookSubHeader>{memberName}의 스토리북</StorybookSubHeader>
-          </StorybookSubHeaderLeft>
-          <Link to={`${index + 1}`}>
-            <Button mode="border" style={buttonStyle}>
-              모두 보기
-            </Button>
-          </Link>
-        </StorybookSubHeaderContainer>
-        <StoryBookDiaryList diaryList={diaryList} />
-      </div>
-    ));
+    memberList.map(
+      ({ participantId, participantNickname, participantAvatar, diaries }) => (
+        <div key={participantId}>
+          <StorybookSubHeaderContainer>
+            <StorybookSubHeaderLeft>
+              <Avatar src={participantAvatar} />
+              <StorybookSubHeader>
+                {participantNickname}의 스토리북
+              </StorybookSubHeader>
+            </StorybookSubHeaderLeft>
+            <Link to={`${participantId}`}>
+              <Button mode="border" style={buttonStyle}>
+                모두 보기
+              </Button>
+            </Link>
+          </StorybookSubHeaderContainer>
+          <StoryBookDiaryList
+            diaryList={diaries}
+            albumId={albumId}
+            isLoading={isLoading}
+          />
+        </div>
+      ),
+    );
 
   return (
     <>
       <OnlyInfoHeader pageTitle="스토리북" />
       <StoryBookPageContainer>
-        {renderStoryBookList(DUMMY_DATA)}
+        {isLoading ? (
+          <>{renderSkeleton()}</>
+        ) : (
+          <>{renderStoryBookList(storyBookDiaryList)}</>
+        )}
       </StoryBookPageContainer>
       <Navigation />
     </>

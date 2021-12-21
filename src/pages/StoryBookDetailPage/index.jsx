@@ -35,7 +35,7 @@ const StoryBookDetailPage = () => {
   const renderSkeleton = () => {
     let list = [];
     for (let i = 0; i < 8; i++) {
-      list.push(<Skeleton.Box width={'100%'} height={'100%'} />);
+      list.push(<Skeleton.Box key={i} width={'100%'} height={'100%'} />);
     }
     return list;
   };

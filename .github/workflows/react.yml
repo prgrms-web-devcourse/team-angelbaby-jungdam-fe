@@ -10,6 +10,11 @@ jobs:
     steps:
       - name: Checkout source code. # 레포지토리 체크아웃
         uses: actions/checkout@v2
+        with:
+          REACT_APP_MODE: ${{ secrets.REACT_APP_MODE }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_HOME_URL: ${{ secrets.REACT_APP_HOME_URL }}
+          REACT_APP_OAUTH2_REDIRECT_URL: ${{ secrets.REACT_APP_OAUTH2_REDIRECT_URL }}
 
       - name: Cache node modules # node modules 캐싱
         uses: actions/cache@v1
@@ -25,11 +30,6 @@ jobs:
 
       - name: Build # React Build
         run: yarn build
-        with:
-          REACT_APP_MODE: ${{ secrets.REACT_APP_MODE }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_HOME_URL: ${{ secrets.REACT_APP_HOME_URL }}
-          REACT_APP_OAUTH2_REDIRECT_URL: ${{ secrets.REACT_APP_OAUTH2_REDIRECT_URL }}
 
       - name: Deploy # S3에 배포하기
         env:

@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import font from '@assets/fonts';
 import color from '@assets/colors';
 import styled from '@emotion/styled';
-const Image = ({ alt, block, width, height, mode, ...props }) => {
+import defaultImage from '@assets/Image/Logo.svg';
+const Image = ({ src, alt, block, width, height, mode, ...props }) => {
   // image style 설정 가로,세로,모드,블록 설정 완료
+
   const imageStyle = {
     width,
     height,
@@ -11,7 +13,14 @@ const Image = ({ alt, block, width, height, mode, ...props }) => {
     display: block && 'block',
   };
 
-  return <img alt={alt} style={{ ...props.style, ...imageStyle }} {...props} />;
+  return (
+    <img
+      alt={alt}
+      src={src || defaultImage}
+      style={{ ...props.style, ...imageStyle }}
+      {...props}
+    />
+  );
 };
 
 export default Image;
@@ -58,11 +67,11 @@ export const DimImage = ({
 }) => {
   return (
     <ImageBox
-      src={src}
+      src={src || defaultImage}
       alt={alt}
       width={width}
       height={height}
-      mode={mode}
+      mode={src ? mode : 'fill'}
       {...props}
     >
       <DimContainer dimPadding={dimPadding}>{children}</DimContainer>

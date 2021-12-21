@@ -22,17 +22,17 @@ const combinedReducer = combineReducers({
 });
 const rootReducer = persistReducer(persistConfig, combinedReducer);
 
-let middleware = [];
+// let middleware = [];
 
-if (!isProduction) {
-  middleware = [...middleware, thunk, logger];
-} else {
-  middleware = [...middleware, thunk];
-}
+// if (!isProduction) {
+//   middleware = [...middleware, thunk, logger];
+// } else {
+//   middleware = [...middleware, thunk];
+// }
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: middleware,
+  middleware: [thunk, logger],
 });
 
 export const persistor = persistStore(store);

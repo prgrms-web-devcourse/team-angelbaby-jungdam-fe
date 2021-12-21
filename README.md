@@ -46,6 +46,10 @@
     </span>
 </div>
 
+## 프로젝트 FE 인프라
+![image](https://user-images.githubusercontent.com/60251579/146999904-e9b6e3c3-927c-44d7-b8e0-adb7abb4d279.png)
+
+
 
 ## 🔨 기술 스택
 

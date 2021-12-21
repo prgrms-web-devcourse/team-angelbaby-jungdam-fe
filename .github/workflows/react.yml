@@ -4,6 +4,12 @@ on:
     branches:
       - main
 
+env:
+  REACT_APP_MODE: ${{ secrets.REACT_APP_MODE }}
+  REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+  REACT_APP_HOME_URL: ${{ secrets.REACT_APP_HOME_URL }}
+  REACT_APP_OAUTH2_REDIRECT_URL: ${{ secrets.REACT_APP_OAUTH2_REDIRECT_URL }}
+
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -25,11 +31,6 @@ jobs:
 
       - name: Build # React Build
         run: yarn build
-        with:
-          REACT_APP_MODE: ${{ secrets.REACT_APP_MODE }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_HOME_URL: ${{ secrets.REACT_APP_HOME_URL }}
-          REACT_APP_OAUTH2_REDIRECT_URL: ${{ secrets.REACT_APP_OAUTH2_REDIRECT_URL }}
 
       - name: Deploy # S3에 배포하기
         env:

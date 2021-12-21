@@ -1,4 +1,9 @@
-import React, { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import DefaultTemplate from '@styles/DefaultTemplate';
 import ScrollToTop from '@utils/ScrollToTop';
 import { AuthRoute, PreventedRoute, AlbumValidationRoute } from '@router';
@@ -21,7 +26,6 @@ import {
   Error404Page,
   AlbumMainPage,
 } from '@pages';
-import TestPage from '../pages/TestPage';
 
 const Router = () => {
   return (
@@ -29,8 +33,7 @@ const Router = () => {
       <ScrollToTop />
       <DefaultTemplate>
         <Routes>
-          {/* TestRoute - 각 Choi/Hoon/Bingle*/}
-          <Route path="/test/:name" element={<TestPage />} />
+          <Route path="/" element={<Navigate to="/tutorial" />} />
           {/* PreventedRoute - Token이 존재 할 시 자동 메인(앨범 선택)으로 이동 */}
           <Route element={<PreventedRoute />}>
             <Route path="/login" element={<LoginPage />} />
@@ -62,7 +65,7 @@ const Router = () => {
                 <Route path="storybook">
                   <Route path="" element={<StoryBookPage />} />
                   <Route
-                    path=":storybookId"
+                    path=":participantId"
                     element={<StoryBookDetailPage />}
                   />
                 </Route>

@@ -1,13 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
+import { useAuth } from '@hooks';
 
-const PreventedRoute = ({ ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      // render={(props) => (accessToken ? <Redirect to="/" /> : <Component {...props} />)}
-    />
-  );
+const PreventedRoute = () => {
+  const token = useAuth();
+  return !token ? <Outlet /> : <Navigate to="/album" />;
 };
 
 export default PreventedRoute;

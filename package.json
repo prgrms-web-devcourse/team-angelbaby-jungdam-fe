@@ -10,7 +10,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "axios": "^0.23.0",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
+    "lottie-web": "^5.8.1",
+    "prop-types": "^15.7.2",
+    "qs": "^6.10.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -22,6 +27,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.0",
+    "swiper": "6.8.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -63,6 +69,7 @@
     "@craco/craco": "^6.3.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@iconify/react": "^3.1.0",
     "@storybook/addon-actions": "^6.4.7",
     "@storybook/addon-essentials": "^6.4.7",
     "@storybook/addon-links": "^6.4.7",
@@ -76,7 +83,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.4.1",
     "redux-devtools-extension": "^2.13.9",
-    "storybook-mobile": "^1.0.0"
+    "storybook-mobile": "^1.0.0",
+    "storybook-preset-craco": "^0.0.6"
   },
   "resolutions": {
     "babel-loader": "8.1.0"

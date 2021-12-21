@@ -1,24 +1,17 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-
-const AuthRoute = ({ ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      // render={(props) =>
-      //   accessToken ? (
-      //     <Component {...props} />
-      //   ) : (
-      //     <Redirect
-      //       to={{
-      //         pathname: '/login',
-      //         state: { text: 'Token 만료' },
-      //       }}
-      //     />
-      //   )
-      // }
-    />
-  );
+import React, { useEffect } from 'react';
+import { useAuth } from '@hooks';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchMemberLogin } from '@redux/member';
+const AuthRoute = () => {
+  const token = useAuth();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchMemberLogin());
+    }
+  }, [dispatch, token]);
+  return token ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default AuthRoute;

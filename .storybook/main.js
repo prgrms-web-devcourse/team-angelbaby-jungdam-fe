@@ -1,4 +1,6 @@
 const customWebpackConfig = require('../craco.config.js');
+const path = require('path');
+const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -6,7 +8,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-create-react-app',
-    'storybook-mobile'
+    'storybook-mobile',
   ],
   webpackFinal: async (config) => {
     const { webpack } = customWebpackConfig;
@@ -18,6 +20,8 @@ module.exports = {
         alias: {
           ...config.resolve.alias,
           ...webpack.alias,
+          '@emotion/react': toPath('node_modules/@emotion/react'),
+          '@emotion/styled': toPath('node_modules/@emotion/styled'),
         },
       },
     };

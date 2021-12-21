@@ -1,6 +1,6 @@
 ---
-name: "[TASK] 템플릿"
-about: TASK 단위 이슈 템플릿 입니다.
+name: "[Task] 템플릿"
+about: Task 단위 이슈 템플릿 입니다.
 title: "[Task] 내용"
 labels: ''
 assignees: ''

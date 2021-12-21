@@ -60,9 +60,6 @@
 - iconify
 - craco
 - lottie-web (LottieAnimation)
-- prettier
-- eslint
-
 
 ### 상태 관리 라이브러리
 - redux
@@ -78,10 +75,238 @@
 - 문서화: Notion
 - 커뮤니케이션: Slack, Discord
 
-## 프로젝트 진행 사항
+## 📁프로젝트 디렉토리 구조
+
+
+<details markdown="1">
+<summary>열기/닫기</summary>
+
+
+```
+src
+ ┣ assets
+ ┃ ┣ Image
+ ┃ ┃ ┣ Family.svg
+ ┃ ┃ ┣ Logo.svg
+ ┃ ┃ ┣ defaultUser.png
+ ┃ ┃ ┣ google.png
+ ┃ ┃ ┣ kakao.png
+ ┃ ┃ ┗ naver.png
+ ┃ ┣ colors
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ fonts
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ lottie
+ ┃ ┃ ┣ 404.json
+ ┃ ┃ ┣ family.json
+ ┃ ┃ ┣ laugh.json
+ ┃ ┃ ┣ loading.json
+ ┃ ┃ ┗ notepad.json
+ ┃ ┗ .DS_Store
+ ┣ common
+ ┃ ┣ api
+ ┃ ┃ ┣ albumApi.jsx
+ ┃ ┃ ┣ api.jsx
+ ┃ ┃ ┣ commonApi.jsx
+ ┃ ┃ ┣ deleteAlbum.jsx
+ ┃ ┃ ┣ deleteDiaryComment.jsx
+ ┃ ┃ ┣ getAlbumInfo.jsx
+ ┃ ┃ ┣ getAlbumMainDiaries.jsx
+ ┃ ┃ ┣ getDiaryComments.jsx
+ ┃ ┃ ┣ getDiaryContents.jsx
+ ┃ ┃ ┣ getExistenceDiaryDate.jsx
+ ┃ ┃ ┣ getMemberList.jsx
+ ┃ ┃ ┣ getSpecialMoment.jsx
+ ┃ ┃ ┣ inviteUser.jsx
+ ┃ ┃ ┣ memberApi.jsx
+ ┃ ┃ ┣ postDiaryComment.jsx
+ ┃ ┃ ┣ postDiaryCreate.jsx
+ ┃ ┃ ┣ postImageUpload.jsx
+ ┃ ┃ ┣ putAlbumInfo.jsx
+ ┃ ┃ ┣ putBookmark.jsx
+ ┃ ┃ ┣ readme.md
+ ┃ ┃ ┣ searchUser.jsx
+ ┃ ┃ ┗ storyBookApi.jsx
+ ┃ ┗ utils
+ ┃ ┃ ┣ ScrollToTop.jsx
+ ┃ ┃ ┣ constants.jsx
+ ┃ ┃ ┣ getBase64ToFile.jsx
+ ┃ ┃ ┣ readme.md
+ ┃ ┃ ┗ replaceTildeWithDate.jsx
+ ┣ components
+ ┃ ┣ base
+ ┃ ┃ ┣ Avatar
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Button
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Divider
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Icon
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Image
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Input
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ LoadingModal
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Lottie
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Modal
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ ProgressBar
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Skeleton
+ ┃ ┃ ┃ ┣ Base.jsx
+ ┃ ┃ ┃ ┣ Box.jsx
+ ┃ ┃ ┃ ┣ Circle.jsx
+ ┃ ┃ ┃ ┣ Line.jsx
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Spinner
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Textarea
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Upload
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ domain
+ ┃ ┃ ┣ AlbumInviteList
+ ┃ ┃ ┃ ┣ AlbumInviteCard.jsx
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ AlbumMainHeader
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ AlbumMainTimeline
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ AlbumSwiper
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryComment
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryCommentInputForm
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryContent
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryCreateStepOne
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryCreateStepThree
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryCreateStepTwo
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryHeaderInfo
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ DiaryImages
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Header
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ LandingSwiper
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Navigation
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ Profile
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ ProfileList
+ ┃ ┃ ┃ ┣ ProfileItem.jsx
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ StoryBookDiaryList
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┣ UserCard
+ ┃ ┃ ┃ ┗ index.jsx
+ ┃ ┃ ┗ index.jsx
+ ┃ ┗ .DS_Store
+ ┣ hooks
+ ┃ ┣ index.jsx
+ ┃ ┣ useAlbumValidation.jsx
+ ┃ ┣ useAuth.jsx
+ ┃ ┣ useClickAway.jsx
+ ┃ ┣ useForm.jsx
+ ┃ ┗ usePromise.jsx
+ ┣ pages
+ ┃ ┣ AlbumCreatePage
+ ┃ ┃ ┣ AlbumCreateStep1.jsx
+ ┃ ┃ ┣ AlbumCreateStep2.jsx
+ ┃ ┃ ┣ AlbumCreateStep3.jsx
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ AlbumListPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ AlbumMainPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ AlbumSettingsEditPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ AlbumSettingsPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ DiaryCreatePage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ DiaryPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ Error404Page
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ LandingPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ LoginPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ MemberInvitePage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ MemberListPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ OAuthRedirect
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ ProfilePage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ SpecialMomentPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ StoryBookDetailPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ StoryBookPage
+ ┃ ┃ ┗ index.jsx
+ ┃ ┗ index.jsx
+ ┣ redux
+ ┃ ┣ album
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ member
+ ┃ ┃ ┗ index.jsx
+ ┃ ┣ .DS_Store
+ ┃ ┗ store.jsx
+ ┣ router
+ ┃ ┣ AlbumValidationRoute.jsx
+ ┃ ┣ AuthRoute.jsx
+ ┃ ┣ PreventedRoute.jsx
+ ┃ ┣ Router.jsx
+ ┃ ┣ index.jsx
+ ┃ ┗ readme.md
+ ┣ stories
+ ┃ ┣ components
+ ┃ ┃ ┣ Avatar.stories.jsx
+ ┃ ┃ ┣ Button.stories.jsx
+ ┃ ┃ ┣ Divider.stories.jsx
+ ┃ ┃ ┣ Icon.stories.js
+ ┃ ┃ ┣ Image.stories.jsx
+ ┃ ┃ ┣ Input.stories.jsx
+ ┃ ┃ ┣ Modal.stories.jsx
+ ┃ ┃ ┣ ProgressBar.stories.jsx
+ ┃ ┃ ┣ Skeleton.stories.jsx
+ ┃ ┃ ┣ Spinner.stories.jsx
+ ┃ ┃ ┣ Textarea.stories.jsx
+ ┃ ┃ ┗ Upload.stories.jsx
+ ┃ ┗ hooks
+ ┣ styles
+ ┃ ┣ DefaultContainer.jsx
+ ┃ ┣ DefaultTemplate.jsx
+ ┃ ┣ ResetStyle.jsx
+ ┃ ┗ readme.md
+ ┣ .DS_Store
+ ┣ App.jsx
+ ┣ index.jsx
+ ┣ reportWebVitals.js
+ ┗ setupTests.js
+```
+
+</details>
+
+## 👉🏻프로젝트 진행 사항
 
 - ✔ [[극락이들] 1주차 프로젝트 공유사항](https://www.notion.so/1-26887b0b74d749b388454b91a7e1c48c)
 
 - ✔ [[극락이들] 2주차 프로젝트 공유사항](https://www.notion.so/2-83899a046b004f9aaef1c94d43f8fa77)
 
 - ✔ [[극락이들] 3주차 프로젝트 공유사항](https://www.notion.so/3-16fb65f0756146b2adad3698d6771550)
+
+
+

@@ -3,7 +3,7 @@ import { member } from './member';
 import { album } from './album';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
-import { isProduction } from '@utils/constants';
+// import { isProduction } from '@utils/constants';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import session from 'redux-persist/lib/storage/session';

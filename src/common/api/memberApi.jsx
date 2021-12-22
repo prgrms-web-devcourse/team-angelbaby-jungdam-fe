@@ -13,3 +13,9 @@ export const putMember = async (params) =>
     type: 'put',
     params,
   });
+
+export const getMemberRole = async ({ albumId }) =>
+  await api({
+    url: `/api/v1/albums/${albumId}/participants/role`,
+    type: 'get',
+  });

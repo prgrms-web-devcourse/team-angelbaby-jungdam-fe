@@ -1,0 +1,43 @@
+name: React build
+on:
+  push: # develop Branch에서 push 이벤트가 일어났을 때만 실행
+    branches:
+      - develop
+
+env:
+  REACT_APP_MODE: ${{ secrets.REACT_APP_MODE_TEST }}
+  REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL_TEST }}
+  REACT_APP_HOME_URL: ${{ secrets.REACT_APP_HOME_URL_TEST }}
+  REACT_APP_OAUTH2_REDIRECT_URL: ${{ secrets.REACT_APP_OAUTH2_REDIRECT_URL_TEST }}
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout source code. # 레포지토리 체크아웃
+        uses: actions/checkout@v2
+
+      - name: Cache node modules # node modules 캐싱
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies # 의존 파일 설치
+        run: yarn install
+
+      - name: Build # React Build
+        run: yarn build
+
+      - name: Deploy # S3에 배포하기
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --region ap-northeast-2 \
+            --recursive \
+            build s3://jungdam-test

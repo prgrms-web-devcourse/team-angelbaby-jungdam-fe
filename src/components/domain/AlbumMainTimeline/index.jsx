@@ -120,6 +120,10 @@ const AlbumMainTimeline = ({ diaries, children }) => {
     [navigate],
   );
 
+  const handleDefaultAlbumClick = useCallback(() => {
+    navigate(`diary/new`);
+  }, [navigate]);
+
   if (!diaries) return null;
 
   return (
@@ -167,7 +171,7 @@ const AlbumMainTimeline = ({ diaries, children }) => {
           </Diary>
         ))
       ) : (
-        <DefaultAlbum>
+        <DefaultAlbum onClick={handleDefaultAlbumClick}>
           <Icon name="healthicons:default" height={50} color={color.grey} />
           <DefaultSpan>작성된 일기가 없습니다 !</DefaultSpan>
           <DefaultSpan>먼저 일기를 작성해볼까요 ?</DefaultSpan>

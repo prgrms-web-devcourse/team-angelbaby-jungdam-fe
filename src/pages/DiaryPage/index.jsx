@@ -8,7 +8,7 @@ import {
   DiaryComment,
   DiaryCommentInputForm,
 } from '@components/domain';
-import { Button, Icon } from '@components/base';
+import { Button, Icon, Modal } from '@components/base';
 import DefaultContainer from '@styles/DefaultContainer';
 import color from '@assets/colors';
 import {
@@ -28,6 +28,7 @@ import { postDiaryComment } from '@api/postDiaryComment';
 import { deleteDiaryComment } from '@api/deleteDiaryComment';
 import { putBookmark } from '@api/putBookmark';
 import replaceTildeWithDate from '@utils/replaceTildeWithDate';
+import { deleteDiary } from '@api/deleteDiary';
 
 const ContainerStyle = css`
   margin-top: 38px;
@@ -49,6 +50,7 @@ const Divider = styled.hr`
 const DiaryPage = () => {
   const { albumId, diaryId } = useParams();
   const navigate = useNavigate();
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const [scrollType, setScrollType] = useState(null);
 
@@ -95,6 +97,7 @@ const DiaryPage = () => {
         recordedAt: replaceTildeWithDate(data.recordedAt),
         diaryPhotos: [...data.diaryPhotos],
         content: data.content,
+        participant: { ...data.participant },
       }));
     };
 
@@ -103,7 +106,7 @@ const DiaryPage = () => {
         albumId,
         diaryId,
         cursorId: cursorId.current,
-        size: 10,
+        size: 15,
       };
 
       const data = await getDiaryComments(body);
@@ -129,8 +132,11 @@ const DiaryPage = () => {
     content,
     comments,
     hasNext,
+    participant,
   } = state;
   const profile = useSelector((state) => state.member.data.memberAvatar);
+  const email = useSelector((state) => state.member.data.memberEmail);
+
   const scrollRef = useRef(null);
 
   const handleCommentCreateClick = useCallback(async () => {
@@ -147,7 +153,7 @@ const DiaryPage = () => {
 
       setState((state) => ({
         ...state,
-        comments: [newComment].concat(state.comments),
+        comments: [newComment].concat(...state.comments),
       }));
 
       setScrollType(() => 'Create');
@@ -172,6 +178,8 @@ const DiaryPage = () => {
             (comment) => comment.commentId !== Number(commentId),
           ),
         }));
+
+        createCommentInput.current.value = '';
       } catch (e) {
         console.log(e.response.data.message);
       }
@@ -195,6 +203,27 @@ const DiaryPage = () => {
     navigate(`/album/${albumId}`);
   }, [navigate, albumId]);
 
+  const onClickDiaryDelete = useCallback(async () => {
+    try {
+      const data = await deleteDiary({ albumId, diaryId });
+
+      console.log(data);
+      navigate(`/album/${albumId}`);
+    } catch (e) {
+      console.log(e.response.data.message);
+    }
+  }, [albumId, diaryId, navigate]);
+
+  const OpenDeleteModal = () => {
+    setDeleteModalVisible(true);
+  };
+
+  const CloseDeleteModal = () => {
+    if (deleteModalVisible) {
+      setDeleteModalVisible(false);
+    }
+  };
+
   const scrollIntoCommentTop = () => {
     scrollRef.current.scrollIntoView({
       behavior: 'smooth',
@@ -209,6 +238,8 @@ const DiaryPage = () => {
     );
   }, [onClickGoBack]);
 
+  if (!participant) return null;
+
   return (
     <DefaultContainer css={ContainerStyle}>
       <Header leftComponent={leftHeaderContent()} />
@@ -216,7 +247,9 @@ const DiaryPage = () => {
         title={title}
         createdAt={recordedAt}
         bookmark={bookmark}
+        auth={participant.email === email}
         onBookmarkClick={handleBookmarkClick}
+        onModal={OpenDeleteModal}
       />
       <DiaryImages images={diaryPhotos} />
       <DiaryContent content={content} />
@@ -225,6 +258,7 @@ const DiaryPage = () => {
         comments={comments}
         ref={scrollRef}
         hasNext={hasNext}
+        userInfo={email}
         onDelete={handleCommentDeleteClick}
       />
       <DiaryCommentInputForm
@@ -234,6 +268,15 @@ const DiaryPage = () => {
         onChange={handleChange}
         onClick={handleCommentCreateClick}
       />
+      <Modal
+        selectable="primary"
+        visible={deleteModalVisible}
+        onSubmit={() => onClickDiaryDelete()}
+        onClose={CloseDeleteModal}
+      >
+        정말로 일기를 <br />
+        삭제하시겠습니까?
+      </Modal>
     </DefaultContainer>
   );
 };

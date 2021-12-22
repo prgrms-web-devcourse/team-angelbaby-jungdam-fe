@@ -19,6 +19,7 @@ const Container = styled.div`
   padding: 0px 32px 0 32px;
   background-color: ${color.white};
   box-sizing: border-box;
+  box-shadow: 0px 1px 4px rgba(100, 88, 71, 0.25);
 `;
 
 const ContentWrapper = styled.div`
@@ -26,6 +27,7 @@ const ContentWrapper = styled.div`
   margin-left: 16px;
   display: flex;
   flex-direction: column;
+  ${font.heading_20};
 `;
 
 const AlbumName = styled.span`

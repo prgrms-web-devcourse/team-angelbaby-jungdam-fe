@@ -46,6 +46,10 @@
     </span>
 </div>
 
+## 프로젝트 FE 인프라
+![image](https://user-images.githubusercontent.com/60251579/146999904-e9b6e3c3-927c-44d7-b8e0-adb7abb4d279.png)
+
+
 
 ## 🔨 기술 스택
 
@@ -300,13 +304,10 @@ src
 
 </details>
 
-## 👉🏻프로젝트 진행 사항
+## ❗ 이슈 관리
 
-- ✔ [[극락이들] 1주차 프로젝트 공유사항](https://www.notion.so/1-26887b0b74d749b388454b91a7e1c48c)
-
-- ✔ [[극락이들] 2주차 프로젝트 공유사항](https://www.notion.so/2-83899a046b004f9aaef1c94d43f8fa77)
-
-- ✔ [[극락이들] 3주차 프로젝트 공유사항](https://www.notion.so/3-16fb65f0756146b2adad3698d6771550)
-
-
+⚡[1차 QA 리스트](https://www.notion.so/backend-devcourse/QA-Check-a47b8a4663bc4b85b9209fe062edbc8e)  
+🤔[앨범 유효성 검사하는 법](https://www.notion.so/backend-devcourse/dd20af06fbf64c308db64994b23e8866)  
+👩‍💻[모바일 웹 뷰의 가상 키보드 밀림 현상](https://www.notion.so/backend-devcourse/CSS-153c1f320e2a44c7986026ec3b4bc566)  
+📌[images 업로드 413 code error](https://www.notion.so/backend-devcourse/api-v1-images-Error-413-d88e0146217f4ac19fd4451d1d0b885f)
 

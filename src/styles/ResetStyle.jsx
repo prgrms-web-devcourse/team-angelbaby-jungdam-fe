@@ -146,6 +146,11 @@ const ResetStyle = css`
   #root {
     height: 100%;
   }
+
+  input {
+    border-radius: 0;
+    appearance: none;
+  }
 `;
 
 export default ResetStyle;

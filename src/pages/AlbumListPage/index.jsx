@@ -14,7 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchInvitations, fetchAlbums } from '@redux/album';
 
 const AlbumListPageContainer = styled(DefaultContainer)`
+  height: auto;
   padding-top: 50px;
+  flex-wrap: nowrap;
 `;
 
 const SubHeader = styled.div`

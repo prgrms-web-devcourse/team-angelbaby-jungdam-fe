@@ -7,7 +7,7 @@ import {
   DiaryCreateStepTwo,
   DiaryCreateStepThree,
 } from '@components/domain';
-import { Button, Icon, ProgressBar } from '@components/base';
+import { Button, Icon, ProgressBar, Spinner } from '@components/base';
 import font from '@assets/fonts';
 import color from '@assets/colors';
 import useForm from '@hooks/useForm';
@@ -31,11 +31,21 @@ const ButtonStyle = {
   boxSizing: 'border-box',
 };
 
+const SpinnerWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const DiaryCreatePage = () => {
   const { albumId } = useParams();
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
   const buttonRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
+
   const { values, handleChange } = useForm({
     initialValues: {
       date: '',
@@ -159,6 +169,8 @@ const DiaryCreatePage = () => {
 
   const handleSubmitButtonClick = async () => {
     try {
+      setIsLoading(true);
+
       const urls = [];
 
       for (let i = 0; i < photos.length; i++) {
@@ -181,8 +193,10 @@ const DiaryCreatePage = () => {
         submitData,
       };
 
-      const { diaryId } = await postDiaryCreate(data);
-      navigate(`../${diaryId}`);
+      await postDiaryCreate(data);
+      setIsLoading(true);
+
+      navigate(`/album/${albumId}`);
     } catch (e) {
       console.log(e.message);
 
@@ -238,6 +252,14 @@ const DiaryCreatePage = () => {
       return <DiaryCreateStepThree onChange={handleChange} photos={photos} />;
     }
   };
+
+  if (isLoading) {
+    return (
+      <SpinnerWrapper>
+        <Spinner size={24} />
+      </SpinnerWrapper>
+    );
+  }
 
   return (
     <Conatainer>

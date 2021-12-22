@@ -148,8 +148,14 @@ const ResetStyle = css`
   }
 
   input {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     border-radius: 0;
     appearance: none;
+  }
+  input[type='date'],
+  input[type='time'] {
+    -webkit-appearance: none;
   }
 `;
 

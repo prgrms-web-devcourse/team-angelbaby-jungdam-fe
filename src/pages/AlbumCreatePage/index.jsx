@@ -53,7 +53,7 @@ const AlbumContentContainer = styled.div`
 
 const AlbumCreatePage = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(ALBUM_PROGRESS_VALUE.currentStep);
+  const [step, setStep] = useState(parseInt(ALBUM_PROGRESS_VALUE.currentStep));
   const [formData, setFormData] = useState({
     albumName: '',
     albumMotto: '',

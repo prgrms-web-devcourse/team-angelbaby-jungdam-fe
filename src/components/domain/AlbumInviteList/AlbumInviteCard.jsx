@@ -65,7 +65,7 @@ const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
       } = await putInvitations({ invitationId, status: 'ACCEPT' });
       alert('수락 완료');
       dispatch(fetchInvitations());
-      navigate(`/album/${data.id}`);
+      navigate(`/album/${data.albumId}`);
     } catch (error) {
       console.log(error.message);
     }

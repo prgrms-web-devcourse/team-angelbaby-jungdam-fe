@@ -45,6 +45,11 @@ export const member = createSlice({
     setMemberInfo: (state, action) => {
       state.data = { ...state.data, ...action.payload };
     },
+    setLogout: (state) => {
+      sessionStorage.removeItem('token');
+      state.token = '';
+      state.data = { ...initialValue.data };
+    },
   },
   extraReducers: {
     [fetchMemberLogin.pending]: (state, action) => {

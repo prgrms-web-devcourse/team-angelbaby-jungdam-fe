@@ -21,9 +21,6 @@ const AvatarWrapper = styled.div`
   text-align: center;
   border-radius: 50%;
   overflow: hidden;
-  > img {
-    width: 100%;
-  }
 `;
 
 const Avatar = ({ size, src, ...props }) => {
@@ -31,7 +28,13 @@ const Avatar = ({ size, src, ...props }) => {
 
   return (
     <AvatarWrapper {...props} size={size}>
-      <Image src={avatarSrc} alt="userProfile" mode="cover" />
+      <Image
+        src={avatarSrc}
+        width={'100%'}
+        height={'100%'}
+        alt="userProfile"
+        mode="cover"
+      />
     </AvatarWrapper>
   );
 };

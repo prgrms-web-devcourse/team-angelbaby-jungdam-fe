@@ -56,7 +56,7 @@ const AlbumMainPage = () => {
     fetchAlbumTitleInfo();
   }, [albumId]);
 
-  if (isLoading) {
+  if ((isLoading, state, !headerInfo)) {
     return (
       <SpinnerWrapper>
         <Spinner size={24} />

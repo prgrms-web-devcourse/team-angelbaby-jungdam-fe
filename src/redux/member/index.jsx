@@ -1,4 +1,4 @@
-import { getMember } from '@api/memberApi';
+import { getMember, getMemberRole } from '@api/memberApi';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const name = 'member';
@@ -26,13 +26,15 @@ export const fetchMemberLogin = createAsyncThunk(
   },
 );
 
-// const fetchAuthToken = createAsyncThunk(
-//   `${name}/fetchAuthToken`,
-//   async (token) => {
-//     const { data } = await axios.post('/member/token', token);
-//     return data;
-//   },
-// );
+export const fetchMemberRole = createAsyncThunk(
+  `${name}/fetchMemberRole`,
+  async ({ albumId }) => {
+    const {
+      data: { data },
+    } = await getMemberRole({ albumId });
+    return data.role;
+  },
+);
 
 export const member = createSlice({
   name,
@@ -62,20 +64,17 @@ export const member = createSlice({
     },
     [fetchMemberLogin.rejected]: (state, action) => {
       state = initialValue;
-      state.isLoading = false;
       sessionStorage.removeItem('token');
     },
-    // [fetchAuthToken.pending]: (state, action) => {
-    //   state.member = initialValue.member;
-    //   state.isLoading = true;
-    // },
-    // [fetchAuthToken.fulfilled]: (state, action) => {
-    //   state.member = { ...action.payload };
-    //   state.isLoading = false;
-    // },
-    // [fetchAuthToken.rejected]: (state, action) => {
-    //   state.error = action.error.message;
-    //   state.isLoading = false;
-    // },
+    [fetchMemberRole.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [fetchMemberRole.fulfilled]: (state, action) => {
+      state.data.memberRole = action.payload;
+      state.isLoading = false;
+    },
+    [fetchMemberRole.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });

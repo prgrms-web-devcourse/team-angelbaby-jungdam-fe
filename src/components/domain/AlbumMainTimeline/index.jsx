@@ -120,6 +120,8 @@ const AlbumMainTimeline = ({ diaries, children }) => {
     [navigate],
   );
 
+  if (!diaries) return null;
+
   return (
     <Container>
       {diaries.length > 0 ? (

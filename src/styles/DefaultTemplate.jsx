@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { ResponseDefaultPage } from '@pages';
 const MainWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -23,10 +24,10 @@ const DefaultTemplate = ({ children }) => {
   });
 
   // 모바일 환경만 처리
-  return width < 456 ? (
+  return width < 550 ? (
     <MainWrapper>{children}</MainWrapper>
   ) : (
-    '태블릿/데스크탑은 지원하지 않습니다.'
+    <ResponseDefaultPage resizing={width} />
   );
 };
 

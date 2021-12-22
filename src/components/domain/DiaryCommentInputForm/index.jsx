@@ -24,6 +24,7 @@ const Avatar = styled.img`
   width: 38px;
   height: 38px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Textarea = styled.textarea`

@@ -14,13 +14,15 @@ const Article = styled.div`
   flex-direction: row;
   align-items: center;
   position: relative;
+  object-fit: cover;
 `;
 
 const Avatar = styled.img`
   margin-right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const CommentContainer = styled.div`

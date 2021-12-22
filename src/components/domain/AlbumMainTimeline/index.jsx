@@ -30,9 +30,10 @@ const DiaryUserInfo = styled.div`
 `;
 
 const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Nickname = styled.div`

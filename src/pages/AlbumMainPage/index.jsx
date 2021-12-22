@@ -41,7 +41,6 @@ const AlbumMainPage = () => {
     };
 
     const fetchAlbumTitleInfo = async () => {
-      setIsLoading(true);
       try {
         setIsLoading(true);
 

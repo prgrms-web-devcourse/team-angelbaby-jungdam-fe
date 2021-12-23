@@ -30,9 +30,10 @@ const DiaryUserInfo = styled.div`
 `;
 
 const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Nickname = styled.div`
@@ -119,6 +120,12 @@ const AlbumMainTimeline = ({ diaries, children }) => {
     [navigate],
   );
 
+  const handleDefaultAlbumClick = useCallback(() => {
+    navigate(`diary/new`);
+  }, [navigate]);
+
+  if (!diaries) return null;
+
   return (
     <Container>
       {diaries.length > 0 ? (
@@ -143,7 +150,7 @@ const AlbumMainTimeline = ({ diaries, children }) => {
                         <DimImage
                           src={image}
                           mode="cover"
-                          style={{ borderRadius: '6px' }}
+                          style={{ borderRadius: '0px 0px 6px 6px' }}
                         >
                           <DiaryTitle>{diary.title}</DiaryTitle>
                           <DiaryDate>{diary.recordedAt}</DiaryDate>
@@ -164,7 +171,7 @@ const AlbumMainTimeline = ({ diaries, children }) => {
           </Diary>
         ))
       ) : (
-        <DefaultAlbum>
+        <DefaultAlbum onClick={handleDefaultAlbumClick}>
           <Icon name="healthicons:default" height={50} color={color.grey} />
           <DefaultSpan>작성된 일기가 없습니다 !</DefaultSpan>
           <DefaultSpan>먼저 일기를 작성해볼까요 ?</DefaultSpan>

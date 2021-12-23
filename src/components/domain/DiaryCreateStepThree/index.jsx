@@ -18,6 +18,7 @@ import 'swiper/components/pagination/pagination.min.css';
 SwiperCore.use([Pagination]);
 
 const Container = styled.div`
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
 `;
@@ -74,7 +75,7 @@ const DiaryCreateStepThree = ({ onChange, photos }) => {
         />
       </Upload>
 
-      {base64 && (
+      {base64.length > 0 && (
         <StyledSwiper {...swiperParams}>
           {base64.map((info, index) => (
             <SwiperSlide key={index}>

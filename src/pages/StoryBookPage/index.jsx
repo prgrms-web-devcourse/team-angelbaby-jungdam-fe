@@ -38,6 +38,20 @@ const StorybookSubHeader = styled.h2`
   ${font.heading_20};
 `;
 
+const Default = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+`;
+
+const DefaultText = styled.h3`
+  text-align: center;
+  color: ${color.black};
+  ${font.content_16};
+`;
+
 const buttonStyle = {
   width: '40px',
   height: '20px',
@@ -85,30 +99,44 @@ const StoryBookPage = () => {
 
   const renderStoryBookList = (memberList) =>
     memberList.map(
-      ({ participantId, participantNickname, participantAvatar, diaries }) => (
-        <div key={participantId}>
-          <StorybookSubHeaderContainer>
-            <StorybookSubHeaderLeft>
-              <Avatar src={participantAvatar} />
-              <StorybookSubHeader>
-                {participantNickname}의 스토리북
-              </StorybookSubHeader>
-            </StorybookSubHeaderLeft>
-            {diaries.length > 0 && (
-              <Link to={`${participantId}`}>
-                <Button mode="border" style={buttonStyle}>
-                  모두 보기
-                </Button>
-              </Link>
-            )}
-          </StorybookSubHeaderContainer>
-          <StoryBookDiaryList
-            diaryList={diaries}
-            albumId={albumId}
-            isLoading={isLoading}
-          />
-        </div>
-      ),
+      (
+        { participantId, participantNickname, participantAvatar, diaries },
+        index,
+      ) =>
+        diaries.length > 0 ? (
+          <div key={participantId}>
+            <StorybookSubHeaderContainer>
+              <StorybookSubHeaderLeft>
+                <Avatar src={participantAvatar} />
+                <StorybookSubHeader>
+                  {participantNickname}의 스토리북
+                </StorybookSubHeader>
+              </StorybookSubHeaderLeft>
+              {diaries.length > 0 && (
+                <Link to={`${participantId}`}>
+                  <Button mode="border" style={buttonStyle}>
+                    모두 보기
+                  </Button>
+                </Link>
+              )}
+            </StorybookSubHeaderContainer>
+            <StoryBookDiaryList
+              diaryList={diaries}
+              albumId={albumId}
+              isLoading={isLoading}
+            />
+          </div>
+        ) : (
+          index === memberList.length - 1 && (
+            <Default>
+              <DefaultText>
+                일기가 없습니다.
+                <br />
+                일기를 작성하러 가실까요?
+              </DefaultText>
+            </Default>
+          )
+        ), // 마지막 요소만 빈 요소로 보여줌,
     );
 
   return (

@@ -2,6 +2,8 @@ import React from 'react';
 import color from '@assets/colors';
 import font from '@assets/fonts';
 import { Divider } from '@components/base';
+import { useDispatch } from 'react-redux';
+import { member } from '@redux/member';
 import styled from '@emotion/styled';
 import ProfileItem from './ProfileItem';
 import { useNavigate } from 'react-router';
@@ -55,6 +57,8 @@ const ProfileList = ({
 export default ProfileList;
 
 export const ServiceInfoList = () => {
+  const { setLogout } = member.actions;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const SERVICE_INFO_LIST = [
@@ -65,19 +69,20 @@ export const ServiceInfoList = () => {
     {
       title: '문의 사항',
       onClick: () => {
-        navigate('/inquiry');
+        alert('미구현');
       },
     },
     {
       title: '서비스 이용 약관',
       onClick: () => {
-        navigate('/service-terms');
+        alert('미구현');
       },
     },
     {
       title: '로그아웃',
       onClick: () => {
-        alert('미구현');
+        dispatch(setLogout());
+        navigate('/');
       },
     },
   ];

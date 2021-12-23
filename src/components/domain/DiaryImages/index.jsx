@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Image } from '@components/base';
 
@@ -20,6 +19,7 @@ const Container = styled.div`
 `;
 
 const StyledSwiper = styled(Swiper)`
+  width: 100%;
   height: 40vh;
   min-height: 260px;
   position: relative;
@@ -27,12 +27,8 @@ const StyledSwiper = styled(Swiper)`
 `;
 
 const SwiperSlideStyle = {
-  width: '85%',
+  width: '90%',
 };
-
-const ImageStyle = css`
-  border-radius: 5px;
-`;
 
 const swiperParams = {
   slidesPerView: 'auto',
@@ -50,11 +46,11 @@ const DiaryImages = ({ images }) => {
           {images.map((image, index) => (
             <SwiperSlide key={index} style={SwiperSlideStyle}>
               <Image
-                css={ImageStyle}
                 src={image}
                 alt="image"
                 width="100%"
                 height="100%"
+                mode="contain"
               />
             </SwiperSlide>
           ))}

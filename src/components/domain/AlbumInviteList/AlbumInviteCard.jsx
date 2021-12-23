@@ -36,11 +36,11 @@ const AlbumRight = styled.div`
 
 const AlbumTitle = styled.h3`
   display: inline-block;
-  ${font.content_14};
+  ${font.content_16};
 `;
 
 const AlbumInvite = styled.span`
-  font-size: 10px;
+  font-size: 12px;
   color: ${color.black_70};
 `;
 
@@ -65,7 +65,7 @@ const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
       } = await putInvitations({ invitationId, status: 'ACCEPT' });
       alert('수락 완료');
       dispatch(fetchInvitations());
-      navigate(`/album/${data.id}`);
+      navigate(`/album/${data.albumId}`);
     } catch (error) {
       console.log(error.message);
     }
@@ -74,16 +74,16 @@ const AlbumInviteCard = ({ invitationId, albumTitle, invitationCreatedAt }) => {
   return (
     <AlbumInviteCardContainer>
       <AlbumLeft>
-        <Icon name="flat-color-icons:invite" height={14} />
+        <Icon name="flat-color-icons:invite" height={20} />
         <AlbumTitle>'{albumTitle}'</AlbumTitle>에서 초대 요청
         <AlbumInvite>{invitationCreatedAt}</AlbumInvite>
       </AlbumLeft>
       <AlbumRight>
         <Button onClick={() => handleApprove({ invitationId })}>
-          <Icon name="emojione:white-heavy-check-mark" height={16} />
+          <Icon name="emojione:white-heavy-check-mark" height={20} />
         </Button>
         <Button onClick={() => handleCancel({ invitationId })}>
-          <Icon name="bx:bxs-x-circle" height={18} />
+          <Icon name="bx:bxs-x-circle" height={22} />
         </Button>
       </AlbumRight>
     </AlbumInviteCardContainer>

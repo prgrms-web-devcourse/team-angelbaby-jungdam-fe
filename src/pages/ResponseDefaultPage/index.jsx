@@ -57,7 +57,7 @@ const ResponseDefaultPage = ({ resizing }) => {
           <br />
         </ResponseText>
         <ResponseSizeText>
-          🥲죄송합니다. 저희 서비스는 모바일 환경만 지원합니다. (550px)
+          죄송합니다. 저희 서비스는 모바일 환경만 지원합니다. (550px)
         </ResponseSizeText>
         <ResponseSizeText className="strong">
           현재 사이즈 값은? {resizing}px

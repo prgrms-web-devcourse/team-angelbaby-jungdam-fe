@@ -14,7 +14,8 @@ import useForm from '@hooks/useForm';
 import { postImageUpload } from '@api/postImageUpload';
 import { postDiaryCreate } from '@api/postDiaryCreate';
 import { getExistenceDiaryDate } from '@api/getExistenceDiaryDate';
-import getTodayDate from '../../common/utils/getTodayDate';
+import getDateValidate from '@utils/getDateValidate';
+import getDateStr from '@utils/getDateStr';
 
 const Conatainer = styled.div`
   margin-top: 80px;
@@ -48,13 +49,13 @@ const DiaryCreatePage = () => {
 
   const { values, handleChange } = useForm({
     initialValues: {
-      date: '',
       title: '',
       content: '',
       photos: [],
     },
   });
-  const { date, title, content, photos } = values;
+  const { title, content, photos } = values;
+  const [date, setDate] = useState(null);
 
   const [inputErrors, setInputErrors] = useState({});
   const { dateError, titleError, contentError } = inputErrors;
@@ -81,7 +82,7 @@ const DiaryCreatePage = () => {
         }));
 
         return;
-      } else if (date > getTodayDate()) {
+      } else if (getDateValidate(date)) {
         setInputErrors((values) => ({
           ...values,
           dateError: '미래의 날짜에 해당하는 일기는 작성할 수 없습니다 !',
@@ -91,7 +92,7 @@ const DiaryCreatePage = () => {
       } else if (date) {
         const data = {
           albumId,
-          date,
+          date: getDateStr(date),
         };
 
         try {
@@ -231,9 +232,9 @@ const DiaryCreatePage = () => {
     if (step === 1) {
       return (
         <DiaryCreateStepOne
-          onChange={handleChange}
+          // onChange={handleChange}
           date={date}
-          getTodayDate={getTodayDate}
+          setDate={setDate}
           dateError={dateError}
         />
       );

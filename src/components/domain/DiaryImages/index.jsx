@@ -45,13 +45,7 @@ const DiaryImages = ({ images }) => {
         <StyledSwiper {...swiperParams}>
           {images.map((image, index) => (
             <SwiperSlide key={index} style={SwiperSlideStyle}>
-              <Image
-                src={image}
-                alt="image"
-                width="100%"
-                height="100%"
-                mode="contain"
-              />
+              <Image src={image} alt="image" width="100%" height="100%" />
             </SwiperSlide>
           ))}
         </StyledSwiper>

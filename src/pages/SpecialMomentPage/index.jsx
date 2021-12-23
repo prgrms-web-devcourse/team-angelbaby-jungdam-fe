@@ -132,7 +132,7 @@ const SpecialMomentPage = () => {
         <TooltipWrapper>{recordedAt.substr(0, 10)}</TooltipWrapper>
         <Image
           src={thumbnail}
-          alt={index}
+          alt="thumbnail"
           style={{
             borderRadius: 12,
             width: '100%',
